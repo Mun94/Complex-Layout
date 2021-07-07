@@ -1,47 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <style>
-        .mainBlock{
-            background: #3892d3;
-            width: 1071px;
-            height: 807px;
-        }
-    </style>
-    <link rel="stylesheet" href="header/headerStyle.css"/>
-    <link rel="stylesheet" href="body/bodyStyle.css"/>
-    <link rel="stylesheet" href="footer/footerStyle.css"/>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="/header/headerStyle.css"/>
+    <link rel="stylesheet" href="/body/bodyStyle.css"/>
+    <link rel="stylesheet" href="/footer/footerStyle.css"/>
 </head>
 
 <body>
-    <div class = "mainBlock">
-    <div id = "headerBlock_ID">header</div>
-    <div>body</div>
-    <div>footer</div>
-    </div>
-    <script src="header/headerScript.js"></script>
-    <script src="body/bodyScript.js"></script>
-    <script src="footer/footerScript.js"></script>
+    <div class= "header"></div>
+    <div class= "body"></div>
+    <div class= "footer"></div>
+
+    <script src="/header/headerHtml.js"></script>
+    <script src="/header/headerScript.js"></script>
+
+    <script src="/body/bodyHtml.js"></script>
+    <script src="/body/bodyScript.js"></script>
+
+    <script src="/footer//footerHtml.js"></script>
+    <script src="/footer/footerScript.js"></script>
 </body>
 </html>
-
-<!-- <script defer>
-        const load = async () => {
-                var allElements = document.getElementsByTagName('*');
-                await Array.prototype.forEach.call(allElements, function(el) {
-                    var includePath = el.dataset.includePath;
-                    if (includePath) {
-                        var xhttp = new XMLHttpRequest();
-                        xhttp.onreadystatechange = function () {
-                            if (this.readyState == 4 && this.status == 200) {
-                                el.outerHTML = this.responseText;
-                            }
-                        };
-                        xhttp.open('GET', includePath, true);
-                        xhttp.send();
-                    }
-                });
-                console.log(allElements);
-            }
-            load();
-</script> -->
