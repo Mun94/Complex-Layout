@@ -1,12 +1,10 @@
-const getElementBody = value =>  document.querySelector(value);
+const {style: navigationPanelStyle} = HookGetElement('.navigation-panel');
+const {style: settingsPanelStyle} = HookGetElement('.settings-panel');
+const {style: informationPanelStyle} = HookGetElement('.information-panel');
 
-const {style: navigationPanelStyle} = getElementBody('.navigation-panel');
-const {style: settingsPanelStyle} = getElementBody('.settings-panel');
-const {style: informationPanelStyle} = getElementBody('.information-panel');
-
-const navigationButton = getElementBody('.navigation-button');
-const settingsButton = getElementBody('.settings-button');
-const informationButton = getElementBody('.information-button');
+const navigationButton = HookGetElement('.navigation-button');
+const settingsButton = HookGetElement('.settings-button');
+const informationButton = HookGetElement('.information-button');
 
 // west side button controll
 navigationButton.addEventListener('click', e => {
@@ -67,3 +65,22 @@ const clickEvent = (
         other2Panel.display= 'none';
     };
 };
+
+// moddle button controll
+const closeMeButton = HookGetElement('.close-me-button');
+const centerPanelButton = HookGetElement('.center-panel-button');
+
+const descriptionPlace = HookGetElement('.middle-block .description');
+descriptionPlace.innerHTML = closeMe;
+
+closeMeButton.addEventListener('click', () => {
+   if(descriptionPlace.innerHTML === closeMe) return; // 없으면 클릭때마다 같은 부분이 중첩으로 계속 새로 생김
+
+    descriptionPlace.innerHTML = closeMe;
+})
+
+centerPanelButton.addEventListener('click', () => {
+    if(descriptionPlace.innerHTML === centerPanel) return;
+
+    descriptionPlace.innerHTML = centerPanel;
+})

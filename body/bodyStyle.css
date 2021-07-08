@@ -1,5 +1,5 @@
 .west-side-block{
-    max-width: 400px;
+    width: 400px;
 }
 
 .west-side-block .top{
@@ -31,4 +31,28 @@
 .settings-button-wrapper,
 .information-button-wrapper{
     margin-top:5px;
+}
+
+
+/* /////////// */
+.middle-block{
+    width:800px;
+    background-color: #157fcc;
+    margin-left: 10px;
+}
+
+.middle-block .category{
+    display: flex;
+}
+
+.category .close-me-button,.center-panel-button{
+    height: 41px;
+    padding:8px 12px;
+    background: #4b9cd7;
+}
+
+.middle-block .description{
+    height: 721px;
+    overflow: auto;
+    background: white;
 }

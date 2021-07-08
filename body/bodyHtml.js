@@ -1,4 +1,4 @@
-const body = document.querySelector('.body');
+const bodyWest = HookGetElement('.body-block .west');
 
 const westSideCategory = (categoryName, text, buttonIcon, display) => {
     return (
@@ -16,7 +16,7 @@ const westSideCategory = (categoryName, text, buttonIcon, display) => {
 )};
 // inline 요소에 바로 스타일을 적용해야 getElement속성을 했을 때 스타일을 갸져와서 if문에서 사용할 수 있음
 
-body.innerHTML = `
+bodyWest.innerHTML = `
     <div class= "west-side-block">
         <div class= "top">
             <div class= "title">
@@ -34,3 +34,20 @@ body.innerHTML = `
         </div>
     </div>
 `;
+
+/////////////////////
+
+const bodyMiddle = HookGetElement('.body-block .middle');
+
+
+
+bodyMiddle.innerHTML = `
+    <div class= "middle-block">
+        <div class= "category">
+            <button class= "close-me-button">Close Me</button>
+            <button class= "center-panel-button">Center Parnel</button>
+        </div>
+
+        <div class= "description"></div>
+    </div>
+`
