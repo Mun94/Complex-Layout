@@ -9,11 +9,7 @@
     justify-content: space-between;
 }
 
-.west-side-block .top .button{
-    background: red;
-}
-
-.west-side-block .middle{
+.west-side-block .category{
     background: #ffffff;
     padding: 5px;
 }
@@ -22,9 +18,9 @@
     height: 578px;
 }
 
-.navigation-button,
-.settings-button,
-.information-button
+.navigation-button-wrapper,
+.settings-button-wrapper,
+.information-button-wrapper
 {
     background: #dfeaf2;
     padding: 10px;
@@ -32,3 +28,12 @@
     justify-content: space-between;
 }
 
+.settings-button-wrapper,
+.information-button-wrapper{
+    margin-top:5px;
+}
+
+.settings-panel, .information-panel{
+    display: none;
+    height: 578px;
+}
