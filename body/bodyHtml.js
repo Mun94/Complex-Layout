@@ -1,6 +1,6 @@
 const body = document.querySelector('.body');
 
-const westSideCategory = (categoryName, text, buttonIcon) => {
+const westSideCategory = (categoryName, text, buttonIcon, display) => {
     return (
    ` <div class= ${categoryName}>
         <div class= "${categoryName}-button-wrapper">
@@ -9,11 +9,12 @@ const westSideCategory = (categoryName, text, buttonIcon) => {
             </div>
             <button class= "${categoryName}-button">${buttonIcon}</button>
         </div>
-        <div class= "${categoryName}-panel">
+        <div class= "${categoryName}-panel" style="display:${display}">
             ${text}
         </div>
     </div>`
 )};
+// inline 요소에 바로 스타일을 적용해야 getElement속성을 했을 때 스타일을 갸져와서 if문에서 사용할 수 있음
 
 body.innerHTML = `
     <div class= "west-side-block">
@@ -27,9 +28,9 @@ body.innerHTML = `
         </div>
 
         <div class= "category">
-            ${westSideCategory("navigation", "hi im the west panel", "-")}
-            ${westSideCategory("settings", "Some settings in here.", "+")}
-            ${westSideCategory("information", "Some info in here.", "+")}
+            ${westSideCategory("navigation", "hi im the west panel", "-", "block")}
+            ${westSideCategory("settings", "Some settings in here.", "+", "none")}
+            ${westSideCategory("information", "Some info in here.", "+", "none")}
         </div>
     </div>
 `;

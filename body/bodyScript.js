@@ -1,77 +1,69 @@
 const getElementBody = value =>  document.querySelector(value);
 
+const {style: navigationPanelStyle} = getElementBody('.navigation-panel');
+const {style: settingsPanelStyle} = getElementBody('.settings-panel');
+const {style: informationPanelStyle} = getElementBody('.information-panel');
+
+const navigationButton = getElementBody('.navigation-button');
+const settingsButton = getElementBody('.settings-button');
+const informationButton = getElementBody('.information-button');
+
 // west side button controll
-getElementBody('.navigation-button').addEventListener('click', e => {
-    const {style: navigationPanelStyle} = getElementBody('.navigation-panel');
-    const {style: settingsPanelStyle} = getElementBody('.settings-panel');
-    const {style: informationPanelStyle} = getElementBody('.information-panel');
-    
-    const settingsButton = getElementBody('.settings-button');
-    const informationButton = getElementBody('.information-button');
-
-    if(navigationPanelStyle.display === 'none'){
-        e.target.innerHTML = '-';
-        settingsButton.innerHTML = '+';
-        informationButton.innerHTML = '+';
-
-        navigationPanelStyle.display= 'block';
-        settingsPanelStyle.display= 'none';
-        informationPanelStyle.display= 'none';
-    }else{
-        e.target.innerHTML = '+';
-        settingsButton.innerHTML = '-';
-
-        navigationPanelStyle.display = 'none';
-        settingsPanelStyle.display= 'block';
-    };
+navigationButton.addEventListener('click', e => {
+    clickEvent(
+        navigationPanelStyle,
+        settingsPanelStyle,
+        informationPanelStyle,
+        e.target,
+        settingsButton,
+        informationButton
+        );
 });
 
-getElementBody('.settings-button').addEventListener('click', e => {
-    const {style: navigationPanelStyle} = getElementBody('.navigation-panel');
-    const {style: settingsPanelStyle} = getElementBody('.settings-panel');
-    const {style: informationPanelStyle} = getElementBody('.information-panel');
-
-    const navigationButton = getElementBody('.navigation-button');
-    const informationButton = getElementBody('.information-button');
-
-    if(settingsPanelStyle.display === 'block'){
-        e.target.innerHTML = '+';
-        informationButton.innerHTML= '-';
-
-        settingsPanelStyle.display= 'none';
-        informationPanelStyle.display= 'block';
-    }else{
-        navigationButton.innerHTML = '+';
-        e.target.innerHTML = '-';
-        informationButton.innerHTML = '+';
-
-        navigationPanelStyle.display= 'none';
-        settingsPanelStyle.display= 'block';
-        informationPanelStyle.display= 'none';
-    };
+settingsButton.addEventListener('click', e => {
+    clickEvent(
+        settingsPanelStyle,
+        informationPanelStyle,
+        navigationPanelStyle,
+        e.target,
+        informationButton,
+        navigationButton
+        );
 });
 
-getElementBody('.information-button').addEventListener('click', e => {
-    const {style: navigationPanelStyle} = getElementBody('.navigation-panel');
-    const {style: settingsPanelStyle} = getElementBody('.settings-panel');
-    const {style: informationPanelStyle} = getElementBody('.information-panel');
-
-    const navigationButton = getElementBody('.navigation-button');
-    const settingsButton = getElementBody('.settings-button');
-
-    if(informationPanelStyle.display === 'block'){
-        settingsButton.innerHTML = '-';
-        e.target.innerHTML = '+';
-
-        settingsPanelStyle.display= 'block';
-        informationPanelStyle.display= 'none';
-    }else{
-        navigationButton.innerHTML = '+';
-        settingsButton.innerHTML = '+';
-        e.target.innerHTML = '-';
-
-        navigationPanelStyle.display= 'none';
-        settingsPanelStyle.display = 'none';
-        informationPanelStyle.display = 'block';
-    };
+informationButton.addEventListener('click', e => {
+    clickEvent(
+        informationPanelStyle, 
+        settingsPanelStyle, 
+        navigationPanelStyle,
+        e.target,
+        settingsButton,
+        navigationButton
+        );
 });
+
+const clickEvent = (
+    myPanel, 
+    otherPanel,
+    other2Panel, 
+    myButton, // e.target
+    otherButton,
+    other2Button 
+    ) => {
+    if(myPanel.display === 'block'){
+        myButton.innerHTML = '+';
+        myPanel.display= 'none';
+
+        otherButton.innerHTML = '-';
+        otherPanel.display= 'block';
+    }else{
+        myButton.innerHTML = '-';
+        myPanel.display = 'block';
+
+        otherButton.innerHTML = '+';
+        otherPanel.display = 'none';
+
+        other2Button.innerHTML = '+';
+        other2Panel.display= 'none';
+    };
+};

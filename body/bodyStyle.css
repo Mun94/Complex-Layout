@@ -14,7 +14,7 @@
     padding: 5px;
 }
 
-.navigation-panel{
+.navigation-panel,.settings-panel, .information-panel{
     height: 578px;
 }
 
@@ -31,9 +31,4 @@
 .settings-button-wrapper,
 .information-button-wrapper{
     margin-top:5px;
-}
-
-.settings-panel, .information-panel{
-    display: none;
-    height: 578px;
 }
