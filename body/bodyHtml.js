@@ -1,5 +1,6 @@
 const bodyWest = HookGetElement('.body-block .west');
 
+// body west side
 const westSideCategory = (categoryName, text, buttonIcon, display) => {
     return (
    ` <div class= ${categoryName}>
@@ -14,7 +15,7 @@ const westSideCategory = (categoryName, text, buttonIcon, display) => {
         </div>
     </div>`
 )};
-// inline 요소에 바로 스타일을 적용해야 getElement속성을 했을 때 스타일을 갸져와서 if문에서 사용할 수 있음
+///// inline 요소에 바로 스타일을 적용해야 getElement속성을 했을 때 스타일을 갸져와서 if문에서 사용할 수 있음
 
 bodyWest.innerHTML = `
     <div class= "west-side-block">
@@ -35,11 +36,8 @@ bodyWest.innerHTML = `
     </div>
 `;
 
-/////////////////////
-
+// body middle
 const bodyMiddle = HookGetElement('.body-block .middle');
-
-
 
 bodyMiddle.innerHTML = `
     <div class= "middle-block">

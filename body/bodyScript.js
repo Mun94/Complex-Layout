@@ -6,8 +6,8 @@ const navigationButton = HookGetElement('.navigation-button');
 const settingsButton = HookGetElement('.settings-button');
 const informationButton = HookGetElement('.information-button');
 
-// west side button controll
-navigationButton.addEventListener('click', e => {
+// body west side button controll
+HookClickEvent(navigationButton, e => {
     clickEvent(
         navigationPanelStyle,
         settingsPanelStyle,
@@ -18,7 +18,7 @@ navigationButton.addEventListener('click', e => {
         );
 });
 
-settingsButton.addEventListener('click', e => {
+HookClickEvent(settingsButton, e => {
     clickEvent(
         settingsPanelStyle,
         informationPanelStyle,
@@ -29,7 +29,7 @@ settingsButton.addEventListener('click', e => {
         );
 });
 
-informationButton.addEventListener('click', e => {
+HookClickEvent(informationButton, e => {
     clickEvent(
         informationPanelStyle, 
         settingsPanelStyle, 
@@ -66,21 +66,22 @@ const clickEvent = (
     };
 };
 
-// moddle button controll
+// body moddle button controll
 const closeMeButton = HookGetElement('.close-me-button');
 const centerPanelButton = HookGetElement('.center-panel-button');
 
 const descriptionPlace = HookGetElement('.middle-block .description');
+
 descriptionPlace.innerHTML = closeMe;
 
-closeMeButton.addEventListener('click', () => {
+HookClickEvent(closeMeButton, () => {
    if(descriptionPlace.innerHTML === closeMe) return; // 없으면 클릭때마다 같은 부분이 중첩으로 계속 새로 생김
 
     descriptionPlace.innerHTML = closeMe;
-})
+});
 
-centerPanelButton.addEventListener('click', () => {
+HookClickEvent(centerPanelButton, () => {
     if(descriptionPlace.innerHTML === centerPanel) return;
 
     descriptionPlace.innerHTML = centerPanel;
-})
+});
