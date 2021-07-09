@@ -42,7 +42,12 @@ const bodyMiddle = useGetElement('.body-block .middle');
 bodyMiddle.innerHTML = `
     <div class= "middle-block">
         <div class= "category">
-            <button class= "close-me-button">Close Me</button>
+            <div class= "close-me-block">
+                <span class= "close-me-close-icon">x</span>
+                <button class= "close-me-button">
+                    Close Me
+                </button>
+            </div>
             <button class= "center-panel-button">Center Panel</button>
         </div>
 

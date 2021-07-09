@@ -88,8 +88,8 @@ const categoryFold = (
     };
 };
 
-// middle button controll
-const closeMeButton = useGetElement('.close-me-button');
+// middle button controll (+ toggle west side controll)
+const closeMeButton = useGetElement('.close-me-button'); // close me close에도 사용
 const centerPanelButton = useGetElement('.center-panel-button');
 const descriptionPlace = useGetElement('.middle-block .description');
 
@@ -101,14 +101,8 @@ useClickEvent(closeMeButton, () => {
     descriptionPlace.innerHTML = closeMe; // 본문 내용 교체
 });
 
-useClickEvent(centerPanelButton, () => {
-    if(descriptionPlace.innerHTML === centerPanel) return;
-
-    descriptionPlace.innerHTML = centerPanel; // 본문 내용 교체
-
-    const toggleWestSide = useGetElement('.toggle-the-west-region');
-
-    toggleWestSide && useClickEvent(toggleWestSide, () =>{
+const westSideToggle = (toggleWestSide) => {
+    return toggleWestSide && useClickEvent(toggleWestSide, () =>{
         const copyWestSideBlock = useGetElement('.west-side-block');
         const westParent = useGetElement('.west'); // 전체 블럭
 
@@ -123,10 +117,32 @@ useClickEvent(centerPanelButton, () => {
         }else{
             const westSideFolded = useGetElement('.west-side-block-folded');  
 
-            westSideFolded.remove();
-            westParent.appendChild(westSideBlock)// outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
+            westSideFolded.remove(); // 요소 제거
+            westParent.appendChild(westSideBlock); // outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
         };
     });
+}
+
+useClickEvent(centerPanelButton, () => {
+    if(descriptionPlace.innerHTML === centerPanel) return;
+
+    descriptionPlace.innerHTML = centerPanel; // 본문 내용 교체
+
+    const toggleWestSide = useGetElement('.toggle-the-west-region');
+
+    westSideToggle(toggleWestSide)
 });
 
-// middle toggle west side controll
+// middle close me close
+const closeMeClose = useGetElement('.close-me-close-icon');
+const closeMeBlock = useGetElement('.close-me-block');
+
+useClickEvent(closeMeClose, () => {
+    const {style} = closeMeBlock;
+    style.display = 'none';
+    descriptionPlace.innerHTML = centerPanel;
+
+    const toggleWestSide = useGetElement('.toggle-the-west-region');
+
+    westSideToggle(toggleWestSide);
+});

@@ -63,3 +63,14 @@
     overflow: auto;
     background: white;
 }
+
+.close-me-block{
+    position: relative;
+}
+
+.close-me-close-icon{
+    position: absolute;
+    top:0;
+    right: 5px;
+    cursor: pointer;
+}
