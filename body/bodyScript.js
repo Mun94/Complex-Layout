@@ -1,14 +1,47 @@
-const {style: navigationPanelStyle} = HookGetElement('.navigation-panel');
-const {style: settingsPanelStyle} = HookGetElement('.settings-panel');
-const {style: informationPanelStyle} = HookGetElement('.information-panel');
+// west side button controll(클릭시 왼쪽으로 접힘)
+const {style: westSideBlock} = useGetElement('.west-side-block');
+const {style: westSideTop} = useGetElement('.west-side-block .top');
+const {style: categoryBlockStyle} = useGetElement('.west-side-block .category');
+const westSideTopButton = useGetElement('.west-side-block .button');
 
-const navigationButton = HookGetElement('.navigation-button');
-const settingsButton = HookGetElement('.settings-button');
-const informationButton = HookGetElement('.information-button');
+useClickEvent(westSideTopButton, e=> {
+    if(categoryBlockStyle.display === 'none'){
+        westSideBlock.width = '400px';
 
-// body west side button controll
-HookClickEvent(navigationButton, e => {
-    clickEvent(
+        categoryBlockStyle.display = 'block';
+
+        westSideTop.width = 'initial';
+        westSideTop.height = 'initial';
+        westSideTop.flexDirection = 'initial';
+        westSideTop.justifyContent ='space-between';
+
+        westSideTopButton.innerHTML = '<';
+    }else{
+        westSideBlock.width = 'initial';
+
+        categoryBlockStyle.display = 'none';
+
+        westSideTop.width = '16px';
+        westSideTop.height = '730px';
+        westSideTop.flexDirection = 'column-reverse';
+        westSideTop.justifyContent ='flex-end';
+        
+        westSideTopButton.innerHTML = '>';
+    };
+});
+
+
+// west side category button controll
+const {style: navigationPanelStyle} = useGetElement('.navigation-panel');
+const {style: settingsPanelStyle} = useGetElement('.settings-panel');
+const {style: informationPanelStyle} = useGetElement('.information-panel');
+
+const navigationButton = useGetElement('.navigation-button');
+const settingsButton = useGetElement('.settings-button');
+const informationButton = useGetElement('.information-button');
+
+useClickEvent(navigationButton, e => {
+    categoryFold(
         navigationPanelStyle,
         settingsPanelStyle,
         informationPanelStyle,
@@ -18,8 +51,8 @@ HookClickEvent(navigationButton, e => {
         );
 });
 
-HookClickEvent(settingsButton, e => {
-    clickEvent(
+useClickEvent(settingsButton, e => {
+    categoryFold(
         settingsPanelStyle,
         informationPanelStyle,
         navigationPanelStyle,
@@ -29,8 +62,8 @@ HookClickEvent(settingsButton, e => {
         );
 });
 
-HookClickEvent(informationButton, e => {
-    clickEvent(
+useClickEvent(informationButton, e => {
+    categoryFold(
         informationPanelStyle, 
         settingsPanelStyle, 
         navigationPanelStyle,
@@ -40,7 +73,7 @@ HookClickEvent(informationButton, e => {
         );
 });
 
-const clickEvent = (
+const categoryFold = (
     myPanel, 
     otherPanel,
     other2Panel, 
@@ -66,22 +99,52 @@ const clickEvent = (
     };
 };
 
-// body moddle button controll
-const closeMeButton = HookGetElement('.close-me-button');
-const centerPanelButton = HookGetElement('.center-panel-button');
+// middle button controll
+const closeMeButton = useGetElement('.close-me-button');
+const centerPanelButton = useGetElement('.center-panel-button');
 
-const descriptionPlace = HookGetElement('.middle-block .description');
+const descriptionPlace = useGetElement('.middle-block .description');
 
 descriptionPlace.innerHTML = closeMe;
 
-HookClickEvent(closeMeButton, () => {
+useClickEvent(closeMeButton, () => {
    if(descriptionPlace.innerHTML === closeMe) return; // 없으면 클릭때마다 같은 부분이 중첩으로 계속 새로 생김
 
     descriptionPlace.innerHTML = closeMe;
 });
 
-HookClickEvent(centerPanelButton, () => {
+useClickEvent(centerPanelButton, () => {
     if(descriptionPlace.innerHTML === centerPanel) return;
 
     descriptionPlace.innerHTML = centerPanel;
+
+    const toggleWestSide = useGetElement('.whatthe');
+
+    toggleWestSide && useClickEvent(toggleWestSide, () =>{
+        if(categoryBlockStyle.display === 'none'){
+            westSideBlock.width = '400px';
+    
+            categoryBlockStyle.display = 'block';
+    
+            westSideTop.width = 'initial';
+            westSideTop.height = 'initial';
+            westSideTop.flexDirection = 'initial';
+            westSideTop.justifyContent ='space-between';
+    
+            westSideTopButton.innerHTML = '<';
+        }else{
+            westSideBlock.width = 'initial';
+    
+            categoryBlockStyle.display = 'none';
+    
+            westSideTop.width = '16px';
+            westSideTop.height = '730px';
+            westSideTop.flexDirection = 'column-reverse';
+            westSideTop.justifyContent ='flex-end';
+            
+            westSideTopButton.innerHTML = '>';
+        };
+    });
 });
+
+// middle toggle west side controll

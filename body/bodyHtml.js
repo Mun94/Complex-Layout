@@ -1,4 +1,4 @@
-const bodyWest = HookGetElement('.body-block .west');
+const bodyWest = useGetElement('.body-block .west');
 
 // body west side
 const westSideCategory = (categoryName, text, buttonIcon, display) => {
@@ -37,15 +37,15 @@ bodyWest.innerHTML = `
 `;
 
 // body middle
-const bodyMiddle = HookGetElement('.body-block .middle');
+const bodyMiddle = useGetElement('.body-block .middle');
 
 bodyMiddle.innerHTML = `
     <div class= "middle-block">
         <div class= "category">
             <button class= "close-me-button">Close Me</button>
-            <button class= "center-panel-button">Center Parnel</button>
+            <button class= "center-panel-button">Center Panel</button>
         </div>
 
         <div class= "description"></div>
     </div>
-`
+`;
