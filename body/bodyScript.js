@@ -91,23 +91,23 @@ const categoryFold = (
 // middle button controll (+ toggle west side controll)
 const closeMeButton = useGetElement('.close-me-button'); // close me close에도 사용
 const centerPanelButton = useGetElement('.center-panel-button');
-const descriptionPlace = useGetElement('.middle-block .description');
+const middleDescriptionPlace = useGetElement('.middle-block .description');
 
-descriptionPlace.innerHTML = closeMe;
+middleDescriptionPlace.innerHTML = closeMe;
 
 useClickEvent(closeMeButton, () => {
-   if(descriptionPlace.innerHTML === closeMe) return; // 없으면 클릭때마다 같은 부분이 중첩으로 계속 새로 생김
+   if(middleDescriptionPlace.innerHTML === closeMe) return; // 없으면 클릭때마다 같은 부분이 중첩으로 계속 새로 생김
 
-    descriptionPlace.innerHTML = closeMe; // 본문 내용 교체
+    middleDescriptionPlace.innerHTML = closeMe; // 본문 내용 교체
 });
 
 const westSideToggle = (toggleWestSide) => {
     return toggleWestSide && useClickEvent(toggleWestSide, () =>{
-        const copyWestSideBlock = useGetElement('.west-side-block');
+        const reloadWestSideBlock = useGetElement('.west-side-block');
         const westParent = useGetElement('.west'); // 전체 블럭
 
-        if(copyWestSideBlock){
-            copyWestSideBlock.outerHTML = westSideFoldedHtml; // foldHtml.js 파일에 있음
+        if(reloadWestSideBlock){
+            reloadWestSideBlock.outerHTML = westSideFoldedHtml; // foldHtml.js 파일에 있음
 
             // 아래 로직은 center panel의 toggle 버튼을 통해 west side를 접은 상태에서 west side 상다의 버튼을 클릭했을 때 동작하지 않는 에러 해결
             const westSideTopFoldedButton = useGetElement('.west-side-block-folded .button');
@@ -124,9 +124,9 @@ const westSideToggle = (toggleWestSide) => {
 }
 
 useClickEvent(centerPanelButton, () => {
-    if(descriptionPlace.innerHTML === centerPanel) return;
+    if(middleDescriptionPlace.innerHTML === centerPanel) return;
 
-    descriptionPlace.innerHTML = centerPanel; // 본문 내용 교체
+    middleDescriptionPlace.innerHTML = centerPanel; // 본문 내용 교체
 
     const toggleWestSide = useGetElement('.toggle-the-west-region');
 
@@ -140,9 +140,14 @@ const closeMeBlock = useGetElement('.close-me-block');
 useClickEvent(closeMeClose, () => {
     const {style} = closeMeBlock;
     style.display = 'none';
-    descriptionPlace.innerHTML = centerPanel;
+    middleDescriptionPlace.innerHTML = centerPanel;
 
     const toggleWestSide = useGetElement('.toggle-the-west-region');
 
     westSideToggle(toggleWestSide);
 });
+
+// east side button controll
+const eastDescriptionPlace = useGetElement('.east-side-block .grid-description');
+
+eastDescriptionPlace.innerHTML = propertyGrid;

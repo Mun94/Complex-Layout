@@ -1,9 +1,9 @@
 /* body west side */
-.west-side-block{
+.west-side-block{ /*.east-side-block이랑 중복됨*/
     width: 400px;
 }
 
-.west-side-block .top{
+.west-side-block .top{ /*.east-side-block .top이랑 중복됨*/
     background: #157fcc;
     padding: 10px;
     display: flex;
@@ -46,13 +46,16 @@
     width:800px;
     background-color: #157fcc;
     margin-left: 10px;
+    margin-right: 10px;
 }
 
-.middle-block .category{
+.middle-block .category, .east-side-block .category{ /* east side 같이 적용 */
     display: flex;
 }
 
-.category .close-me-button,.center-panel-button{
+.category .close-me-button,.center-panel-button,
+.property-grid-button, .a-tab-button /* east side 같이 적용 */
+{
     height: 41px;
     padding:8px 12px;
     background: #4b9cd7;
@@ -64,13 +67,32 @@
     background: white;
 }
 
-.close-me-block{
+.close-me-block, .property-grid-block{
     position: relative;
 }
 
-.close-me-close-icon{
+.close-me-close-icon, .property-grid-close-icon{
     position: absolute;
     top:0;
     right: 5px;
     cursor: pointer;
+}
+
+/* body east side */
+.east-side-block .top{
+    background: #157fcc;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.east-side-block .category{
+    background: #157fcc;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.east-side-block .grid-description{
+    height: 680px;
+    background: white;
 }
