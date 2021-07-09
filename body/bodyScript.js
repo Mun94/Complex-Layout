@@ -1,33 +1,23 @@
 // west side button controll(클릭시 왼쪽으로 접힘)
-const {style: westSideBlock} = useGetElement('.west-side-block');
-const {style: westSideTop} = useGetElement('.west-side-block .top');
-const {style: categoryBlockStyle} = useGetElement('.west-side-block .category');
+const westSideBlock = useGetElement('.west-side-block'); // toggle the west region에서도 사용됨!! 지역 변수로 사용하자니.. 코드가 너무 많아짐
+
+const westParent = useGetElement('.west'); // 전체 블럭
 const westSideTopButton = useGetElement('.west-side-block .button');
 
+const spreadFold = (fold, button) => {
+    button && useClickEvent(button, () => {
+        fold.remove();
+        westParent.appendChild(westSideBlock)// outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
+    })
+}
+
 useClickEvent(westSideTopButton, e=> {
-    if(categoryBlockStyle.display === 'none'){
-        westSideBlock.width = '400px';
+    westSideBlock.outerHTML = westSideFoldedHtml; // foldHtml.js 파일에 있음
 
-        categoryBlockStyle.display = 'block';
+    const westSideFolded = useGetElement('.west-side-block-folded');  
+    const westSideTopFoldedButton = useGetElement('.west-side-block-folded .button');
 
-        westSideTop.width = 'initial';
-        westSideTop.height = 'initial';
-        westSideTop.flexDirection = 'initial';
-        westSideTop.justifyContent ='space-between';
-
-        westSideTopButton.innerHTML = '<';
-    }else{
-        westSideBlock.width = 'initial';
-
-        categoryBlockStyle.display = 'none';
-
-        westSideTop.width = '16px';
-        westSideTop.height = '730px';
-        westSideTop.flexDirection = 'column-reverse';
-        westSideTop.justifyContent ='flex-end';
-        
-        westSideTopButton.innerHTML = '>';
-    };
+    spreadFold(westSideFolded, westSideTopFoldedButton)
 });
 
 
@@ -35,7 +25,6 @@ useClickEvent(westSideTopButton, e=> {
 const {style: navigationPanelStyle} = useGetElement('.navigation-panel');
 const {style: settingsPanelStyle} = useGetElement('.settings-panel');
 const {style: informationPanelStyle} = useGetElement('.information-panel');
-
 const navigationButton = useGetElement('.navigation-button');
 const settingsButton = useGetElement('.settings-button');
 const informationButton = useGetElement('.information-button');
@@ -102,7 +91,6 @@ const categoryFold = (
 // middle button controll
 const closeMeButton = useGetElement('.close-me-button');
 const centerPanelButton = useGetElement('.center-panel-button');
-
 const descriptionPlace = useGetElement('.middle-block .description');
 
 descriptionPlace.innerHTML = closeMe;
@@ -110,39 +98,33 @@ descriptionPlace.innerHTML = closeMe;
 useClickEvent(closeMeButton, () => {
    if(descriptionPlace.innerHTML === closeMe) return; // 없으면 클릭때마다 같은 부분이 중첩으로 계속 새로 생김
 
-    descriptionPlace.innerHTML = closeMe;
+    descriptionPlace.innerHTML = closeMe; // 본문 내용 교체
 });
 
 useClickEvent(centerPanelButton, () => {
     if(descriptionPlace.innerHTML === centerPanel) return;
 
-    descriptionPlace.innerHTML = centerPanel;
+    descriptionPlace.innerHTML = centerPanel; // 본문 내용 교체
 
-    const toggleWestSide = useGetElement('.whatthe');
+    const toggleWestSide = useGetElement('.toggle-the-west-region');
 
     toggleWestSide && useClickEvent(toggleWestSide, () =>{
-        if(categoryBlockStyle.display === 'none'){
-            westSideBlock.width = '400px';
-    
-            categoryBlockStyle.display = 'block';
-    
-            westSideTop.width = 'initial';
-            westSideTop.height = 'initial';
-            westSideTop.flexDirection = 'initial';
-            westSideTop.justifyContent ='space-between';
-    
-            westSideTopButton.innerHTML = '<';
+        const copyWestSideBlock = useGetElement('.west-side-block');
+        const westParent = useGetElement('.west'); // 전체 블럭
+
+        if(copyWestSideBlock){
+            copyWestSideBlock.outerHTML = westSideFoldedHtml; // foldHtml.js 파일에 있음
+
+            // 아래 로직은 center panel의 toggle 버튼을 통해 west side를 접은 상태에서 west side 상다의 버튼을 클릭했을 때 동작하지 않는 에러 해결
+            const westSideTopFoldedButton = useGetElement('.west-side-block-folded .button');
+            const westSideFolded = useGetElement('.west-side-block-folded');  
+
+            spreadFold(westSideFolded, westSideTopFoldedButton);
         }else{
-            westSideBlock.width = 'initial';
-    
-            categoryBlockStyle.display = 'none';
-    
-            westSideTop.width = '16px';
-            westSideTop.height = '730px';
-            westSideTop.flexDirection = 'column-reverse';
-            westSideTop.justifyContent ='flex-end';
-            
-            westSideTopButton.innerHTML = '>';
+            const westSideFolded = useGetElement('.west-side-block-folded');  
+
+            westSideFolded.remove();
+            westParent.appendChild(westSideBlock)// outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
         };
     });
 });

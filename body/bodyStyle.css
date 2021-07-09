@@ -34,6 +34,13 @@
     margin-top:5px;
 }
 
+/* west side 접혔을 때*/
+.west-side-block-folded{
+    background: #157fcc;
+    height: 730px;
+    padding: 10px;
+}
+
 /* body middle */
 .middle-block{
     width:800px;
