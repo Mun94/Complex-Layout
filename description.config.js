@@ -60,7 +60,10 @@ const makeTable = (td) => {
 const propertyGrid = makeTable(
     [
         [
-            `<div>Name</div>`, 
+            `<div class="first-col">
+                Name
+                <span class="icon">^</span>
+            </div>`, 
             '(name)', 
             'autoFitColumns', 
             'borderWidth', 
@@ -71,7 +74,10 @@ const propertyGrid = makeTable(
             'version'
         ],
         [
-            `<div>value</div>`
+            `<div class="second-col">
+                value
+                <span class= "icon" style="display:none">^</span>
+            </div>`
             ,
             'Properties Grid',
             `

@@ -138,8 +138,7 @@ const closeMeClose = useGetElement('.close-me-close-icon');
 const closeMeBlock = useGetElement('.close-me-block');
 
 useClickEvent(closeMeClose, () => {
-    const {style} = closeMeBlock;
-    style.display = 'none';
+    closeMeBlock.remove();
     middleDescriptionPlace.innerHTML = centerPanel;
 
     const toggleWestSide = useGetElement('.toggle-the-west-region');
@@ -188,8 +187,40 @@ const propertyGridClose = useGetElement('.property-grid-close-icon');
 const propertyGridBlock = useGetElement('.property-grid-block');
 
 useClickEvent(propertyGridClose, () => {
-    const {style} = propertyGridBlock;
-
-    style.display = 'none';
+    propertyGridBlock.remove();
     eastDescriptionPlace.innerHTML = aTab;
+});
+
+// east side property grid sort
+const firstColPropertyGrid = useGetElement('.first-col');
+const secondColPropertyGrid = useGetElement('.second-col');
+const firstColPropertyGridIcon = useGetElement('.first-col .icon');
+const secondColPropertyGridIcon = useGetElement('.second-col .icon');
+
+const changeIcon = (myStyle, otherStyle, myIcon) => {
+    if(myStyle.display === 'none'){
+        myStyle.display = 'inline';
+        otherStyle.display = 'none';
+        myIcon.innerHTML = '^';
+    }else{
+        if(myIcon.innerHTML === '^'){
+            myIcon.innerHTML = 'V';
+        }else{
+            myIcon.innerHTML = '^';
+        };
+    };
+};
+
+useClickEvent(firstColPropertyGrid, () => {
+    const {style: secondIconStyle} = secondColPropertyGridIcon;
+    const {style: firstIconStyle} = firstColPropertyGridIcon;
+
+    changeIcon(firstIconStyle, secondIconStyle, firstColPropertyGridIcon);
+});
+
+useClickEvent(secondColPropertyGrid, ()=>{
+    const {style: secondIconStyle} = secondColPropertyGridIcon;
+    const {style: firstIconStyle} = firstColPropertyGridIcon;
+    
+    changeIcon(secondIconStyle, firstIconStyle, secondColPropertyGridIcon);       
 });

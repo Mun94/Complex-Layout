@@ -96,3 +96,11 @@
     height: 680px;
     background: white;
 }
+
+.first-col, .second-col{
+    cursor: pointer;
+}
+
+.second-col .icon{
+    display: none;
+}
