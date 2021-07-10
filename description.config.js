@@ -20,11 +20,11 @@ Aliquam elementum mauris id sem. Vivamus varius, est ut nonummy consectetuer, nu
 `
 
 const splitDescription = (desc) => {
-    const array = desc.split('\n');
+    const splitDesc = desc.split('\n');
     let includePTag = '';
 
-    for(let i= 0; i < array.length; i++){
-        includePTag += `<p>${array[i]}</p>`
+    for(let i= 0; i < splitDesc.length; i++){
+        includePTag += `<p>${splitDesc[i]}</p>`
     };
 
     return includePTag;
@@ -35,69 +35,73 @@ const centerPanel = firstCenterPanelDescription + secondCenterPanelDescription +
 
 const aTab = '<p>A TabPanel component can be a region.</p>'
 
-// 테이블 부분 정리하자 너무 노가다임
-const propertyGrid = `
-    
-<table border="1">
-<tbody><tr>
-    <th><div>Name</div></th>
-    <th><div>Value</div></th>
-</tr>
-<tr>
-    <td>(name)</td>
-    <td>
-       Properties Grid
-    </td>
-</tr>
-<tr>
-    <td>autoFitColumns</td>
-    <td>
-        <select>
+// 테이블 부분 정리
+const makeTable = (td) => {
+    const rowCnt = td[0].length; // 행 수
+    const columnCnt = td.length  // 열 수
+
+    let table = '';
+
+    table += `<table><tbody>`;
+    for(let i = 0; i < rowCnt; i++){
+        table += `<tr>`;
+            for(let j = 0; j < columnCnt; j++){
+                table += `<td>`;
+                table += td[j][i];
+                table += `</td>`;
+            };
+        table += `</tr>`;
+    }
+    table += `</tbody></table>`;
+
+    return table;
+}
+
+const propertyGrid = makeTable(
+    [
+        [`<div>Name</div>`, 
+        '(name)', 
+        'autoFitColumns', 
+        'borderWidth', 
+        'created', 
+        'grouping', 
+        'productionQuality', 
+        'tested', 
+        'version'
+        ],
+        [
+            `<div>value</div>`
+            ,
+            'Properties Grid',
+            `
+            <select>
             <option value="true">true</option>
             <option value="false">false</option>
-        </select>
-    </td>
-</tr>
-<tr>
-    <td>borderWidth</td>
-    <td>2</td>
-</tr>
-<tr>
-    <td>created</td>
-    <td>
-        <input type="date" name="userBirthday" value="2006-10-15">
-    </td>
-</tr>
-<tr>
-    <td>grouping</td>
-    <td>
-        <select>
+            </select>
+            `,
+            '2',
+            `
+            <input type="date" name="userBirthday" value="2006-10-15">
+            `,
+            `
+            <select>
             <option value="true">true</option>
             <option value="false">false</option>
-        </select>
-    </td>
-</tr>
-<tr>
-    <td>productionQuality</td>
-    <td>
-        <select>
+            </select>
+            `,
+            `
+            <select>
             <option value="true">true</option>
             <option value="false">false</option>
-        </select>
-    </td>
-</tr>
-<tr>
-    <td>tested</td>
-    <td>
-        <select>
+            </select>
+            `,
+            `
+            <select>
             <option value="true">true</option>
             <option value="false">false</option>
-        </select>
-    </td>
-</tr>
-<tr>
-    <td>version</td>
-    <td>1.01</td>
-</tr>
-</tbody></table>
-`
+            </select>
+            `,
+            '1.01'
+        ]
+    ]
+);
