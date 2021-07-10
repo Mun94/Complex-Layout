@@ -182,3 +182,14 @@ useClickEvent(propertyGridButton, ()=>{
     
     eastDescriptionPlace.innerHTML = propertyGrid;
 });
+
+// east side property grid close (property grid 창 닫기)
+const propertyGridClose = useGetElement('.property-grid-close-icon');
+const propertyGridBlock = useGetElement('.property-grid-block');
+
+useClickEvent(propertyGridClose, () => {
+    const {style} = propertyGridBlock;
+
+    style.display = 'none';
+    eastDescriptionPlace.innerHTML = aTab;
+});
