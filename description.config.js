@@ -33,67 +33,71 @@ const splitDescription = (desc) => {
 const closeMe = firstCloseMeDescription + splitDescription(closeMeDescription);
 const centerPanel = firstCenterPanelDescription + secondCenterPanelDescription + "<hr>" + splitDescription(centerPanelDescription);
 
+const aTab = '<p>A TabPanel component can be a region.</p>'
+
+// 테이블 부분 정리하자 너무 노가다임
 const propertyGrid = `
-    <table border="1">
-        <tr>
-            <th><div >Name</div></th>
-            <th><div>Value</div></th>
-        </tr>
-        <tr>
-            <td>(name)</td>
-            <td>
-               Properties Grid
-            </td>
-        </tr>
-        <tr>
-            <td>autoFitColumns</td>
-            <td>
-                <select>
-                    <option value="true">true</option>
-                    <option value="false">false</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>borderWidth</td>
-            <td>2</td>
-        </tr>
-        <tr>
-            <td>created</td>
-            <td>
-                <input type='date' name='userBirthday' value='2006-10-15'/>
-            </td>
-        </tr>
-        <tr>
-            <td>grouping</td>
-            <td>
-                <select>
-                    <option value="true">true</option>
-                    <option value="false">false</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>productionQuality</td>
-            <td>
-                <select>
-                    <option value="true">true</option>
-                    <option value="false">false</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>tested</td>
-            <td>
-                <select>
-                    <option value="true">true</option>
-                    <option value="false">false</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>version</td>
-            <td>1.01</td>
-        </tr>
-    </table>
+    
+<table border="1">
+<tbody><tr>
+    <th><div>Name</div></th>
+    <th><div>Value</div></th>
+</tr>
+<tr>
+    <td>(name)</td>
+    <td>
+       Properties Grid
+    </td>
+</tr>
+<tr>
+    <td>autoFitColumns</td>
+    <td>
+        <select>
+            <option value="true">true</option>
+            <option value="false">false</option>
+        </select>
+    </td>
+</tr>
+<tr>
+    <td>borderWidth</td>
+    <td>2</td>
+</tr>
+<tr>
+    <td>created</td>
+    <td>
+        <input type="date" name="userBirthday" value="2006-10-15">
+    </td>
+</tr>
+<tr>
+    <td>grouping</td>
+    <td>
+        <select>
+            <option value="true">true</option>
+            <option value="false">false</option>
+        </select>
+    </td>
+</tr>
+<tr>
+    <td>productionQuality</td>
+    <td>
+        <select>
+            <option value="true">true</option>
+            <option value="false">false</option>
+        </select>
+    </td>
+</tr>
+<tr>
+    <td>tested</td>
+    <td>
+        <select>
+            <option value="true">true</option>
+            <option value="false">false</option>
+        </select>
+    </td>
+</tr>
+<tr>
+    <td>version</td>
+    <td>1.01</td>
+</tr>
+</tbody></table>
 `

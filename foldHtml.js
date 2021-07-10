@@ -1,12 +1,20 @@
-const westSideFoldedHtml = `
-    <div class= "west-side-block-folded">
+const foldedHtml = (side, arrow) => `
+    <div class= "${side}-side-block-folded">
         <div class= "top">
             <button class= "button">
-            >
+                ${arrow}
             </button>
             <div class= "title">
-                west
+                ${side}
             </div>
         </div>
     </div>
+`
+
+const westSideFoldedHtml = `
+    ${foldedHtml('west', '>')}
+`;
+
+const eastSideFoldedHtml = `
+    ${foldedHtml('east', '<')}
 `;

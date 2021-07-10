@@ -88,10 +88,10 @@ const categoryFold = (
     };
 };
 
-// middle button controll (+ toggle west side controll)
+// middle button(close me, center panel) controll (+ toggle west side controll)
+const middleDescriptionPlace = useGetElement('.middle-block .description');
 const closeMeButton = useGetElement('.close-me-button'); // close me close에도 사용
 const centerPanelButton = useGetElement('.center-panel-button');
-const middleDescriptionPlace = useGetElement('.middle-block .description');
 
 middleDescriptionPlace.innerHTML = closeMe;
 
@@ -133,7 +133,7 @@ useClickEvent(centerPanelButton, () => {
     westSideToggle(toggleWestSide)
 });
 
-// middle close me close
+// middle close me close (close me 창 닫기)
 const closeMeClose = useGetElement('.close-me-close-icon');
 const closeMeBlock = useGetElement('.close-me-block');
 
@@ -147,7 +147,38 @@ useClickEvent(closeMeClose, () => {
     westSideToggle(toggleWestSide);
 });
 
-// east side button controll
+// east side button controll(클릭시 오른쪽으로 접힘)
+const eastSideBlock = useGetElement('.east-side-block');
+const eastSideTopButton = useGetElement('.east-side-block .button');
+const eastParent = useGetElement('.east');
+
+useClickEvent(eastSideTopButton, () => {
+    eastSideBlock.outerHTML = eastSideFoldedHtml;
+
+    const eastSideFolded = useGetElement('.east-side-block-folded');
+    const eastSideTopFoldedButton = useGetElement('.east-side-block-folded .button');
+
+    eastSideTopFoldedButton && useClickEvent(eastSideTopFoldedButton, ()=>{
+        eastSideFolded.remove();
+        eastParent.appendChild(eastSideBlock);
+    })
+});
+
+// east button(a tab, property grid) controll
 const eastDescriptionPlace = useGetElement('.east-side-block .grid-description');
+const aTabButton = useGetElement('.a-tab-button');
+const propertyGridButton = useGetElement('.property-grid-button');
 
 eastDescriptionPlace.innerHTML = propertyGrid;
+
+useClickEvent(aTabButton, () => {
+    if(eastDescriptionPlace.innerHTML === aTab) return;
+
+    eastDescriptionPlace.innerHTML = aTab;
+});
+
+useClickEvent(propertyGridButton, ()=>{
+    if(eastDescriptionPlace.innerHTML === propertyGrid) return;
+    
+    eastDescriptionPlace.innerHTML = propertyGrid;
+});
