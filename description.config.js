@@ -112,3 +112,5 @@ const propertyGrid = makeTable(
         ]
     ]
 );
+
+const southDescription = `<p>south - generally for informational stuff, also could be for status bar</p>`;

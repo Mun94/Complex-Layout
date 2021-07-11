@@ -18,3 +18,7 @@ const westSideFoldedHtml = `
 const eastSideFoldedHtml = `
     ${foldedHtml('east', '<')}
 `;
+
+const southSideFoldedHtml = `
+    ${foldedHtml('south', '^')}
+`;
