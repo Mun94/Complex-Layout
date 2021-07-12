@@ -17,7 +17,8 @@ useClickEvent(southSideTopFoldedButton, () => {
     const settingsButton = useGetElement('.settings-button');
     const informationButton = useGetElement('.information-button');
 
-    
+    const toggleWestSide = useGetElement('.toggle-the-west-region');
+
     const westSideFolded = useGetElement('.west-side-block-folded');  
     const eastSideFolded = useGetElement('.east-side-block-folded');
 
@@ -29,6 +30,27 @@ useClickEvent(southSideTopFoldedButton, () => {
     westSideNavigationPanel.style.height = '468px';
     westSideSettingsPanel.style.height = '468px';
     westSideInformationPanel.style.height = '468px';
+
+    useClickEvent(centerPanelButton, () => {
+        const toggleWestSide = useGetElement('.toggle-the-west-region');
+        toggleWestSide && useClickEvent(toggleWestSide, () => {
+            const westSideFolded = useGetElement('.west-side-block-folded'); 
+            westSideFolded ? westSideFolded.style.height = '632px' : null;
+        });
+    });
+
+    useClickEvent(closeMeClose , () => {
+        const toggleWestSide = useGetElement('.toggle-the-west-region');
+        toggleWestSide && useClickEvent(toggleWestSide, () => {
+            const westSideFolded = useGetElement('.west-side-block-folded'); 
+            westSideFolded ? westSideFolded.style.height = '632px' : null;
+        });
+    });
+
+    toggleWestSide && useClickEvent(toggleWestSide, () => {
+        const westSideFolded = useGetElement('.west-side-block-folded'); 
+        westSideFolded ? westSideFolded.style.height = '632px' : null;
+    });
 
     westSideFolded ? westSideFolded.style.height = '632px' : null;
     useClickEvent(westSideTopButton , () => {

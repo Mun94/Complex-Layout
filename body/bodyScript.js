@@ -104,7 +104,7 @@ useClickEvent(closeMeButton, () => {
 });
 
 const westSideToggle = (toggleWestSide) => {
-    return toggleWestSide && useClickEvent(toggleWestSide, () =>{
+    return useClickEvent(toggleWestSide, () =>{
         const reloadWestSideBlock = useGetElement('.west-side-block');
         const westParent = useGetElement('.west'); // 전체 블럭
         

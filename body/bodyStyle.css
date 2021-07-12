@@ -102,6 +102,14 @@
     background: white;
 }
 
+.east-side-block .grid-description p{
+    margin: 0;
+}
+
+.east-side-block .grid-description table{
+    margin:0 auto;
+}
+
 .first-col, .second-col{
     cursor: pointer;
 }
