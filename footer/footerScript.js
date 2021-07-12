@@ -1,12 +1,60 @@
 const southSideTopFoldedButton = useGetElement('.south-side-block-folded .button');
 const southSideFolded = useGetElement('.south-side-block-folded');
 const southParent = useGetElement('.footer');
+const southSideDragZone = useGetElement('.south-side-drag-zone');
 
 const westSideNavigationPanel = useGetElement('.navigation-panel');
 const westSideSettingsPanel = useGetElement('.settings-panel');
 const westSideInformationPanel = useGetElement('.information-panel');
-// const middleDescriptionPlace = useGetElement('.middle .description');
 
+// south side drag zone 창 크기 조절
+const onSouthMouseMove =  e => {
+    const southSideBlock = useGetElement('.south-side-block');
+
+    southSideBlock.style.minHeight = '111px';
+    southSideBlock.style.maxHeight = '465px';
+
+    southSideBlock ? southSideBlock.style.height = (111 + 844 - e.screenY) + 'px' : null;
+    middleDescriptionPlace.style.height = 657 - 111 - southSideBlock.clientHeight + 148 + 64 + 'px';
+    eastDescriptionPlace.style.height = 615 - 111 - southSideBlock.clientHeight + 148 + 64 + 'px';
+    
+    westSideNavigationPanel.style.height = 512 - 111 - southSideBlock.clientHeight + 148 + 64 + 'px';
+    westSideSettingsPanel.style.height = 512 - 111 - southSideBlock.clientHeight + 148 + 64 + 'px';
+    westSideInformationPanel.style.height = 512 - 111 - southSideBlock.clientHeight + 148 + 64 + 'px';
+};
+
+const onSouthMouseDown = e => {
+    document.addEventListener('mousemove', onSouthMouseMove);
+};
+
+southSideDragZone.addEventListener('mousedown', onSouthMouseDown);
+
+document.addEventListener('mouseup', () => {
+    document.removeEventListener('mousemove', onSouthMouseMove);
+
+    const onClickFoldButton = (button, side) => {
+        button && useClickEvent(button, () => {
+            const folded = useGetElement(`.${side}`+'-side-block-folded');
+            const middleBlock = useGetElement('.middle-block');
+    
+            folded ? folded.style.height = middleBlock.clientHeight + 'px' : null;
+        });
+    };
+    
+    const westSideTopButton = useGetElement('.west-side-block .button');
+    onClickFoldButton(westSideTopButton, 'west');
+
+    const eastSideTopButton = useGetElement('.east-side-block .button');
+    onClickFoldButton(eastSideTopButton, 'east');
+
+    const westSideDragZoneButton = useGetElement('.west-side-drag-zone .button');
+    onClickFoldButton(westSideDragZoneButton, 'west');
+
+    const eastSideDragZoneButton = useGetElement('.east-side-drag-zone .button');
+    onClickFoldButton(eastSideDragZoneButton, 'east');
+});
+
+// south side 상단 버튼 눌렀을 때
 const southSideHtml = `
     <div class= "south-side-block">
         <div class= "top">
@@ -40,7 +88,7 @@ useClickEvent(southSideTopFoldedButton, () => {
 
     southDescriptionPlace.innerHTML = southDescription;
 
-    middleDescriptionPlace.style.height = `${middleDescriptionPlace.clientHeight - southDescriptionPlace.clientHeight}px`;
+    middleDescriptionPlace.style.height = '657px';
     eastDescriptionPlace.style.height = '615px';
     
     westSideNavigationPanel.style.height = '512px';
@@ -104,7 +152,7 @@ useClickEvent(southSideTopFoldedButton, () => {
         const westSideFolded = useGetElement('.west-side-block-folded');  
         const eastSideFolded = useGetElement('.east-side-block-folded');
 
-        middleDescriptionPlace.style.height = `${middleDescriptionPlace.clientHeight + southDescriptionPlace.clientHeight}px`;
+        middleDescriptionPlace.style.height = '721px';
         eastDescriptionPlace.style.height = '680px';
       
         westSideNavigationPanel.style.height = '578px';
@@ -189,7 +237,7 @@ useClickEvent(southSideDragZoneButton, () => {
         const westSideFolded = useGetElement('.west-side-block-folded');  
         const eastSideFolded = useGetElement('.east-side-block-folded');
 
-        middleDescriptionPlace.style.height = `${middleDescriptionPlace.clientHeight + southDescriptionPlace.clientHeight}px`;
+        middleDescriptionPlace.style.height = '721px';
         eastDescriptionPlace.style.height = '680px';
       
         westSideNavigationPanel.style.height = '578px';
@@ -267,7 +315,7 @@ useClickEvent(southSideDragZoneButton, () => {
 
     southDescriptionPlace.innerHTML = southDescription;
 
-    middleDescriptionPlace.style.height = `${middleDescriptionPlace.clientHeight - southDescriptionPlace.clientHeight}px`;
+    middleDescriptionPlace.style.height = '657px';
     eastDescriptionPlace.style.height = '615px';
     
     westSideNavigationPanel.style.height = '512px';
@@ -394,5 +442,5 @@ useClickEvent(southSideDragZoneButton, () => {
             southSideBlock.remove();
             southParent.appendChild(southSideFolded);
         });
-    }
-})
+    };
+});

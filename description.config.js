@@ -1,3 +1,7 @@
+// header
+const headerDescription = '<p>north - generally for menus, toolbars and/or advertisements</p>';
+
+// middle
 const firstCloseMeDescription='<p style="font-weight:bold">Done reading me? Close me by clicking the X in the top right corner.</p>';
 
 const closeMeDescription = `Vestibulum semper. Nullam non odio. Aliquam quam. Mauris eu lectus non nunc auctor ullamcorper. Sed tincidunt molestie enim. Phasellus lobortis justo sit amet quam. Duis nulla erat, varius a, cursus in, tempor sollicitudin, mauris. Aliquam mi velit, consectetuer mattis, consequat tristique, pulvinar ac, nisl. Aliquam mattis vehicula elit. Proin quis leo sed tellus scelerisque molestie. Quisque luctus. Integer mattis. Donec id augue sed leo aliquam egestas. Quisque in sem. Donec dictum enim in dolor. Praesent non erat. Nulla ultrices vestibulum quam.
@@ -33,6 +37,7 @@ const splitDescription = (desc) => {
 const closeMe = firstCloseMeDescription + splitDescription(closeMeDescription);
 const centerPanel = firstCenterPanelDescription + secondCenterPanelDescription + "<hr>" + splitDescription(centerPanelDescription);
 
+// east
 const aTab = '<p>A TabPanel component can be a region.</p>';
 
 // 테이블 부분 정리
@@ -42,7 +47,7 @@ const makeTable = (td) => {
 
     let table = '';
 
-    table += `<table class="propertyGridTable"><tbody>`;
+    table += `<table class="property-grid-table"><tbody>`;
     for(let i = 0; i < rowCnt; i++){
         table += `<tr>`;
             for(let j = 0; j < columnCnt; j++){
@@ -113,4 +118,5 @@ const propertyGrid = makeTable(
     ]
 );
 
+// footer
 const southDescription = `<p>south - generally for informational stuff, also could be for status bar</p>`;

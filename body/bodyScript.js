@@ -293,7 +293,7 @@ let rememberEastWidth = 0;
 const onEastMouseMove = e => {
     eastParent.style.width = (rememberEastWidth + document.body.clientWidth - e.clientX) +'px';
     rememberEastWidth = document.body.clientWidth - e.clientX;
-    const table = useGetElement('.propertyGridTable');
+    const table = useGetElement('.property-grid-table');
 
     eastParent.style.minWidth = table ? table.clientWidth + 10 + 'px' : '120px'; 
 };
