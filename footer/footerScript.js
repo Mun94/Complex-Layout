@@ -10,11 +10,16 @@ const westSideInformationPanel = useGetElement('.information-panel');
 // south side drag zone 창 크기 조절
 const onSouthMouseMove =  e => {
     const southSideBlock = useGetElement('.south-side-block');
+    const westSideFolded = useGetElement('.west-side-block-folded');
+    const eastSideFolded = useGetElement('.east-side-block-folded');
 
-    southSideBlock.style.minHeight = '111px';
-    southSideBlock.style.maxHeight = '465px';
+    westSideFolded ? westSideFolded.style.height = 657 - 111 - southSideBlock.clientHeight + 148 + 64 + 21 + 'px' :null;
+    eastSideFolded ? eastSideFolded.style.height = 657 - 111 - southSideBlock.clientHeight + 148 + 64 + 21 + 'px' :null;
 
+    southSideBlock ? southSideBlock.style.minHeight = '111px' : null;
+    southSideBlock ? southSideBlock.style.maxHeight = '465px' : null;
     southSideBlock ? southSideBlock.style.height = (111 + 844 - e.screenY) + 'px' : null;
+    
     middleDescriptionPlace.style.height = 657 - 111 - southSideBlock.clientHeight + 148 + 64 + 'px';
     eastDescriptionPlace.style.height = 615 - 111 - southSideBlock.clientHeight + 148 + 64 + 'px';
     
