@@ -7,7 +7,6 @@
 
 .south-side-drag-zone{
     height: 8px;
-    background: red;
 }
 
 .south-side-block{
@@ -24,4 +23,20 @@
     flex-direction: row-reverse;
     background: #157fcc;
     padding: 10px;
+}
+
+/* drag zone button */
+.south-side-drag-zone{
+    position: relative;
+    cursor: col-resize;
+}
+
+.south-side-drag-zone .button{
+    width: 70px;
+    height: 100%;
+    background: red;
+
+    position: absolute;
+    left: 45%;
+    cursor: pointer;
 }

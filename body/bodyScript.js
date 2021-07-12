@@ -31,15 +31,30 @@ useClickEvent(westSideTopButton, e => {
 // west side drag zone 클릭 시 왼쪽으로 접힘
 const westSideDragZoneButton = useGetElement('.west-side-drag-zone .button');
 
-const onClickDragZoneButton = (folded, block, foldedHtml, blockFoldedClassName, parent, dragZone, checkDragZone, side) => {
+const onClickDragZoneButton = (
+    folded, 
+    block, 
+    foldedHtml, 
+    blockFoldedClassName, 
+    parent, 
+    dragZone, 
+    checkDragZone, 
+    side) => {
+    
+    const removeEvent = (val) => val === 'west' ? 
+        westSideDragZone.removeEventListener('mousedown', onWestMouseDown) 
+        : eastSideDragZone.removeEventListener('mousedown', onEastMouseDown);
+    
+    const addEvent = (val) => val === 'west' ? 
+        westSideDragZone.addEventListener('mousedown', onWestMouseDown) 
+        : eastSideDragZone.addEventListener('mousedown', onEastMouseDown);
+
     if(!folded){
         block.outerHTML = foldedHtml;
         parent.style.width = 'initial';
         parent.style.minWidth = 'initial';
 
-        side === 'west' ? 
-            westSideDragZone.removeEventListener('mousedown', onWestMouseDown) 
-            : eastSideDragZone.removeEventListener('mousedown', onEastMouseDown);
+        removeEvent(side);
 
         const topFoldedButton = useGetElement(`${blockFoldedClassName} .button`);
 
@@ -47,31 +62,35 @@ const onClickDragZoneButton = (folded, block, foldedHtml, blockFoldedClassName, 
             const folded = useGetElement(`${blockFoldedClassName}`);
             parent.style.width = '30%';
             folded.remove();
-            parent.appendChild(block); // outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
+            parent.appendChild(block);
         
             checkDragZone && parent.appendChild(dragZone);
 
-            side === 'west' ? 
-            westSideDragZone.addEventListener('mousedown', onWestMouseDown) 
-            : eastSideDragZone.addEventListener('mousedown', onEastMouseDown);
+            addEvent(side);
         });
     }else{
         parent.style.width = '30%';
         folded.remove();
-        parent.appendChild(block); // outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
+        parent.appendChild(block);
 
         checkDragZone && parent.appendChild(dragZone);
 
-        side === 'west' ? 
-            westSideDragZone.addEventListener('mousedown', onWestMouseDown) 
-            : eastSideDragZone.addEventListener('mousedown', onEastMouseDown);
+        addEvent(side);
     };
 };
 
 useClickEvent(westSideDragZoneButton, () => {
     const westSideFolded = useGetElement('.west-side-block-folded');
 
-    onClickDragZoneButton(westSideFolded, westSideBlock, westSideFoldedHtml, '.west-side-block-folded', westParent, westSideDragZone, true , 'west');
+    onClickDragZoneButton(
+        westSideFolded, 
+        westSideBlock, 
+        westSideFoldedHtml, 
+        '.west-side-block-folded', 
+        westParent, 
+        westSideDragZone, 
+        true , 
+        'west');
 });
 
 // west side drag zone 창 크기 조절
@@ -258,7 +277,15 @@ const eastSideDragZoneButton = useGetElement('.east-side-drag-zone .button');
 useClickEvent(eastSideDragZoneButton, () => {
     const eastSideFolded = useGetElement('.east-side-block-folded');
 
-    onClickDragZoneButton(eastSideFolded, eastSideBlock, eastSideFoldedHtml, '.east-side-block-folded', eastParent, eastSideDragZone, false, 'east');
+    onClickDragZoneButton(
+        eastSideFolded, 
+        eastSideBlock, 
+        eastSideFoldedHtml, 
+        '.east-side-block-folded', 
+        eastParent, 
+        eastSideDragZone, 
+        false, 
+        'east');
 });
 
 // east side drag zone 창 크기 조절

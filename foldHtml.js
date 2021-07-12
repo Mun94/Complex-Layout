@@ -9,7 +9,7 @@ const foldedHtml = (side, arrow) => `
             </div>
         </div>
     </div>
-`
+`;
 
 const westSideFoldedHtml = `
     ${foldedHtml('west', '>')}
@@ -21,6 +21,8 @@ const eastSideFoldedHtml = `
 
 const southSideFoldedHtml = `
     <div class= "south-side-drag-zone">
+        <div class="button">
+        </div> 
     </div>
     ${foldedHtml('south', '^')}
 `;
