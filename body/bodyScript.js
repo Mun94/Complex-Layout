@@ -7,6 +7,7 @@ const westSideTopButton = useGetElement('.west-side-block .button');
 
 const spreadFold = (fold, button) => {
     button && useClickEvent(button, () => {
+        westSideDragZone.addEventListener('mousedown', onMouseDown);
         westParent.style.width = '30%';
         fold.remove();
         westParent.appendChild(westSideBlock); // outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
@@ -22,6 +23,8 @@ useClickEvent(westSideTopButton, e=> {
     const westSideFolded = useGetElement('.west-side-block-folded');  
     const westSideTopFoldedButton = useGetElement('.west-side-block-folded .button');
 
+    westSideDragZone.removeEventListener('mousedown', onMouseDown);
+
     spreadFold(westSideFolded, westSideTopFoldedButton);
 });
 
@@ -32,6 +35,9 @@ const onClickDragZoneButton = (folded, block, foldedHtml, blockFoldedClassName, 
     if(!folded){
         block.outerHTML = foldedHtml;
         parent.style.width = 'initial';
+        parent.style.minWidth = 'initial';
+
+        westSideDragZone.removeEventListener('mousedown', onMouseDown);
 
         const topFoldedButton = useGetElement(`${blockFoldedClassName} .button`);
 
@@ -41,6 +47,8 @@ const onClickDragZoneButton = (folded, block, foldedHtml, blockFoldedClassName, 
             folded.remove();
             parent.appendChild(block); // outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
             
+            westSideDragZone.addEventListener('mousedown', onMouseDown);
+
             checkDragZone && parent.appendChild(dragZone);
         });
     }else{
@@ -48,6 +56,8 @@ const onClickDragZoneButton = (folded, block, foldedHtml, blockFoldedClassName, 
         folded.remove();
         parent.appendChild(block); // outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
         
+        westSideDragZone.addEventListener('mousedown', onMouseDown);
+
         checkDragZone && parent.appendChild(dragZone);
     };
 };
@@ -59,49 +69,20 @@ useClickEvent(westSideDragZoneButton, () => {
 });
 
 // west side drag zone 창 크기 조절
-// var startpos, diffpos=0;
-// var erlaubt = false;
-
-// function on_mouse_move(e) {
-//     console.log('2');
-//     if (erlaubt) {
-//             if (!document.all)
-//                     jetztpos = e.screenX;
-//             else
-//                     jetztpos = e.clientX;
-    
-//             diffpos = startpos-jetztpos;
-    
-//         console.log()
-
-//             if (diffpos > -200 && diffpos < 200) {
-//                     document.querySelector(".west").style.width = document.querySelector(".west").clientWidth - diffpos + "px";
-//                     document.querySelector(".middle").style.width = document.querySelector(".middle").clientWidth + diffpos + "px";
-//             }
-//     }
-// };
-
-let i = 0;
-const callback = (e) => {
-    i++
-    const {clientWidth: westParentWidth} =  westParent;
-    console.log('asd', westParentWidth);
-    const west = useGetElement('.west');
-
-    westParent.style.width=e.screenX + 'px';
+const mouseEventCall = e => {
+    westParent.style.width = e.screenX + 'px';
     westParent.style.maxWidth = '400px';
     westParent.style.minWidth = '175px';
 };
 
-function on_mouse_down(e) {
-    document.addEventListener('mousemove', callback);
+const onMouseDown = () => {
+    document.addEventListener('mousemove', mouseEventCall);
 };
 
-westSideDragZone.addEventListener('mousedown', on_mouse_down);
+westSideDragZone.addEventListener('mousedown', onMouseDown);
 
 document.addEventListener('mouseup', () => {
-    i=0;
-    document.removeEventListener('mousemove', callback);
+    document.removeEventListener('mousemove', mouseEventCall);
 });
 
 
@@ -191,9 +172,11 @@ const westSideToggle = (toggleWestSide) => {
         const westParent = useGetElement('.west'); // 전체 블럭
         
         westParent.style.width = 'initial';
+        westParent.style.minWidth = 'initial';
 
         if(reloadWestSideBlock){
             reloadWestSideBlock.outerHTML = westSideFoldedHtml; // foldHtml.js 파일에 있음
+            westSideDragZone.removeEventListener('mousedown', onMouseDown);
 
             // 아래 로직은 center panel의 toggle 버튼을 통해 west side를 접은 상태에서 west side 상다의 버튼을 클릭했을 때 동작하지 않는 에러 해결
             const westSideTopFoldedButton = useGetElement('.west-side-block-folded .button');
@@ -202,6 +185,7 @@ const westSideToggle = (toggleWestSide) => {
             spreadFold(westSideFolded, westSideTopFoldedButton);
         }else{
             const westSideFolded = useGetElement('.west-side-block-folded');  
+            westSideDragZone.addEventListener('mousedown', onMouseDown);
 
             westParent.style.width = '30%';
             westSideFolded.remove(); // 요소 제거
