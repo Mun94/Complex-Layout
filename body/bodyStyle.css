@@ -6,8 +6,6 @@
 }
 
 .west-side-drag-zone, .east-side-drag-zone{
-    border:1px solid gray;
-    background: red;
     width:8px;
 }
 
@@ -130,10 +128,10 @@
 
 .east-side-drag-zone .button, .west-side-drag-zone .button{
     width: 8px;
-    height: 40px;
-    background: white;
+    height: 70px;
+    background: red;
 
     position: absolute;
-    top: 50%;
+    top: 45%;
     cursor: pointer;
 }

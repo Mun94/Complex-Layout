@@ -20,16 +20,7 @@ const eastSideFoldedHtml = `
 `;
 
 const southSideFoldedHtml = `
-    <div class= "south-side-block">
-        <div class= "top">
-            <div class= "title">
-                south
-            </div>
-            <button class= "button">
-                v
-            </button>
-        </div>
-
-        <div class= "description"></div>
+    <div class= "south-side-drag-zone">
     </div>
+    ${foldedHtml('south', '^')}
 `;

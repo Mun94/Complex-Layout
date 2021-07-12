@@ -42,7 +42,7 @@ const makeTable = (td) => {
 
     let table = '';
 
-    table += `<table><tbody>`;
+    table += `<table class="propertyGridTable"><tbody>`;
     for(let i = 0; i < rowCnt; i++){
         table += `<tr>`;
             for(let j = 0; j < columnCnt; j++){
