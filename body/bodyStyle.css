@@ -1,6 +1,8 @@
+
+
 /* body west side */
 .west-side-block{ /*.east-side-block이랑 중복됨*/
-    width: 400px;
+    
 }
 
 .west-side-block .top{ /*.east-side-block .top이랑 중복됨*/
@@ -42,8 +44,11 @@
 }
 
 /* body middle */
+.middle{
+    width:100%;
+}
+
 .middle-block{
-    width:800px;
     background-color: #157fcc;
     margin-left: 10px;
     margin-right: 10px;

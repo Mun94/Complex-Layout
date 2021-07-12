@@ -2,10 +2,15 @@
     display: flex;
     justify-content: space-between;
     background: #157fcc;
+    padding:10px;
 }
 
 .south-side-block{
     background: white;
+}
+
+.south-side-block .description{
+    height: 64px;
 }
 
 .south-side-block-folded .top{
@@ -13,4 +18,5 @@
     justify-content: space-between;
     flex-direction: row-reverse;
     background: #157fcc;
+    padding: 10px;
 }

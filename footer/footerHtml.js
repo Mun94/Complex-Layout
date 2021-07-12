@@ -1,16 +1,14 @@
 const footer = document.querySelector('.footer');
 
 footer.innerHTML = `
-    <div class= "south-side-block">
-        <div class= "top">
-            <div class= "title">
-                south
-            </div>
-            <button class= "button">
-                v
-            </button>
+<div class= "south-side-block-folded">
+    <div class= "top">
+        <button class= "button">
+            ^
+        </button>
+        <div class= "title">
+            south
         </div>
-
-        <div class= "description"></div>
     </div>
+</div>
 `;

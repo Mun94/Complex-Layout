@@ -6,18 +6,20 @@ const westSideTopButton = useGetElement('.west-side-block .button');
 
 const spreadFold = (fold, button) => {
     button && useClickEvent(button, () => {
+        westParent.style.width = '30%';
         fold.remove();
-        westParent.appendChild(westSideBlock)// outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
-    })
-}
+        westParent.appendChild(westSideBlock); // outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
+    });
+};
 
 useClickEvent(westSideTopButton, e=> {
     westSideBlock.outerHTML = westSideFoldedHtml; // foldHtml.js 파일에 있음
+    westParent.style.width = 'initial';
 
     const westSideFolded = useGetElement('.west-side-block-folded');  
     const westSideTopFoldedButton = useGetElement('.west-side-block-folded .button');
 
-    spreadFold(westSideFolded, westSideTopFoldedButton)
+    spreadFold(westSideFolded, westSideTopFoldedButton);
 });
 
 
@@ -105,6 +107,8 @@ const westSideToggle = (toggleWestSide) => {
     return toggleWestSide && useClickEvent(toggleWestSide, () =>{
         const reloadWestSideBlock = useGetElement('.west-side-block');
         const westParent = useGetElement('.west'); // 전체 블럭
+        
+        westParent.style.width = 'initial';
 
         if(reloadWestSideBlock){
             reloadWestSideBlock.outerHTML = westSideFoldedHtml; // foldHtml.js 파일에 있음
@@ -117,6 +121,7 @@ const westSideToggle = (toggleWestSide) => {
         }else{
             const westSideFolded = useGetElement('.west-side-block-folded');  
 
+            westParent.style.width = '30%';
             westSideFolded.remove(); // 요소 제거
             westParent.appendChild(westSideBlock); // outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
         };
@@ -154,11 +159,14 @@ const eastParent = useGetElement('.east');
 useClickEvent(eastSideTopButton, () => {
     eastSideBlock.outerHTML = eastSideFoldedHtml;
 
+    eastParent.style.width = 'initial';
+    
     const eastSideFolded = useGetElement('.east-side-block-folded');
     const eastSideTopFoldedButton = useGetElement('.east-side-block-folded .button');
 
     eastSideTopFoldedButton && useClickEvent(eastSideTopFoldedButton, ()=>{
         eastSideFolded.remove();
+        eastParent.style.width = '30%';
         eastParent.appendChild(eastSideBlock);
     })
 });
