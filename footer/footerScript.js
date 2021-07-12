@@ -17,39 +17,72 @@ useClickEvent(southSideTopFoldedButton, () => {
     const settingsButton = useGetElement('.settings-button');
     const informationButton = useGetElement('.information-button');
 
+    
+    const westSideFolded = useGetElement('.west-side-block-folded');  
+    const eastSideFolded = useGetElement('.east-side-block-folded');
+
     southDescriptionPlace.innerHTML = southDescription;
 
-    middleDescriptionPlace.style.height = `${middleDescriptionPlace.clientHeight - southSideBlock.clientHeight}px`
-    eastDescriptionPlace.style.height = `${eastDescriptionPlace.clientHeight - southSideBlock.clientHeight}px`;
-    westSideNavigationPanel.style.height = `${westSideNavigationPanel.clientHeight - southSideBlock.clientHeight}px`;
-    westSideSettingsPanel.style.height = `${westSideSettingsPanel.clientHeight - southSideBlock.clientHeight}px`;
-    westSideInformationPanel.style.height = `${westSideInformationPanel.clientHeight - southSideBlock.clientHeight}px`;
+    middleDescriptionPlace.style.height = `${middleDescriptionPlace.clientHeight - southSideBlock.clientHeight}px`;
+    eastDescriptionPlace.style.height = '570px';
+    
+    westSideNavigationPanel.style.height = '468px';
+    westSideSettingsPanel.style.height = '468px';
+    westSideInformationPanel.style.height = '468px';
 
-    useClickEvent(navigationButton, () => {
+    westSideFolded ? westSideFolded.style.height = '632px' : null;
+    useClickEvent(westSideTopButton , () => {
+        const westSideFolded = useGetElement('.west-side-block-folded'); 
+        westSideFolded.style.height = '632px';
+    });
+    eastSideFolded ? eastSideFolded.style.height = '632px' : null;
+    useClickEvent(eastSideTopButton, () => {
+        const eastSideFolded = useGetElement('.east-side-block-folded');
+        eastSideFolded.style.height = '632px';
+    });
+
+    navigationButton && useClickEvent(navigationButton, () => {
         westSideNavigationPanel.style.height = '468px';
     });
-    useClickEvent(settingsButton, () => {
+    settingsButton && useClickEvent(settingsButton, () => {
         westSideSettingsPanel.style.height ='468px';
     });
-    useClickEvent(informationButton, () => {
+    informationButton && useClickEvent(informationButton, () => {
         westSideInformationPanel.style.height = '468px';
     });
 
     southSideTopButton && useClickEvent(southSideTopButton, () => {
-        middleDescriptionPlace.style.height = `${middleDescriptionPlace.clientHeight + southSideBlock.clientHeight}px`
-        eastDescriptionPlace.style.height = `${eastDescriptionPlace.clientHeight + southSideBlock.clientHeight}px`;
-        westSideNavigationPanel.style.height = `${westSideNavigationPanel.clientHeight + southSideBlock.clientHeight}px`;
-        westSideSettingsPanel.style.height = `${westSideSettingsPanel.clientHeight + southSideBlock.clientHeight}px`;
-        westSideInformationPanel.style.height = `${westSideInformationPanel.clientHeight + southSideBlock.clientHeight}px`;
-        
-        useClickEvent(navigationButton, () => {
+        const westSideFolded = useGetElement('.west-side-block-folded');  
+        const eastSideFolded = useGetElement('.east-side-block-folded');
+
+        middleDescriptionPlace.style.height = `${middleDescriptionPlace.clientHeight + southSideBlock.clientHeight}px`;
+        eastDescriptionPlace.style.height = '680px';
+      
+        westSideNavigationPanel.style.height = '578px';
+        westSideSettingsPanel.style.height = '578px';
+        westSideInformationPanel.style.height = '578px';
+
+        navigationButton && useClickEvent(navigationButton, () => {
             westSideNavigationPanel.style.height = '578px';
         });
-        useClickEvent(settingsButton, () => {
+        settingsButton && useClickEvent(settingsButton, () => {
             westSideSettingsPanel.style.height = '578px';
         });
-        useClickEvent(informationButton, () => {
+        informationButton && useClickEvent(informationButton, () => {
             westSideInformationPanel.style.height = '578px';
+        });
+
+
+        westSideFolded ? westSideFolded.style.height = '732px' : null;
+        useClickEvent(westSideTopButton , () => {
+        const westSideFolded = useGetElement('.west-side-block-folded'); 
+        westSideFolded.style.height = '732px';
+        });
+
+        eastSideFolded ? eastSideFolded.style.height = '732px' : null;
+        useClickEvent(eastSideTopButton, () => {
+        const eastSideFolded = useGetElement('.east-side-block-folded');
+        eastSideFolded.style.height = '732px';
         });
 
         southSideBlock.remove();
