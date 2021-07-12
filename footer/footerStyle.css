@@ -5,6 +5,11 @@
     padding:10px;
 }
 
+.south-side-drag-zone{
+    height: 8px;
+    background: red;
+}
+
 .south-side-block{
     background: white;
 }

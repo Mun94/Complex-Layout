@@ -1,8 +1,14 @@
 
 
 /* body west side */
-.west-side-block{ /*.east-side-block이랑 중복됨*/
-    
+.west-side-block, .east-side-block{ /*.east-side-block이랑 중복됨*/
+    width:100%;
+}
+
+.west-side-drag-zone, .east-side-drag-zone{
+    border:1px solid gray;
+    background: red;
+    width:8px;
 }
 
 .west-side-block .top{ /*.east-side-block .top이랑 중복됨*/
@@ -50,8 +56,6 @@
 
 .middle-block{
     background-color: #157fcc;
-    margin-left: 10px;
-    margin-right: 10px;
 }
 
 .middle-block .category, .east-side-block .category{ /* east side 같이 적용 */

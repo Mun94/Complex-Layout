@@ -94,6 +94,26 @@ useClickEvent(southSideTopFoldedButton, () => {
             westSideInformationPanel.style.height = '578px';
         });
 
+        useClickEvent(centerPanelButton, () => {
+            const toggleWestSide = useGetElement('.toggle-the-west-region');
+            toggleWestSide && useClickEvent(toggleWestSide, () => {
+                const westSideFolded = useGetElement('.west-side-block-folded'); 
+                westSideFolded ? westSideFolded.style.height = '732px' : null;
+            });
+        });
+    
+        useClickEvent(closeMeClose , () => {
+            const toggleWestSide = useGetElement('.toggle-the-west-region');
+            toggleWestSide && useClickEvent(toggleWestSide, () => {
+                const westSideFolded = useGetElement('.west-side-block-folded'); 
+                westSideFolded ? westSideFolded.style.height = '732px' : null;
+            });
+        });
+    
+        toggleWestSide && useClickEvent(toggleWestSide, () => {
+            const westSideFolded = useGetElement('.west-side-block-folded'); 
+            westSideFolded ? westSideFolded.style.height = '732px' : null;
+        });
 
         westSideFolded ? westSideFolded.style.height = '732px' : null;
         useClickEvent(westSideTopButton , () => {

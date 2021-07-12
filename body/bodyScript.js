@@ -1,5 +1,6 @@
 // west side button controll(클릭시 왼쪽으로 접힘)
 const westSideBlock = useGetElement('.west-side-block'); // toggle the west region에서도 사용됨!! 지역 변수로 사용하자니.. 코드가 너무 많아짐
+const westSideDragZone = useGetElement('.west-side-drag-zone');
 
 const westParent = useGetElement('.west'); // 전체 블럭
 const westSideTopButton = useGetElement('.west-side-block .button');
@@ -9,6 +10,7 @@ const spreadFold = (fold, button) => {
         westParent.style.width = '30%';
         fold.remove();
         westParent.appendChild(westSideBlock); // outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
+        westParent.appendChild(westSideDragZone);
     });
 };
 
@@ -124,6 +126,7 @@ const westSideToggle = (toggleWestSide) => {
             westParent.style.width = '30%';
             westSideFolded.remove(); // 요소 제거
             westParent.appendChild(westSideBlock); // outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
+            westParent.appendChild(westSideDragZone);
         };
     });
 }

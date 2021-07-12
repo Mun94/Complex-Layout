@@ -33,6 +33,8 @@ bodyWest.innerHTML = `
             ${westSideCategory("information", "Some info in here.", "+", "none")}
         </div>
     </div>
+    <div class="west-side-drag-zone">
+    </div>
 `;
 
 // body middle
@@ -62,6 +64,8 @@ bodyMiddle.innerHTML = `
 const bodyEast = useGetElement('.body-block .east');
 
 bodyEast.innerHTML = `
+    <div class="east-side-drag-zone">
+    </div>
     <div class= "east-side-block">
         <div class= "top">
             <div class= "title">
