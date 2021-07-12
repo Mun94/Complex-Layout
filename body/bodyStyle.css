@@ -121,3 +121,18 @@
 .second-col .icon{
     display: none;
 }
+
+/* drag zone button*/
+.east-side-drag-zone, .west-side-drag-zone{
+    position: relative;
+}
+
+.east-side-drag-zone .button, .west-side-drag-zone .button{
+    width: 8px;
+    height: 40px;
+    background: white;
+
+    position: absolute;
+    top: 50%;
+    cursor: pointer;
+}

@@ -34,6 +34,8 @@ bodyWest.innerHTML = `
         </div>
     </div>
     <div class="west-side-drag-zone">
+        <div class="button">
+        </div>  
     </div>
 `;
 
@@ -65,6 +67,8 @@ const bodyEast = useGetElement('.body-block .east');
 
 bodyEast.innerHTML = `
     <div class="east-side-drag-zone">
+        <div class="button">
+        </div>
     </div>
     <div class= "east-side-block">
         <div class= "top">
@@ -76,7 +80,8 @@ bodyEast.innerHTML = `
             </button>
         </div>
 
-        <div class= "grid-description"></div>
+        <div class= "grid-description">
+        </div>
 
         ${middleEastCategory("property-grid", "a-tab")}
     </div>

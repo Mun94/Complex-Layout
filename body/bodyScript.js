@@ -20,10 +20,34 @@ useClickEvent(westSideTopButton, e=> {
 
     const westSideFolded = useGetElement('.west-side-block-folded');  
     const westSideTopFoldedButton = useGetElement('.west-side-block-folded .button');
-
+    console.log('123');
     spreadFold(westSideFolded, westSideTopFoldedButton);
 });
 
+// west side drag zone 클릭 시 왼쪽으로 접힘
+const westSideDragZoneButton = useGetElement('.west-side-drag-zone .button');
+useClickEvent(westSideDragZoneButton, () => {
+    const westSideFolded = useGetElement('.west-side-block-folded');
+    if(!westSideFolded){
+        westSideBlock.outerHTML = westSideFoldedHtml;
+        westParent.style.width = 'initial';
+
+        const westSideTopFoldedButton = useGetElement('.west-side-block-folded .button');
+
+        useClickEvent(westSideTopFoldedButton, () => {
+            const westSideFolded = useGetElement('.west-side-block-folded');
+            westParent.style.width = '30%';
+            westSideFolded.remove();
+            westParent.appendChild(westSideBlock); // outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
+            westParent.appendChild(westSideDragZone);
+        });
+    }else{
+        westParent.style.width = '30%';
+        westSideFolded.remove();
+        westParent.appendChild(westSideBlock); // outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
+        westParent.appendChild(westSideDragZone);
+    }
+});
 
 // west side category button controll
 const {style: navigationPanelStyle} = useGetElement('.navigation-panel');
