@@ -125,6 +125,7 @@
 /* drag zone button*/
 .east-side-drag-zone, .west-side-drag-zone{
     position: relative;
+    cursor: col-resize;
 }
 
 .east-side-drag-zone .button, .west-side-drag-zone .button{

@@ -17,39 +17,95 @@ const spreadFold = (fold, button) => {
 useClickEvent(westSideTopButton, e=> {
     westSideBlock.outerHTML = westSideFoldedHtml; // foldHtml.js 파일에 있음
     westParent.style.width = 'initial';
-
+    westParent.style.minWidth = 'initial';
+    
     const westSideFolded = useGetElement('.west-side-block-folded');  
     const westSideTopFoldedButton = useGetElement('.west-side-block-folded .button');
-    console.log('123');
+
     spreadFold(westSideFolded, westSideTopFoldedButton);
 });
 
 // west side drag zone 클릭 시 왼쪽으로 접힘
 const westSideDragZoneButton = useGetElement('.west-side-drag-zone .button');
-useClickEvent(westSideDragZoneButton, () => {
-    const westSideFolded = useGetElement('.west-side-block-folded');
-    if(!westSideFolded){
-        westSideBlock.outerHTML = westSideFoldedHtml;
-        westParent.style.width = 'initial';
 
-        const westSideTopFoldedButton = useGetElement('.west-side-block-folded .button');
+const onClickDragZoneButton = (folded, block, foldedHtml, blockFoldedClassName, parent, dragZone, checkDragZone) => {
+    if(!folded){
+        block.outerHTML = foldedHtml;
+        parent.style.width = 'initial';
 
-        useClickEvent(westSideTopFoldedButton, () => {
-            const westSideFolded = useGetElement('.west-side-block-folded');
-            westParent.style.width = '30%';
-            westSideFolded.remove();
-            westParent.appendChild(westSideBlock); // outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
-            westParent.appendChild(westSideDragZone);
+        const topFoldedButton = useGetElement(`${blockFoldedClassName} .button`);
+
+        useClickEvent(topFoldedButton, () => {
+            const folded = useGetElement(`${blockFoldedClassName}`);
+            parent.style.width = '30%';
+            folded.remove();
+            parent.appendChild(block); // outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
+            
+            checkDragZone && parent.appendChild(dragZone);
         });
     }else{
-        westParent.style.width = '30%';
-        westSideFolded.remove();
-        westParent.appendChild(westSideBlock); // outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
-        westParent.appendChild(westSideDragZone);
-    }
+        parent.style.width = '30%';
+        folded.remove();
+        parent.appendChild(block); // outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
+        
+        checkDragZone && parent.appendChild(dragZone);
+    };
+};
+
+useClickEvent(westSideDragZoneButton, () => {
+    const westSideFolded = useGetElement('.west-side-block-folded');
+
+    onClickDragZoneButton(westSideFolded, westSideBlock, westSideFoldedHtml, '.west-side-block-folded', westParent, westSideDragZone, true);
 });
 
-// west side category button controll
+// west side drag zone 창 크기 조절
+// var startpos, diffpos=0;
+// var erlaubt = false;
+
+// function on_mouse_move(e) {
+//     console.log('2');
+//     if (erlaubt) {
+//             if (!document.all)
+//                     jetztpos = e.screenX;
+//             else
+//                     jetztpos = e.clientX;
+    
+//             diffpos = startpos-jetztpos;
+    
+//         console.log()
+
+//             if (diffpos > -200 && diffpos < 200) {
+//                     document.querySelector(".west").style.width = document.querySelector(".west").clientWidth - diffpos + "px";
+//                     document.querySelector(".middle").style.width = document.querySelector(".middle").clientWidth + diffpos + "px";
+//             }
+//     }
+// };
+
+let i = 0;
+const callback = (e) => {
+    i++
+    const {clientWidth: westParentWidth} =  westParent;
+    console.log('asd', westParentWidth);
+    const west = useGetElement('.west');
+
+    westParent.style.width=e.screenX + 'px';
+    westParent.style.maxWidth = '400px';
+    westParent.style.minWidth = '175px';
+};
+
+function on_mouse_down(e) {
+    document.addEventListener('mousemove', callback);
+};
+
+westSideDragZone.addEventListener('mousedown', on_mouse_down);
+
+document.addEventListener('mouseup', () => {
+    i=0;
+    document.removeEventListener('mousemove', callback);
+});
+
+
+///////
 const {style: navigationPanelStyle} = useGetElement('.navigation-panel');
 const {style: settingsPanelStyle} = useGetElement('.settings-panel');
 const {style: informationPanelStyle} = useGetElement('.information-panel');
@@ -178,7 +234,7 @@ useClickEvent(closeMeClose, () => {
     westSideToggle(toggleWestSide);
 });
 
-// east side button controll(클릭시 오른쪽으로 접힘)
+// east side button controll(클릭 시 오른쪽으로 접힘)
 const eastSideBlock = useGetElement('.east-side-block');
 const eastSideTopButton = useGetElement('.east-side-block .button');
 const eastParent = useGetElement('.east');
@@ -196,6 +252,16 @@ useClickEvent(eastSideTopButton, () => {
         eastParent.style.width = '30%';
         eastParent.appendChild(eastSideBlock);
     })
+});
+
+// east side drag zone button 클릭 시 오른쪽으로 접힘
+const eastSideDragZoneButton = useGetElement('.east-side-drag-zone .button');
+const eastSideDragZone = useGetElement('.east-side-drag-zone');
+
+useClickEvent(eastSideDragZoneButton, () => {
+    const eastSideFolded = useGetElement('.east-side-block-folded');
+
+    onClickDragZoneButton(eastSideFolded, eastSideBlock, eastSideFoldedHtml, '.east-side-block-folded', eastParent, eastSideDragZone, false)
 });
 
 // east button(a tab, property grid) controll
