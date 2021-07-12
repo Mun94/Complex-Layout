@@ -94,7 +94,7 @@ document.addEventListener('mouseup', () => {
 });
 
 
-///////
+// west side category
 const {style: navigationPanelStyle} = useGetElement('.navigation-panel');
 const {style: settingsPanelStyle} = useGetElement('.settings-panel');
 const {style: informationPanelStyle} = useGetElement('.information-panel');

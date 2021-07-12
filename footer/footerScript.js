@@ -28,6 +28,7 @@ useClickEvent(southSideTopFoldedButton, () => {
     const southDescriptionPlace = useGetElement('.south-side-block .description');
     const southSideTopButton = useGetElement('.south-side-block .button');
     const southSideBlock = useGetElement('.south-side-block');
+  
     const navigationButton = useGetElement('.navigation-button');
     const settingsButton = useGetElement('.settings-button');
     const informationButton = useGetElement('.information-button');
@@ -39,18 +40,18 @@ useClickEvent(southSideTopFoldedButton, () => {
 
     southDescriptionPlace.innerHTML = southDescription;
 
-    middleDescriptionPlace.style.height = `${middleDescriptionPlace.clientHeight - southSideBlock.clientHeight}px`;
-    eastDescriptionPlace.style.height = '570px';
+    middleDescriptionPlace.style.height = `${middleDescriptionPlace.clientHeight - southDescriptionPlace.clientHeight}px`;
+    eastDescriptionPlace.style.height = '615px';
     
-    westSideNavigationPanel.style.height = '468px';
-    westSideSettingsPanel.style.height = '468px';
-    westSideInformationPanel.style.height = '468px';
+    westSideNavigationPanel.style.height = '512px';
+    westSideSettingsPanel.style.height = '512px';
+    westSideInformationPanel.style.height = '512px';
 
     useClickEvent(centerPanelButton, () => {
         const toggleWestSide = useGetElement('.toggle-the-west-region');
         toggleWestSide && useClickEvent(toggleWestSide, () => {
             const westSideFolded = useGetElement('.west-side-block-folded'); 
-            westSideFolded ? westSideFolded.style.height = '632px' : null;
+            westSideFolded ? westSideFolded.style.height = '678px' : null;
         });
     });
 
@@ -58,52 +59,52 @@ useClickEvent(southSideTopFoldedButton, () => {
         const toggleWestSide = useGetElement('.toggle-the-west-region');
         toggleWestSide && useClickEvent(toggleWestSide, () => {
             const westSideFolded = useGetElement('.west-side-block-folded'); 
-            westSideFolded ? westSideFolded.style.height = '632px' : null;
+            westSideFolded ? westSideFolded.style.height = '678px' : null;
         });
     });
 
     toggleWestSide && useClickEvent(toggleWestSide, () => {
         const westSideFolded = useGetElement('.west-side-block-folded'); 
-        westSideFolded ? westSideFolded.style.height = '632px' : null;
+        westSideFolded ? westSideFolded.style.height = '678px' : null;
     });
 
-    westSideFolded ? westSideFolded.style.height = '632px' : null;
+    westSideFolded ? westSideFolded.style.height = '678px' : null;
     useClickEvent(westSideTopButton , () => {
         const westSideFolded = useGetElement('.west-side-block-folded'); 
-        westSideFolded.style.height = '632px';
+        westSideFolded.style.height = '678px';
     });
 
     useClickEvent(westSideDragZoneButton , () => {
         const westSideFolded = useGetElement('.west-side-block-folded'); 
-        westSideFolded ? westSideFolded.style.height = '632px' : null;
+        westSideFolded ? westSideFolded.style.height = '678px' : null;
     });
 
-    eastSideFolded ? eastSideFolded.style.height = '632px' : null;
+    eastSideFolded ? eastSideFolded.style.height = '678px' : null;
     useClickEvent(eastSideTopButton, () => {
         const eastSideFolded = useGetElement('.east-side-block-folded');
-        eastSideFolded.style.height = '632px';
+        eastSideFolded.style.height = '678px';
     });
 
     useClickEvent(eastSideDragZoneButton , () => {
         const eastSideFolded = useGetElement('.east-side-block-folded'); 
-        eastSideFolded ? eastSideFolded.style.height = '632px' : null;
+        eastSideFolded ? eastSideFolded.style.height = '678px' : null;
     });
 
     navigationButton && useClickEvent(navigationButton, () => {
-        westSideNavigationPanel.style.height = '468px';
+        westSideNavigationPanel.style.height = '512px';
     });
     settingsButton && useClickEvent(settingsButton, () => {
-        westSideSettingsPanel.style.height ='468px';
+        westSideSettingsPanel.style.height ='512px';
     });
     informationButton && useClickEvent(informationButton, () => {
-        westSideInformationPanel.style.height = '468px';
+        westSideInformationPanel.style.height = '512px';
     });
 
     southSideTopButton && useClickEvent(southSideTopButton, () => {
         const westSideFolded = useGetElement('.west-side-block-folded');  
         const eastSideFolded = useGetElement('.east-side-block-folded');
 
-        middleDescriptionPlace.style.height = `${middleDescriptionPlace.clientHeight + southSideBlock.clientHeight}px`;
+        middleDescriptionPlace.style.height = `${middleDescriptionPlace.clientHeight + southDescriptionPlace.clientHeight}px`;
         eastDescriptionPlace.style.height = '680px';
       
         westSideNavigationPanel.style.height = '578px';
@@ -124,7 +125,7 @@ useClickEvent(southSideTopFoldedButton, () => {
             const toggleWestSide = useGetElement('.toggle-the-west-region');
             toggleWestSide && useClickEvent(toggleWestSide, () => {
                 const westSideFolded = useGetElement('.west-side-block-folded'); 
-                westSideFolded ? westSideFolded.style.height = '732px' : null;
+                westSideFolded ? westSideFolded.style.height = '743px' : null;
             });
         });
     
@@ -132,35 +133,35 @@ useClickEvent(southSideTopFoldedButton, () => {
             const toggleWestSide = useGetElement('.toggle-the-west-region');
             toggleWestSide && useClickEvent(toggleWestSide, () => {
                 const westSideFolded = useGetElement('.west-side-block-folded'); 
-                westSideFolded ? westSideFolded.style.height = '732px' : null;
+                westSideFolded ? westSideFolded.style.height = '743px' : null;
             });
         });
     
         toggleWestSide && useClickEvent(toggleWestSide, () => {
             const westSideFolded = useGetElement('.west-side-block-folded'); 
-            westSideFolded ? westSideFolded.style.height = '732px' : null;
+            westSideFolded ? westSideFolded.style.height = '743px' : null;
         });
 
-        westSideFolded ? westSideFolded.style.height = '732px' : null;
+        westSideFolded ? westSideFolded.style.height = '743px' : null;
         useClickEvent(westSideTopButton , () => {
         const westSideFolded = useGetElement('.west-side-block-folded'); 
-        westSideFolded.style.height = '732px';
+        westSideFolded.style.height = '743px';
         });
 
         useClickEvent(westSideDragZoneButton , () => {
             const westSideFolded = useGetElement('.west-side-block-folded'); 
-            westSideFolded ? westSideFolded.style.height = '732px' : null;
+            westSideFolded ? westSideFolded.style.height = '743px' : null;
         });
 
-        eastSideFolded ? eastSideFolded.style.height = '732px' : null;
+        eastSideFolded ? eastSideFolded.style.height = '743px' : null;
         useClickEvent(eastSideTopButton, () => {
         const eastSideFolded = useGetElement('.east-side-block-folded');
-        eastSideFolded.style.height = '732px';
+        eastSideFolded.style.height = '743px';
         });
 
         useClickEvent(eastSideDragZoneButton , () => {
             const eastSideFolded = useGetElement('.east-side-block-folded'); 
-            eastSideFolded ? eastSideFolded.style.height = '632px' : null;
+            eastSideFolded ? eastSideFolded.style.height = '678px' : null;
         });
 
         southSideBlock.remove();
