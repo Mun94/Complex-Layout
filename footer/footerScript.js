@@ -37,10 +37,10 @@ document.addEventListener('mouseup', () => {
             const folded = useGetElement(`.${side}`+'-side-block-folded');
             const middleBlock = useGetElement('.middle-block');
     
-            folded ? folded.style.height = middleBlock.clientHeight + 'px' : null;
+            folded ? folded.style.height = middleBlock.clientHeight-19 + 'px' : null;
         });
     };
-    
+
     const westSideTopButton = useGetElement('.west-side-block .button');
     onClickFoldButton(westSideTopButton, 'west');
 
@@ -52,6 +52,24 @@ document.addEventListener('mouseup', () => {
 
     const eastSideDragZoneButton = useGetElement('.east-side-drag-zone .button');
     onClickFoldButton(eastSideDragZoneButton, 'east');
+
+    const onClickWestSideCategory = (button, side) =>{
+        button && useClickEvent(button, () => {
+            const southSideBlock = useGetElement('.south-side-block');
+            const panel = useGetElement(`.${side}`+'-panel');
+            
+            panel ? panel.style.height = 512 - 111 - southSideBlock.clientHeight + 148 + 64 + 'px' : null;
+        });
+    };
+
+    const westSideNavigationButton = useGetElement('.navigation-button');
+    onClickWestSideCategory(westSideNavigationButton, 'navigation');
+
+    const westSideSettingsButton = useGetElement('.settings-button');
+    onClickWestSideCategory(westSideSettingsButton, 'settings');
+
+    const westSideInformationButton = useGetElement('.information-button');
+    onClickWestSideCategory(westSideInformationButton, 'information');
 });
 
 // south side 상단 버튼 눌렀을 때
