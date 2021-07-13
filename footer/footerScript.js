@@ -13,19 +13,19 @@ const onSouthMouseMove =  e => {
     const westSideFolded = useGetElement('.west-side-block-folded');
     const eastSideFolded = useGetElement('.east-side-block-folded');
 
-    westSideFolded ? westSideFolded.style.height = 657 - 111 - southSideBlock.clientHeight + 148 + 64 + 21 + 'px' :null;
-    eastSideFolded ? eastSideFolded.style.height = 657 - 111 - southSideBlock.clientHeight + 148 + 64 + 21 + 'px' :null;
+    westSideFolded ? westSideFolded.style.height = 743 - 110 - southSideBlock.clientHeight + 148  + 'px' :null; // height가 678px이 돼야 함
+    eastSideFolded ? eastSideFolded.style.height = 743 - 110 - southSideBlock.clientHeight + 148  + 'px' :null;
 
-    southSideBlock ? southSideBlock.style.minHeight = '111px' : null;
+    southSideBlock ? southSideBlock.style.minHeight = '110px' : null;
     southSideBlock ? southSideBlock.style.maxHeight = '465px' : null;
-    southSideBlock ? southSideBlock.style.height = (111 + 844 - e.screenY) + 'px' : null;
+    southSideBlock ? southSideBlock.style.height = (110 + 844 - e.screenY) + 'px' : null;
     
-    middleDescriptionPlace.style.height = 657 - 111 - southSideBlock.clientHeight + 148 + 64 + 'px';
-    eastDescriptionPlace.style.height = 615 - 111 - southSideBlock.clientHeight + 148 + 64 + 'px';
+    middleDescriptionPlace.style.height = 721 - 110 - southSideBlock.clientHeight + 148 + 'px';
+    eastDescriptionPlace.style.height = 680 - 110 - southSideBlock.clientHeight + 148 + 'px';
     
-    westSideNavigationPanel.style.height = 512 - 111 - southSideBlock.clientHeight + 148 + 64 + 'px';
-    westSideSettingsPanel.style.height = 512 - 111 - southSideBlock.clientHeight + 148 + 64 + 'px';
-    westSideInformationPanel.style.height = 512 - 111 - southSideBlock.clientHeight + 148 + 64 + 'px';
+    westSideNavigationPanel.style.height = 578 - 110 - southSideBlock.clientHeight + 148 + 'px';
+    westSideSettingsPanel.style.height = 578 - 110 - southSideBlock.clientHeight + 148 + 'px';
+    westSideInformationPanel.style.height = 578 - 110 - southSideBlock.clientHeight + 148 + 'px';
 };
 
 const onSouthMouseDown = e => {
@@ -34,6 +34,7 @@ const onSouthMouseDown = e => {
 
 southSideDragZone.addEventListener('mousedown', onSouthMouseDown);
 
+// 마우스 업
 document.addEventListener('mouseup', () => {
     document.removeEventListener('mousemove', onSouthMouseMove);
 
@@ -52,18 +53,28 @@ document.addEventListener('mouseup', () => {
     const eastSideTopButton = useGetElement('.east-side-block .button');
     onClickFoldButton(eastSideTopButton, 'east');
 
+    const southSideTopButton = useGetElement('.south-side-block .button');
+    southSideTopButton && useClickEvent(southSideTopButton, () => {
+        const middleDescriptionPlace = useGetElement('.middle-block .description');
+
+        middleDescriptionPlace.style.height = '721px';
+    });
+
     const westSideDragZoneButton = useGetElement('.west-side-drag-zone .button');
     onClickFoldButton(westSideDragZoneButton, 'west');
 
     const eastSideDragZoneButton = useGetElement('.east-side-drag-zone .button');
     onClickFoldButton(eastSideDragZoneButton, 'east');
 
+    const toggleWestSide = useGetElement('.toggle-the-west-region');
+    onClickFoldButton(toggleWestSide, 'west');
+
     const onClickWestSideCategory = (button, side) =>{
         button && useClickEvent(button, () => {
             const southSideBlock = useGetElement('.south-side-block');
             const panel = useGetElement(`.${side}`+'-panel');
             
-            panel ? panel.style.height = 512 - 111 - southSideBlock.clientHeight + 148 + 64 + 'px' : null;
+            panel ? panel.style.height = 578 - 110 - southSideBlock.clientHeight + 148 + 'px' : null;
         });
     };
 

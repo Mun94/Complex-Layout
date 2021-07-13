@@ -1,5 +1,3 @@
-
-
 /* body west side */
 .west-side-block, .east-side-block{ /*.east-side-block이랑 중복됨*/
     width:100%;
@@ -66,12 +64,20 @@
     height: 41px;
     padding:8px 12px;
     background: #4b9cd7;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.center-panel-button, .property-grid-button{
+    margin-left: 3px;
 }
 
 .middle-block .description{
     height: 721px;
     overflow: auto;
-    background: white;
+    background: #ffffff;
 }
 
 .close-me-block, .property-grid-block{
@@ -101,7 +107,7 @@
 
 .east-side-block .grid-description{
     height: 680px;
-    background: white;
+    background: #ffffff;
 }
 
 .east-side-block .grid-description p{

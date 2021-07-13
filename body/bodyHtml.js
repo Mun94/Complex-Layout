@@ -12,10 +12,9 @@ const westSideCategory = (categoryName, text, buttonIcon, display) =>
         <div class= "${categoryName}-panel" style="display:${display}">
             ${text}
         </div>
-    </div>`
-;
-///// inline 요소에 바로 스타일을 적용해야 getElement속성을 했을 때 스타일을 갸져와서 if문에서 사용할 수 있음
+    </div>`;
 
+// 바로 스타일 값을 가져와서 if문에 사용하기 위해 스타일을 인라인으로 작성함
 bodyWest.innerHTML = `
     <div class= "west-side-block">
         <div class= "top">
@@ -40,7 +39,7 @@ bodyWest.innerHTML = `
 `;
 
 // body middle
-const middleEastCategory = (firstTab, secondTab) => `
+const middleAndEastCategory = (firstTab, secondTab) => `
     <div class= "category">
         <div class= "${firstTab}-block">
             <span class= "${firstTab}-close-icon">x</span>
@@ -56,7 +55,7 @@ const bodyMiddle = useGetElement('.body-block .middle');
 
 bodyMiddle.innerHTML = `
     <div class= "middle-block">
-        ${middleEastCategory("close-me", "center-panel")}
+        ${middleAndEastCategory("close-me", "center-panel")}
 
         <div class= "description"></div>
     </div>
@@ -83,6 +82,6 @@ bodyEast.innerHTML = `
         <div class= "grid-description">
         </div>
 
-        ${middleEastCategory("property-grid", "a-tab")}
+        ${middleAndEastCategory("property-grid", "a-tab")}
     </div>
 `;

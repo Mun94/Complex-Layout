@@ -1,5 +1,5 @@
 // west side button controll(클릭시 왼쪽으로 접힘)
-const westSideBlock = useGetElement('.west-side-block'); // toggle the west region에서도 사용됨!! 지역 변수로 사용하자니.. 코드가 너무 많아짐
+const westSideBlock = useGetElement('.west-side-block');
 const westSideDragZone = useGetElement('.west-side-drag-zone');
 
 const westParent = useGetElement('.west'); // 전체 블럭
@@ -7,9 +7,11 @@ const westSideTopButton = useGetElement('.west-side-block .button');
 
 const spreadFold = (fold, button) => {
     button && useClickEvent(button, () => {
-        westSideDragZone.addEventListener('mousedown', onWestMouseDown);
+        westSideDragZone.addEventListener('mousedown', onWestMouseDown); // 폴더가 다시 열리면 창 크기 조절 가능
         westParent.style.width = '30%';
-        fold.remove();
+
+        fold.remove(); // 접혀있을 때 요소 제거
+
         westParent.appendChild(westSideBlock); // outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
         westParent.appendChild(westSideDragZone);
     });
@@ -18,20 +20,20 @@ const spreadFold = (fold, button) => {
 useClickEvent(westSideTopButton, e => {
     westSideBlock.outerHTML = westSideFoldedHtml; // foldHtml.js 파일에 있음
     westParent.style.width = 'initial';
-    westParent.style.minWidth = 'initial';
+    westParent.style.minWidth = 'initial'; // 창 크기 조절하면서 적용했던 최소 길이를 초기화 함
     
     const westSideFolded = useGetElement('.west-side-block-folded');  
     const westSideTopFoldedButton = useGetElement('.west-side-block-folded .button');
 
-    westSideDragZone.removeEventListener('mousedown', onWestMouseDown);
+    westSideDragZone.removeEventListener('mousedown', onWestMouseDown); // 접힌 상태에서는 창 크기 조절 x
 
-    spreadFold(westSideFolded, westSideTopFoldedButton);
+    spreadFold(westSideFolded, westSideTopFoldedButton); // 다시 폴더 열기
 });
 
 // west side drag zone 클릭 시 왼쪽으로 접힘
 const westSideDragZoneButton = useGetElement('.west-side-drag-zone .button');
 
-const onClickDragZoneButton = (
+const onClickDragZoneButton = ( // east side, west side에서 사용 됨
     folded, 
     block, 
     foldedHtml, 
@@ -40,7 +42,8 @@ const onClickDragZoneButton = (
     dragZone, 
     checkDragZone, 
     side) => {
-    
+    let fold = !folded
+
     const removeEvent = (val) => val === 'west' ? 
         westSideDragZone.removeEventListener('mousedown', onWestMouseDown) 
         : eastSideDragZone.removeEventListener('mousedown', onEastMouseDown);
@@ -49,22 +52,23 @@ const onClickDragZoneButton = (
         westSideDragZone.addEventListener('mousedown', onWestMouseDown) 
         : eastSideDragZone.addEventListener('mousedown', onEastMouseDown);
 
-    if(!folded){
-        block.outerHTML = foldedHtml;
+    if(fold){ // 접힌 상태이면
+        block.outerHTML = foldedHtml; // 접힌 상태의 요소 적용
         parent.style.width = 'initial';
         parent.style.minWidth = 'initial';
 
-        removeEvent(side);
+        removeEvent(side); // 접힌 상태에서는 창 크기 조절 x
 
-        const topFoldedButton = useGetElement(`${blockFoldedClassName} .button`);
+        const topFoldedButton = useGetElement(`${blockFoldedClassName} .button`); // 상단에 있는 좌/우 접기 버튼
 
         useClickEvent(topFoldedButton, () => {
-            const folded = useGetElement(`${blockFoldedClassName}`);
+            const folded = useGetElement(`${blockFoldedClassName}`); 
             parent.style.width = '30%';
-            folded.remove();
-            parent.appendChild(block);
+            folded.remove(); // 접혀 있을때의 요소 제거
+            parent.appendChild(block); // 펴진 상태 적용
         
-            checkDragZone && parent.appendChild(dragZone);
+            checkDragZone && parent.appendChild(dragZone); 
+            // appendChild를 하면 마지막에 적용되는데 west side에서는 west side block 다음에 drag zone이 생성 되도록 함
 
             addEvent(side);
         });
@@ -112,7 +116,6 @@ document.addEventListener('mouseup', () => {
     document.removeEventListener('mousemove', onWestMouseMove);
 });
 
-
 // west side category
 const {style: navigationPanelStyle} = useGetElement('.navigation-panel');
 const {style: settingsPanelStyle} = useGetElement('.settings-panel');
@@ -130,6 +133,12 @@ useClickEvent(navigationButton, e => {
         settingsButton,
         informationButton
         );
+    // myPanel, 
+    // otherPanel,
+    // other2Panel, 
+    // myButton, // e.target
+    // otherButton,
+    // other2Button 
 });
 
 useClickEvent(settingsButton, e => {
@@ -161,6 +170,12 @@ const categoryFold = (
     myButton, // e.target
     otherButton,
     other2Button 
+    // navigationPanelStyle,
+    // settingsPanelStyle,
+    // informationPanelStyle,
+    // e.target,
+    // settingsButton,
+    // informationButton
     ) => {
     if(myPanel.display === 'block'){
         myButton.innerHTML = '+';
@@ -180,9 +195,10 @@ const categoryFold = (
     };
 };
 
+// middle 부분 부터 본문 내용은 description.config.js에 있음!
 // middle button(close me, center panel) controll (+ toggle west side controll)
 const middleDescriptionPlace = useGetElement('.middle-block .description');
-const closeMeButton = useGetElement('.close-me-button'); // close me close에도 사용
+const closeMeButton = useGetElement('.close-me-button');
 const centerPanelButton = useGetElement('.center-panel-button');
 
 middleDescriptionPlace.innerHTML = closeMe;
@@ -196,7 +212,7 @@ useClickEvent(closeMeButton, () => {
 const westSideToggle = (toggleWestSide) => {
     return useClickEvent(toggleWestSide, () =>{
         const reloadWestSideBlock = useGetElement('.west-side-block');
-        const westParent = useGetElement('.west'); // 전체 블럭
+        const westParent = useGetElement('.west'); // 부모 요소
         
         westParent.style.width = 'initial';
         westParent.style.minWidth = 'initial';
@@ -205,7 +221,7 @@ const westSideToggle = (toggleWestSide) => {
             reloadWestSideBlock.outerHTML = westSideFoldedHtml; // foldHtml.js 파일에 있음
             westSideDragZone.removeEventListener('mousedown', onWestMouseDown);
 
-            // 아래 로직은 center panel의 toggle 버튼을 통해 west side를 접은 상태에서 west side 상다의 버튼을 클릭했을 때 동작하지 않는 에러 해결
+            // 아래 로직은 center panel의 toggle 버튼을 통해 west side를 접은 상태에서 west side 상단의 버튼을 클릭했을 때 동작하지 않는 에러 해결
             const westSideTopFoldedButton = useGetElement('.west-side-block-folded .button');
             const westSideFolded = useGetElement('.west-side-block-folded');  
 
@@ -216,7 +232,7 @@ const westSideToggle = (toggleWestSide) => {
 
             westParent.style.width = '30%';
             westSideFolded.remove(); // 요소 제거
-            westParent.appendChild(westSideBlock); // outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
+            westParent.appendChild(westSideBlock);
             westParent.appendChild(westSideDragZone);
         };
     });
@@ -345,7 +361,7 @@ useClickEvent(propertyGridClose, () => {
 // east side property grid sort
 const firstColPropertyGrid = useGetElement('.first-col');
 
-function sortFirstCol(firstCol){
+function sortFirstCol(firstCol){ // innerHTML 등으로 요소를 적용했을 때 같은 class 이름이더라도 인식하지 못 하게 됨 
     useClickEvent(firstCol , () => {
         eastDescriptionPlace.innerHTML = makeTable([
                     [...rowValue[0].sort((a, b) => a > b ? -1 : a < b ? 1 : 0)], 
@@ -355,20 +371,23 @@ function sortFirstCol(firstCol){
         const reloadFirstCol = useGetElement('.first-col');
         const reloadSecondCol = useGetElement('.second-col');
 
-        sortSecondCol(reloadSecondCol);
+        sortSecondCol(reloadSecondCol); // 첫 번째 열을 눌렀을 때 두 번째 열을 누르면 두 번째 열 sort
 
         useClickEvent(reloadFirstCol, () => {
             eastDescriptionPlace.innerHTML = makeTable([
-                [...rowValue[0].sort((a, b) => a > b ? 1 : a < b ? -1 : 0)], 
+                [...rowValue[0].sort((a, b) => a > b ? 1 : a < b ? -1 : 0)], // 오름차순
                 [...rowValue[1]]
             ]);
-            
+            // 리턴 값이 -1이면 a가 b보다 낮은 인덱스로 위치 한다. 리턴 값이 1이면 반대
+            // [1,3,2,4] 처음 스타트 
+            // a = 1, b = 3 <=== 1 < 3 이므로 -1 이 리턴되고 1이 3보다 낮은 인덱스로 위치한다. [1, 3, 2, 4]
+            // a = 3, b = 2 <=== 3 > 2 이므로 1 이 리턴되고  3이 2보다 높은 인덱스로 위치한다. [1, 2, 3, 4]
             const secondReloadFirstCol = useGetElement('.first-col');
             const secondReloadSecondCol = useGetElement('.second-col');
 
             sortSecondCol(secondReloadSecondCol);
-            sortFirstCol(secondReloadFirstCol);
-        })
+            sortFirstCol(secondReloadFirstCol); // 클릭 마다 반복 됨
+        });
     });
 };
 sortFirstCol(firstColPropertyGrid);
