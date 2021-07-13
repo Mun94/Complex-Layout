@@ -41,13 +41,36 @@ const centerPanel = firstCenterPanelDescription + secondCenterPanelDescription +
 const aTab = '<p>A TabPanel component can be a region.</p>';
 
 // 테이블 부분 정리
+const firstColTitle = `
+    <div class="first-col" style="text-align:initial">
+        Name
+    </div>
+`;
+
+const secondColTitle = `
+    <div class="second-col" style="text-align:initial">
+            value
+    </div>
+`;
+
 const makeTable = (td) => {
     const rowCnt = td[0].length; // 행 수
     const columnCnt = td.length  // 열 수
 
     let table = '';
 
-    table += `<table class="property-grid-table"><tbody>`;
+    table += `
+    <table class="property-grid-table"><tbody>
+        <tr>
+            <th>
+                ${firstColTitle}
+            </th>
+            <th>
+                ${secondColTitle}
+            </th>
+        </tr>
+    `;
+
     for(let i = 0; i < rowCnt; i++){
         table += `<tr>`;
             for(let j = 0; j < columnCnt; j++){
@@ -62,61 +85,30 @@ const makeTable = (td) => {
     return table;
 };
 
-const propertyGrid = makeTable(
+let rowValue =   [
     [
-        [
-            `<div class="first-col">
-                Name
-                <span class="icon">^</span>
-            </div>`, 
-            '(name)', 
-            'autoFitColumns', 
-            'borderWidth', 
-            'created', 
-            'grouping', 
-            'productionQuality', 
-            'tested', 
-            'version'
-        ],
-        [
-            `<div class="second-col">
-                value
-                <span class= "icon" style="display:none">^</span>
-            </div>`
-            ,
-            'Properties Grid',
-            `
-            <select>
-            <option value="true">true</option>
-            <option value="false">false</option>
-            </select>
-            `,
-            '2',
-            `
-            <input type="date" name="userBirthday" value="2006-10-15">
-            `,
-            `
-            <select>
-            <option value="true">true</option>
-            <option value="false">false</option>
-            </select>
-            `,
-            `
-            <select>
-            <option value="true">true</option>
-            <option value="false">false</option>
-            </select>
-            `,
-            `
-            <select>
-            <option value="true">true</option>
-            <option value="false">false</option>
-            </select>
-            `,
-            '1.01'
-        ]
+        '(name)', 
+        'autoFitColumns', 
+        'borderWidth', 
+        'created', 
+        'grouping', 
+        'productionQuality', 
+        'tested', 
+        'version'
+    ],
+    [
+        'Properties Grid',
+        'true',
+        '1',
+        '10/15/2006',
+        'false',
+        'false',
+        'false',
+        '1.01'
     ]
-);
+];
+
+const propertyGrid = makeTable(rowValue);
 
 // footer
 const southDescription = `<p>south - generally for informational stuff, also could be for status bar</p>`;

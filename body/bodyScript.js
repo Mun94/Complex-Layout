@@ -220,7 +220,7 @@ const westSideToggle = (toggleWestSide) => {
             westParent.appendChild(westSideDragZone);
         };
     });
-}
+};
 
 useClickEvent(centerPanelButton, () => {
     if(middleDescriptionPlace.innerHTML === centerPanel) return;
@@ -321,10 +321,16 @@ useClickEvent(aTabButton, () => {
     eastDescriptionPlace.innerHTML = aTab;
 });
 
-useClickEvent(propertyGridButton, ()=>{
+useClickEvent(propertyGridButton, () => {
     if(eastDescriptionPlace.innerHTML === propertyGrid) return;
     
     eastDescriptionPlace.innerHTML = propertyGrid;
+    
+    const reloadFirstCol = useGetElement('.first-col');
+    const reloadSecondCol = useGetElement('.second-col');
+
+    sortFirstCol(reloadFirstCol);
+    sortSecondCol(reloadSecondCol)
 });
 
 // east side property grid close (property grid 창 닫기)
@@ -338,34 +344,61 @@ useClickEvent(propertyGridClose, () => {
 
 // east side property grid sort
 const firstColPropertyGrid = useGetElement('.first-col');
-const secondColPropertyGrid = useGetElement('.second-col');
-const firstColPropertyGridIcon = useGetElement('.first-col .icon');
-const secondColPropertyGridIcon = useGetElement('.second-col .icon');
 
-const changeIcon = (myStyle, otherStyle, myIcon) => {
-    if(myStyle.display === 'none'){
-        myStyle.display = 'inline';
-        otherStyle.display = 'none';
-        myIcon.innerHTML = '^';
-    }else{
-        if(myIcon.innerHTML === '^'){
-            myIcon.innerHTML = 'V';
-        }else{
-            myIcon.innerHTML = '^';
-        };
-    };
+function sortFirstCol(firstCol){
+    useClickEvent(firstCol , () => {
+        eastDescriptionPlace.innerHTML = makeTable([
+                    [...rowValue[0].sort((a, b) => a > b ? -1 : a < b ? 1 : 0)], 
+                    [...rowValue[1]]
+                ]);
+
+        const reloadFirstCol = useGetElement('.first-col');
+        const reloadSecondCol = useGetElement('.second-col');
+
+        sortSecondCol(reloadSecondCol);
+
+        useClickEvent(reloadFirstCol, () => {
+            eastDescriptionPlace.innerHTML = makeTable([
+                [...rowValue[0].sort((a, b) => a > b ? 1 : a < b ? -1 : 0)], 
+                [...rowValue[1]]
+            ]);
+            
+            const secondReloadFirstCol = useGetElement('.first-col');
+            const secondReloadSecondCol = useGetElement('.second-col');
+
+            sortSecondCol(secondReloadSecondCol);
+            sortFirstCol(secondReloadFirstCol);
+        })
+    });
 };
+sortFirstCol(firstColPropertyGrid);
 
-useClickEvent(firstColPropertyGrid, () => {
-    const {style: secondIconStyle} = secondColPropertyGridIcon;
-    const {style: firstIconStyle} = firstColPropertyGridIcon;
+const secondColPropertyGrid = useGetElement('.second-col');
 
-    changeIcon(firstIconStyle, secondIconStyle, firstColPropertyGridIcon);
-});
+function sortSecondCol(secondCol){
+    useClickEvent(secondCol , () => {
+        eastDescriptionPlace.innerHTML = makeTable([
+                    [...rowValue[0]],
+                    [...rowValue[1].sort((a, b) => a > b ? -1 : a < b ? 1 : 0)]
+                ]);
 
-useClickEvent(secondColPropertyGrid, ()=>{
-    const {style: secondIconStyle} = secondColPropertyGridIcon;
-    const {style: firstIconStyle} = firstColPropertyGridIcon;
-    
-    changeIcon(secondIconStyle, firstIconStyle, secondColPropertyGridIcon);       
-});
+        const reloadFirstCol = useGetElement('.first-col');
+        const reloadSecondCol = useGetElement('.second-col');
+
+        sortFirstCol(reloadFirstCol);
+
+        useClickEvent(reloadSecondCol, () => {
+            eastDescriptionPlace.innerHTML = makeTable([
+                [...rowValue[0]],
+                [...rowValue[1].sort((a, b) => a > b ? 1 : a < b ? -1 : 0)], 
+            ]);
+
+            const secondReloadFirstCol = useGetElement('.first-col');
+            const secondReloadSecondCol = useGetElement('.second-col');
+            
+            sortSecondCol(secondReloadSecondCol);
+            sortFirstCol(secondReloadFirstCol);
+        });
+    });
+};
+sortSecondCol(secondColPropertyGrid);
