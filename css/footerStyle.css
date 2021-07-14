@@ -32,11 +32,31 @@
 }
 
 .south-side-drag-zone .button{
-    width: 70px;
+    width: 48px;
     height: 100%;
-    background: red;
+    background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/util/splitter/mini-top.png');
 
     position: absolute;
     left: 45%;
     cursor: pointer;
+}
+
+.south-side-block .top .button, .south-side-block-folded .button
+{
+    background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/tools/tool-sprites.png');
+    background-color: #157FCC;
+
+    border: none;
+    cursor: pointer;
+    width: 17px;
+    height: 16px;
+    opacity: 0.5;
+}
+
+.south-side-block .top .button{
+    background-position: 0 -208px;
+}
+
+.south-side-block-folded .button{
+    background-position: 0 -224px;
 }

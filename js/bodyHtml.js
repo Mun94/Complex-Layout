@@ -1,13 +1,14 @@
 const bodyWest = document.querySelector('.body-block .west');
 
 // body west side
-const westSideCategory = (categoryName, text, buttonIcon, display) =>
+const westSideCategory = (categoryName, text, display) =>
    ` <div class= ${categoryName}>
         <div class= "${categoryName}-button-wrapper">
             <div class= "button-name">
+                <div class= "categoryImg"></div>    
                 ${categoryName}
             </div>
-            <button class= "${categoryName}-button">${buttonIcon}</button>
+            <button class= "${categoryName}-button"></button>
         </div>
         <div class= "${categoryName}-panel" style="display:${display}">
             ${text}
@@ -22,14 +23,13 @@ bodyWest.innerHTML = `
                 west
             </div>
             <button class= "button">
-                <
             </button>
         </div>
 
         <div class= "category">
-            ${westSideCategory("navigation", "hi im the west panel", "-", "block")}
-            ${westSideCategory("settings", "Some settings in here.", "+", "none")}
-            ${westSideCategory("information", "Some info in here.", "+", "none")}
+            ${westSideCategory("navigation", "hi im the west panel", "block")}
+            ${westSideCategory("settings", "Some settings in here.", "none")}
+            ${westSideCategory("information", "Some info in here.", "none")}
         </div>
     </div>
     <div class="west-side-drag-zone">
@@ -75,7 +75,6 @@ bodyEast.innerHTML = `
                 east side
             </div>
             <button class= "button">
-                >
             </button>
         </div>
 

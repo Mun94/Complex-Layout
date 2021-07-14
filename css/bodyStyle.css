@@ -38,11 +38,75 @@
     margin-top:5px;
 }
 
+.west-side-block button{
+    border: none;
+    cursor: pointer;
+    width: 17px;
+    height: 16px;
+}
+
+.west-side-block .top .button, .east-side-block-folded .button,
+.west-side-block-folded .button, .east-side-block .button
+{
+    background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/tools/tool-sprites.png');
+    background-color: #157FCC;
+
+    border: none;
+    cursor: pointer;
+    width: 17px;
+    height: 16px;
+    opacity: 0.5;
+}
+
+.west-side-block .top .button, .east-side-block-folded .button{
+    background-position: 1px -192px;
+}
+
+.navigation-button, .settings-button, .information-button{
+    background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/tools/tool-sprites-dark.png');
+}
+
+.navigation-button{
+    background-position: 1px -272px;
+}
+
+.settings-button,
+.information-button{
+    background-position: 1px -255px;
+}
+
+.button-name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.category .categoryImg{
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
+
+.navigation-button-wrapper .categoryImg{
+    background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/examples/shared/icons/fam/folder_go.png');
+}
+
+.settings-button-wrapper .categoryImg{
+    background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/examples/shared/icons/fam/folder_wrench.png');
+}
+
+.information-button-wrapper .categoryImg{
+    background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/examples/shared/icons/fam/information.png');
+}
 /* west side 접혔을 때*/
 .west-side-block-folded, .east-side-block-folded{
     background: #157FCC;
     height: 730px;
     padding: 10px;
+}
+
+.west-side-block-folded .button, .east-side-block .button{
+    background-position: 1px -176px;
 }
 
 /* body middle */
@@ -134,10 +198,17 @@
 
 .east-side-drag-zone .button, .west-side-drag-zone .button{
     width: 100%;
-    height: 70px;
-    background: red;
+    height: 49px;
 
     position: absolute;
     top: 45%;
     cursor: pointer;
+}
+
+.west-side-drag-zone .button{
+    background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/util/splitter/mini-left.png');
+}
+
+.east-side-drag-zone .button{
+    background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/util/splitter/mini-right.png');
 }

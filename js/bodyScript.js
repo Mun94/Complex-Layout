@@ -1,11 +1,14 @@
 // west side button controll(클릭시 왼쪽으로 접힘)
 const westSideBlock = document.querySelector('.west-side-block');
 const westSideDragZone = document.querySelector('.west-side-drag-zone');
+const westSideDragZoneButton = document.querySelector('.west-side-drag-zone .button');
 
 const westParent = document.querySelector('.west'); // 전체 블럭
 const westSideTopButton = document.querySelector('.west-side-block .button');
 
-const spreadFold = (fold, button) => {
+const spreadFold = (fold, button, side) => {
+    side === 'west' ? westSideDragZoneButton.style.backgroundImage = 'url("https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/util/splitter/mini-left.png")'
+        : eastSideDragZoneButton.style.backgroundImage = 'url("https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/util/splitter/mini-right.png")';
     button.addEventListener('click', () => {
         westSideDragZone.addEventListener('mousedown', onWestMouseDown); // 폴더가 다시 열리면 창 크기 조절 가능
         westParent.style.width = '30%';
@@ -18,6 +21,8 @@ const spreadFold = (fold, button) => {
 };
 
 westSideTopButton.addEventListener('click', e => {
+    westSideDragZoneButton.style.tarnsform = 'rotate(180deg)';
+
     westSideBlock.outerHTML = westSideFoldedHtml; // foldHtml.js 파일에 있음
     westParent.style.width = 'initial';
     westParent.style.minWidth = 'initial'; // 창 크기 조절하면서 적용했던 최소 길이를 초기화 함
@@ -27,12 +32,10 @@ westSideTopButton.addEventListener('click', e => {
 
     westSideDragZone.removeEventListener('mousedown', onWestMouseDown); // 접힌 상태에서는 창 크기 조절 x
 
-    spreadFold(westSideFolded, westSideTopFoldedButton); // 다시 폴더 열기
+    spreadFold(westSideFolded, westSideTopFoldedButton, 'west'); // 다시 폴더 열기
 });
 
 // west side drag zone 클릭 시 왼쪽으로 접힘
-const westSideDragZoneButton = document.querySelector('.west-side-drag-zone .button');
-
 const onClickDragZoneButton = ( // east side, west side에서 사용 됨
     folded, 
     block, 
@@ -133,19 +136,19 @@ const categoryFold = (
     other2Button 
     ) => {
     if(myPanel.display === 'block'){
-        myButton.innerHTML = '+';
+        myButton.style.backgroundPosition = '1px -255px';
         myPanel.display= 'none';
 
-        otherButton.innerHTML = '-';
+        otherButton.style.backgroundPosition = '1px -272px';
         otherPanel.display= 'block';
     }else{
-        myButton.innerHTML = '-';
+        myButton.style.backgroundPosition = '1px -272px';
         myPanel.display = 'block';
 
-        otherButton.innerHTML = '+';
+        otherButton.style.backgroundPosition = '1px -255px';
         otherPanel.display = 'none';
 
-        other2Button.innerHTML = '+';
+        other2Button.style.backgroundPosition = '1px -255px';
         other2Panel.display= 'none';
     };
 };
@@ -219,7 +222,7 @@ const westSideToggle = (toggleWestSide) => {
             const westSideTopFoldedButton = document.querySelector('.west-side-block-folded .button');
             const westSideFolded = document.querySelector('.west-side-block-folded');  
 
-            spreadFold(westSideFolded, westSideTopFoldedButton);
+            spreadFold(westSideFolded, westSideTopFoldedButton, 'east');
         }else{
             const westSideFolded = document.querySelector('.west-side-block-folded');  
             westSideDragZone.addEventListener('mousedown', onWestMouseDown);
