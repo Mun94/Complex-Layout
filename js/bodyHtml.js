@@ -1,4 +1,4 @@
-const bodyWest = useGetElement('.body-block .west');
+const bodyWest = document.querySelector('.body-block .west');
 
 // body west side
 const westSideCategory = (categoryName, text, buttonIcon, display) =>
@@ -51,7 +51,7 @@ const middleAndEastCategory = (firstTab, secondTab) => `
     </div>
 `;
 
-const bodyMiddle = useGetElement('.body-block .middle');
+const bodyMiddle = document.querySelector('.body-block .middle');
 
 bodyMiddle.innerHTML = `
     <div class= "middle-block">
@@ -62,7 +62,7 @@ bodyMiddle.innerHTML = `
 `;
 
 // body east side
-const bodyEast = useGetElement('.body-block .east');
+const bodyEast = document.querySelector('.body-block .east');
 
 bodyEast.innerHTML = `
     <div class="east-side-drag-zone">
