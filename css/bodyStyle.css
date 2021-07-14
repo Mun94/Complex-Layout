@@ -8,14 +8,14 @@
 }
 
 .west-side-block .top{ /*.east-side-block .top이랑 중복됨*/
-    background: #157fcc;
+    background: #157FCC;
     padding: 10px;
     display: flex;
     justify-content: space-between;
 }
 
 .west-side-block .category{
-    background: #ffffff;
+    background: #FFFFFF;
     padding: 5px;
 }
 
@@ -27,7 +27,7 @@
 .settings-button-wrapper,
 .information-button-wrapper
 {
-    background: #dfeaf2;
+    background: #DFEAF2;
     padding: 10px;
     display: flex;
     justify-content: space-between;
@@ -40,7 +40,7 @@
 
 /* west side 접혔을 때*/
 .west-side-block-folded, .east-side-block-folded{
-    background: #157fcc;
+    background: #157FCC;
     height: 730px;
     padding: 10px;
 }
@@ -51,7 +51,7 @@
 }
 
 .middle-block{
-    background-color: #157fcc;
+    background-color: #157FCC;
 }
 
 .middle-block .category, .east-side-block .category{ /* east side 같이 적용 */
@@ -63,11 +63,11 @@
 {
     height: 41px;
     padding:8px 12px;
-    background: #4b9cd7;
+    background: #4B9CD7;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    color: #ffffff;
+    color: #FFFFFF;
 }
 
 .center-panel-button, .property-grid-button{
@@ -77,7 +77,7 @@
 .middle-block .description{
     height: 721px;
     overflow: auto;
-    background: #ffffff;
+    background: #FFFFFF;
 }
 
 .close-me-block, .property-grid-block{
@@ -93,21 +93,21 @@
 
 /* body east side */
 .east-side-block .top{
-    background: #157fcc;
+    background: #157FCC;
     display: flex;
     justify-content: space-between;
     padding: 10px;
 }
 
 .east-side-block .category{
-    background: #157fcc;
+    background: #157FCC;
     flex-direction: row-reverse;
     justify-content: flex-end;
 }
 
 .east-side-block .grid-description{
     height: 680px;
-    background: #ffffff;
+    background: #FFFFFF;
 }
 
 .east-side-block .grid-description p{

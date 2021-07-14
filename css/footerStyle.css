@@ -1,7 +1,7 @@
 .south-side-block .top{
     display: flex;
     justify-content: space-between;
-    background: #157fcc;
+    background: #157FCC;
     padding:10px;
 }
 
@@ -10,7 +10,7 @@
 }
 
 .south-side-block{
-    background: white;
+    background: #FFFFFF;
 }
 
 .south-side-block .description{
@@ -21,7 +21,7 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row-reverse;
-    background: #157fcc;
+    background: #157FCC;
     padding: 10px;
 }
 
