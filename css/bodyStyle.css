@@ -125,13 +125,17 @@
 .category .close-me-button,.center-panel-button,
 .property-grid-button, .a-tab-button /* east side 같이 적용 */
 {
-    height: 41px;
+    height: 31px;
     padding:8px 12px;
     background: #4B9CD7;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     color: #FFFFFF;
+}
+
+.category .close-me-button, .property-grid-button{
+    padding-right: 28px;
 }
 
 .center-panel-button, .property-grid-button{
@@ -149,10 +153,14 @@
 }
 
 .close-me-close-icon, .property-grid-close-icon{
+    background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/tab/tab-default-close.png');
     position: absolute;
     top:0;
     right: 5px;
     cursor: pointer;
+
+    width:12px;
+    height: 12px;
 }
 
 /* body east side */

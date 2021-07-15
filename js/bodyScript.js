@@ -1,15 +1,18 @@
 // west side button controll(클릭시 왼쪽으로 접힘)
 const westSideBlock = document.querySelector('.west-side-block');
 const westSideDragZone = document.querySelector('.west-side-drag-zone');
+
 const westSideDragZoneButton = document.querySelector('.west-side-drag-zone .button');
+const eastSideDragZoneButton = document.querySelector('.east-side-drag-zone .button');
 
 const westParent = document.querySelector('.west'); // 전체 블럭
 const westSideTopButton = document.querySelector('.west-side-block .button');
 
-const spreadFold = (fold, button, side) => {
-    side === 'west' ? westSideDragZoneButton.style.backgroundImage = 'url("https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/util/splitter/mini-left.png")'
-        : eastSideDragZoneButton.style.backgroundImage = 'url("https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/util/splitter/mini-right.png")';
+const spreadFold = (fold, button) => {        
     button.addEventListener('click', () => {
+        westSideDragZoneButton.style.transform = 'rotate(0deg)' 
+      
+
         westSideDragZone.addEventListener('mousedown', onWestMouseDown); // 폴더가 다시 열리면 창 크기 조절 가능
         westParent.style.width = '30%';
 
@@ -21,7 +24,7 @@ const spreadFold = (fold, button, side) => {
 };
 
 westSideTopButton.addEventListener('click', e => {
-    westSideDragZoneButton.style.tarnsform = 'rotate(180deg)';
+    westSideDragZoneButton.style.transform = 'rotate(180deg)';
 
     westSideBlock.outerHTML = westSideFoldedHtml; // foldHtml.js 파일에 있음
     westParent.style.width = 'initial';
@@ -32,7 +35,7 @@ westSideTopButton.addEventListener('click', e => {
 
     westSideDragZone.removeEventListener('mousedown', onWestMouseDown); // 접힌 상태에서는 창 크기 조절 x
 
-    spreadFold(westSideFolded, westSideTopFoldedButton, 'west'); // 다시 폴더 열기
+    spreadFold(westSideFolded, westSideTopFoldedButton); // 다시 폴더 열기
 });
 
 // west side drag zone 클릭 시 왼쪽으로 접힘
@@ -49,22 +52,25 @@ const onClickDragZoneButton = ( // east side, west side에서 사용 됨
 
     const removeEvent = (val) => val === 'west' ? 
         westSideDragZone.removeEventListener('mousedown', onWestMouseDown) 
-        : eastSideDragZone.removeEventListener('mousedown', onEastMouseDown);
+            : eastSideDragZone.removeEventListener('mousedown', onEastMouseDown);
     
     const addEvent = (val) => val === 'west' ? 
         westSideDragZone.addEventListener('mousedown', onWestMouseDown) 
-        : eastSideDragZone.addEventListener('mousedown', onEastMouseDown);
+            : eastSideDragZone.addEventListener('mousedown', onEastMouseDown);
 
     if(fold){ // 접힌 상태이면
         block.outerHTML = foldedHtml; // 접힌 상태의 요소 적용
         parent.style.width = 'initial';
         parent.style.minWidth = 'initial';
-
+ 
         removeEvent(side); // 접힌 상태에서는 창 크기 조절 x
 
         const topFoldedButton = document.querySelector(`${blockFoldedClassName} .button`); // 상단에 있는 좌/우 접기 버튼
 
         topFoldedButton.addEventListener('click', () => {
+            side === 'west' ? westSideDragZoneButton.style.transform = 'rotate(0deg)' : 
+                eastSideDragZoneButton.style.transform = 'rotate(0deg)';
+
             const folded = document.querySelector(`${blockFoldedClassName}`); 
             parent.style.width = '30%';
             folded.remove(); // 접혀 있을때의 요소 제거
@@ -76,6 +82,9 @@ const onClickDragZoneButton = ( // east side, west side에서 사용 됨
             addEvent(side);
         });
     }else{
+        side === 'west' ? westSideDragZoneButton.style.transform = 'rotate(0deg)' : 
+            eastSideDragZoneButton.style.transform = 'rotate(0deg)';
+
         parent.style.width = '30%';
         folded.remove();
         parent.appendChild(block);
@@ -89,6 +98,7 @@ const onClickDragZoneButton = ( // east side, west side에서 사용 됨
 westSideDragZoneButton.addEventListener('click', () => {
     const westSideFolded = document.querySelector('.west-side-block-folded');
 
+    westSideDragZoneButton.style.transform = 'rotate(180deg)';
     onClickDragZoneButton(
         westSideFolded, 
         westSideBlock, 
@@ -211,6 +221,7 @@ const westSideToggle = (toggleWestSide) => {
         const reloadWestSideBlock = document.querySelector('.west-side-block');
         const westParent = document.querySelector('.west'); // 부모 요소
         
+        westSideDragZoneButton.style.transform = 'rotate(180deg)';
         westParent.style.width = 'initial';
         westParent.style.minWidth = 'initial';
 
@@ -222,8 +233,10 @@ const westSideToggle = (toggleWestSide) => {
             const westSideTopFoldedButton = document.querySelector('.west-side-block-folded .button');
             const westSideFolded = document.querySelector('.west-side-block-folded');  
 
-            spreadFold(westSideFolded, westSideTopFoldedButton, 'east');
+            spreadFold(westSideFolded, westSideTopFoldedButton);
         }else{
+            westSideDragZoneButton.style.transform = 'rotate(0deg)';
+
             const westSideFolded = document.querySelector('.west-side-block-folded');  
             westSideDragZone.addEventListener('mousedown', onWestMouseDown);
 
@@ -265,6 +278,8 @@ const eastParent = document.querySelector('.east');
 const eastSideDragZone = document.querySelector('.east-side-drag-zone');
 
 eastSideTopButton.addEventListener('click', () => {
+    eastSideDragZoneButton.style.transform = 'rotate(180deg)';
+
     eastSideBlock.outerHTML = eastSideFoldedHtml;
 
     eastParent.style.width = 'initial';
@@ -276,6 +291,7 @@ eastSideTopButton.addEventListener('click', () => {
     eastSideDragZone.removeEventListener('mousedown', onEastMouseDown);
 
     eastSideTopFoldedButton && eastSideTopFoldedButton.addEventListener('click', ()=>{
+        eastSideDragZoneButton.style.transform = 'rotate(0deg)';
         eastSideFolded.remove();
         eastParent.style.width = '30%';
         eastParent.appendChild(eastSideBlock);
@@ -285,11 +301,10 @@ eastSideTopButton.addEventListener('click', () => {
 });
 
 // east side drag zone button 클릭 시 오른쪽으로 접힘
-const eastSideDragZoneButton = document.querySelector('.east-side-drag-zone .button');
-
 eastSideDragZoneButton.addEventListener('click', () => {
     const eastSideFolded = document.querySelector('.east-side-block-folded');
 
+    eastSideDragZoneButton.style.transform = 'rotate(180deg)';
     onClickDragZoneButton(
         eastSideFolded, 
         eastSideBlock, 
@@ -375,10 +390,6 @@ function sortFirstCol(firstCol){ // innerHTML 등으로 요소를 적용했을 �
                 [...rowValue[0].sort((a, b) => a > b ? 1 : a < b ? -1 : 0)], // 오름차순
                 [...rowValue[1]]
             ]);
-            // 리턴 값이 -1이면 a가 b보다 낮은 인덱스로 위치 한다. 리턴 값이 1이면 반대
-            // [1,3,2,4] 처음 스타트 
-            // a = 1, b = 3 <=== 1 < 3 이므로 -1 이 리턴되고 1이 3보다 낮은 인덱스로 위치한다. [1, 3, 2, 4]
-            // a = 3, b = 2 <=== 3 > 2 이므로 1 이 리턴되고  3이 2보다 높은 인덱스로 위치한다. [1, 2, 3, 4]
             const secondReloadFirstCol = document.querySelector('.first-col');
             const secondReloadSecondCol = document.querySelector('.second-col');
 
@@ -418,3 +429,8 @@ function sortSecondCol(secondCol){
     });
 };
 sortSecondCol(secondColPropertyGrid);
+
+    // 리턴 값이 -1이면 a가 b보다 낮은 인덱스로 위치 한다. 리턴 값이 1이면 반대
+    // [1,3,2,4] 처음 스타트 
+    // a = 1, b = 3 <=== 1 < 3 이므로 -1 이 리턴되고 1이 3보다 낮은 인덱스로 위치한다. [1, 3, 2, 4]
+    // a = 3, b = 2 <=== 3 > 2 이므로 1 이 리턴되고  3이 2보다 높은 인덱스로 위치한다. [1, 2, 3, 4]

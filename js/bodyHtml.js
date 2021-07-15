@@ -42,7 +42,7 @@ bodyWest.innerHTML = `
 const middleAndEastCategory = (firstTab, secondTab) => `
     <div class= "category">
         <div class= "${firstTab}-block">
-            <span class= "${firstTab}-close-icon">x</span>
+            <span class= "${firstTab}-close-icon"></span>
             <button class= "${firstTab}-button">
                 ${firstTab}
             </button>
