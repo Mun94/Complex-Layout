@@ -1,16 +1,16 @@
 const bodyWest = document.querySelector('.body-block .west');
 
 // body west side
-const westSideCategory = (categoryName, text, display) =>
+const westSideCategory = (categoryName, text, hiddenStatus) =>
    ` <div class= ${categoryName}>
         <div class= "${categoryName}-button-wrapper">
             <div class= "button-name">
-                <div class= "categoryImg"></div>    
+                <div class= "category-img"></div>    
                 ${categoryName}
             </div>
-            <button class= "${categoryName}-button"></button>
+            <button class= "${categoryName}-button ${hiddenStatus}"></button>
         </div>
-        <div class= "${categoryName}-panel" style="display:${display}">
+        <div class= "${categoryName}-panel ${hiddenStatus}" >
             ${text}
         </div>
     </div>`;
@@ -27,9 +27,12 @@ bodyWest.innerHTML = `
         </div>
 
         <div class= "category">
-            ${westSideCategory("navigation", "hi im the west panel", "block")}
-            ${westSideCategory("settings", "Some settings in here.", "none")}
-            ${westSideCategory("information", "Some info in here.", "none")}
+            <!--${westSideCategory("navigation", "hi im the west panel", "visible")}-->
+            <!--${westSideCategory("settings", "Some settings in here.", "hidden")}-->
+            <!--${westSideCategory("information", "Some info in here.", "hidden")}-->
+            ${westSideCategory("navigation", "hi im the west panel", "visible")}
+            ${westSideCategory("settings", "Some settings in here.", "visible")}
+            ${westSideCategory("information", "Some info in here.", "visible")}
         </div>
     </div>
 `;

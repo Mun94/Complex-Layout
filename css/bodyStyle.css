@@ -3,7 +3,7 @@
     width:100%;
 }
 
-.west-side-drag-zone, .east-side-drag-zone{
+.west-side-drag-zone, .east-side-drag-zone, .west-side-folded-drag-zone{
     width:8px;
 }
 
@@ -17,10 +17,6 @@
 .west-side-block .category{
     background: #FFFFFF;
     padding: 5px;
-}
-
-.navigation-panel,.settings-panel, .information-panel{
-    height: 578px;
 }
 
 .navigation-button-wrapper,
@@ -62,18 +58,69 @@
     background-position: 1px -192px;
 }
 
-.navigation-button, .settings-button, .information-button{
+.category .navigation-button, .settings-button, .information-button{
     background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/tools/tool-sprites-dark.png');
 }
 
-.navigation-button{
+.navigation-panel,.settings-panel, .information-panel{
+    /* height: 578px;  */
+    /* transition: height 1.5s ease-in-out; */
+} 
+
+.category div.hidden{
+    height: 0px;
+    overflow: hidden;
+}
+
+.category button.visible{
     background-position: 1px -272px;
 }
 
-.settings-button,
-.information-button{
+.category button.hidden{
+    display: block;
     background-position: 1px -255px;
 }
+
+
+
+
+.acodi-item .acodi-item-body {
+    height: 0px;
+    transition: height 1.5s ease-in-out;
+}
+.acodi-item .disp-block {
+    display: block;
+    /* height: 578px; */
+}
+.acodi-item .disp-none{
+    display: none;
+    animation: fade-out 2s;
+}
+.acodi-item .height-full{
+    height:578px;
+}
+
+
+/* /* @keyframes fade-in {
+    from {
+        display: none;
+        height: 0px;
+    }
+    to {    
+        display: block;
+        height: 578px;
+    }
+  } */
+
+  @keyframes fade-out {
+    from {
+        height: 578px;
+    }
+    to {    
+        height: 0px;
+    }
+} 
+
 
 .button-name{
     display: flex;
@@ -81,21 +128,21 @@
     align-items: center;
 }
 
-.category .categoryImg{
+.category .category-img{
     width: 16px;
     height: 16px;
     margin-right: 5px;
 }
 
-.navigation-button-wrapper .categoryImg{
+.navigation-button-wrapper .category-img{
     background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/examples/shared/icons/fam/folder_go.png');
 }
 
-.settings-button-wrapper .categoryImg{
+.settings-button-wrapper .category-img{
     background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/examples/shared/icons/fam/folder_wrench.png');
 }
 
-.information-button-wrapper .categoryImg{
+.information-button-wrapper .category-img{
     background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/examples/shared/icons/fam/information.png');
 }
 /* west side 접혔을 때*/
@@ -210,12 +257,12 @@
 }
 
 /* drag zone button*/
-.east-side-drag-zone, .west-side-drag-zone{
+.east-side-drag-zone, .west-side-drag-zone , .west-side-folded-drag-zone{
     position: relative;
     cursor: col-resize;
 }
 
-.east-side-drag-zone .button, .west-side-drag-zone .button{
+.east-side-drag-zone .button, .west-side-drag-zone .button, .west-side-folded-drag-zone .button{
     width: 100%;
     height: 49px;
 
@@ -226,6 +273,10 @@
 
 .west-side-drag-zone .button{
     background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/util/splitter/mini-left.png');
+}
+
+.west-side-folded-drag-zone .button{
+    background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/util/splitter/mini-right.png');
 }
 
 .east-side-drag-zone .button{

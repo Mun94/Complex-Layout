@@ -1,6 +1,6 @@
 // west side button controll(클릭 시 왼쪽으로 접힘)
 const westSideBlock = document.querySelector('.west-side-block');
-const westSideBlockFoled = document.querySelector('.west-side-block-folded');
+const westSideBlockFolded = document.querySelector('.west-side-block-folded');
 const westSideDragZone = document.querySelector('.west-side-drag-zone');
 
 const westSideDragZoneButton = document.querySelector('.west-side-drag-zone .button');
@@ -10,127 +10,44 @@ const westParent = document.querySelector('.west'); // 전체 블럭
 const westSideTopButton = document.querySelector('.west-side-block .button');
 const westSideTopFoldedButton = document.querySelector('.west-side-block-folded .button');
 
-// const spreadFold = (fold, button) => {        
-//     button.addEventListener('click', () => {
-//         westSideDragZoneButton.style.transform = 'rotate(0deg)' 
-      
-//         westSideBlockFoled.classList.add('hidden');
-//         westSideBlock.classList.remove('hidden');
-//         // westSideDragZone.addEventListener('mousedown', onWestMouseDown); // 폴더가 다시 열리면 창 크기 조절 가능
-//         // westParent.style.width = '30%';
-
-//         // fold.remove(); // 접혀있을 때 요소 제거
-
-//         // westParent.appendChild(westSideBlock); // outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
-//         // westParent.appendChild(westSideDragZone);
-//     });
-// };
+const westSideFoldedDragZone = document.querySelector(".west-side-folded-drag-zone");
+const westSideFoldedDragZoneButton = document.querySelector('.west-side-folded-drag-zone .button');
 
 westSideTopButton.addEventListener('click', e => {
-    westSideDragZoneButton.style.transform = 'rotate(180deg)';
-
-    // westSideBlock.outerHTML = westSideFoldedHtml; // foldHtml.js 파일에 있음
-    // westParent.style.width = 'initial';
-    // westParent.style.minWidth = 'initial'; // 창 크기 조절하면서 적용했던 최소 길이를 초기화 함
     westSideBlock.classList.add('hidden');
-    westSideBlockFoled.classList.remove('hidden');
+    westSideBlockFolded.classList.remove('hidden');
     
-    // 다시 눌렀을 때 펴짐
-    // const westSideFolded = document.querySelector('.west-side-block-folded');  
-    // const westSideTopFoldedButton = document.querySelector('.west-side-block-folded .button');
-
-    // westSideDragZone.removeEventListener('mousedown', onWestMouseDown); // 접힌 상태에서는 창 크기 조절 x
-
-    // spreadFold(westSideFolded, westSideTopFoldedButton); // 다시 폴더 열기
+    westSideDragZone.classList.add('hidden');
+    westSideFoldedDragZone.classList.remove('hidden');
 });
 
-// spreadFold(westSideBlockFoled, westSideTopFoldedButton); // 다시 폴더 열기
-
 westSideTopFoldedButton.addEventListener('click', e => {
-    westSideDragZoneButton.style.transform = 'rotate(0deg)';
-
-    westSideBlockFoled.classList.add('hidden');
+    westSideBlockFolded.classList.add('hidden');
     westSideBlock.classList.remove('hidden');
+
+    westSideDragZone.classList.remove('hidden');
+    westSideFoldedDragZone.classList.add('hidden');
 })
 
-// west side drag zone 클릭 시 왼쪽으로 접힘
-// const onClickDragZoneButton = ( // east side, west side에서 사용 됨
-//     folded, 
-//     block, 
-//     foldedHtml, 
-//     blockFoldedClassName, 
-//     parent, 
-//     dragZone, 
-//     checkDragZone, 
-//     side) => {
-//     let fold = !folded
-
-//     const removeEvent = (val) => val === 'west' ? 
-//         westSideDragZone.removeEventListener('mousedown', onWestMouseDown) 
-//             : eastSideDragZone.removeEventListener('mousedown', onEastMouseDown);
-    
-//     const addEvent = (val) => val === 'west' ? 
-//         westSideDragZone.addEventListener('mousedown', onWestMouseDown) 
-//             : eastSideDragZone.addEventListener('mousedown', onEastMouseDown);
-
-//     if(fold){ // 접힌 상태이면
-//         // block.outerHTML = foldedHtml; // 접힌 상태의 요소 적용
-//         // parent.style.width = 'initial';
-//         // parent.style.minWidth = 'initial';
-//         westSideBlock.classList.add('hidden');
-//         westSideBlockFoled.classList.remove('hidden');
-//         removeEvent(side); // 접힌 상태에서는 창 크기 조절 x
-
-//         // const topFoldedButton = document.querySelector(`${blockFoldedClassName} .button`); // 상단에 있는 좌/우 접기 버튼
-
-//         // topFoldedButton.addEventListener('click', () => {
-//         //     side === 'west' ? westSideDragZoneButton.style.transform = 'rotate(0deg)' : 
-//         //         eastSideDragZoneButton.style.transform = 'rotate(0deg)';
-
-//         //     const folded = document.querySelector(`${blockFoldedClassName}`); 
-//         //     parent.style.width = '30%';
-//         //     folded.remove(); // 접혀 있을때의 요소 제거
-//         //     parent.appendChild(block); // 펴진 상태 적용
-        
-//         //     checkDragZone && parent.appendChild(dragZone); 
-//         //     // appendChild를 하면 마지막에 적용되는데 west side에서는 west side block 다음에 drag zone이 생성 되도록 함
-
-//         //     addEvent(side);
-//         // });
-//     }else{
-//         side === 'west' ? westSideDragZoneButton.style.transform = 'rotate(0deg)' : 
-//             eastSideDragZoneButton.style.transform = 'rotate(0deg)';
-
-//         parent.style.width = '30%';
-//         folded.remove();
-//         parent.appendChild(block);
-
-//         checkDragZone && parent.appendChild(dragZone);
-
-//         addEvent(side);
-//     };
-// };
-
 westSideDragZoneButton.addEventListener('click', () => {
-    const westSideFolded = document.querySelector('.west-side-block-folded');
+    westSideBlockFolded.classList.remove('hidden');
+    westSideBlock.classList.add('hidden');
 
-    
-    // westSideDragZoneButton.style.transform = 'rotate(180deg)';
-    // onClickDragZoneButton(
-    //     westSideFolded, 
-    //     westSideBlock, 
-    //     westSideFoldedHtml, 
-    //     '.west-side-block-folded', 
-    //     westParent, 
-    //     westSideDragZone, 
-    //     true , 
-    //     'west');
+    westSideDragZone.classList.add('hidden');
+    westSideFoldedDragZone.classList.remove('hidden');
+});
+
+westSideFoldedDragZoneButton.addEventListener('click', () => {
+    westSideBlockFolded.classList.add('hidden');
+    westSideBlock.classList.remove('hidden');
+
+    westSideDragZone.classList.remove('hidden');
+    westSideFoldedDragZone.classList.add('hidden');
 });
 
 // west side drag zone 창 크기 조절
-let rememberWestWidth = 0;
 const onWestMouseMove = e => {
-    westParent.style.width = rememberWestWidth + e.clientX + 'px';
+    westParent.style.width =  e.clientX + 'px';
     rememberWestWidth = e.clientX;
     westParent.style.maxWidth = '400px';
     westParent.style.minWidth = '175px';
@@ -147,236 +64,167 @@ document.addEventListener('mouseup', () => {
 });
 
 // west side category
-const {style: navigationPanelStyle} = document.querySelector('.navigation-panel');
-const {style: settingsPanelStyle} = document.querySelector('.settings-panel');
-const {style: informationPanelStyle} = document.querySelector('.information-panel');
+const navigationPanel = document.querySelector('.navigation-panel');
+const settingsPanel = document.querySelector('.settings-panel');
+const informationPanel = document.querySelector('.information-panel');
 const navigationButton = document.querySelector('.navigation-button');
 const settingsButton = document.querySelector('.settings-button');
 const informationButton = document.querySelector('.information-button');
 
-const categoryFold = (
-    myPanel, 
-    otherPanel,
-    other2Panel, 
-    myButton, // e.target
-    otherButton,
-    other2Button 
-    ) => {
-    if(myPanel.display === 'block'){
-        myButton.style.backgroundPosition = '1px -255px';
-        myPanel.display= 'none';
+// navigationButton.addEventListener('click', () => {
+//     const checkHidden = navigationPanel.classList.contains('hidden');
 
-        otherButton.style.backgroundPosition = '1px -272px';
-        otherPanel.display= 'block';
-    }else{
-        myButton.style.backgroundPosition = '1px -272px';
-        myPanel.display = 'block';
+//     navigationPanel.classList.toggle('hidden', !checkHidden);
+//     navigationButton.classList.toggle('hidden', !checkHidden);
+//     navigationButton.classList.toggle('visible', checkHidden);
 
-        otherButton.style.backgroundPosition = '1px -255px';
-        otherPanel.display = 'none';
+//     settingsPanel.classList.toggle('hidden', checkHidden);
+//     settingsButton.classList.toggle('hidden', checkHidden);
+//     settingsButton.classList.toggle('visible', !checkHidden);
 
-        other2Button.style.backgroundPosition = '1px -255px';
-        other2Panel.display= 'none';
-    };
+//     if (checkHidden) {
+//         informationPanel.classList.add('hidden'); // information panel이 열린 상태에서 navigation button을 클릭했을 때
+//         informationButton.classList.toggle('hidden', checkHidden);
+//         informationButton.classList.toggle('visible', !checkHidden);
+//     }
+// });
+
+// settingsButton.addEventListener('click', () => {
+//     const checkHidden = settingsPanel.classList.contains('hidden');
+
+//     checkHidden && navigationPanel.classList.toggle('hidden', checkHidden);
+//     checkHidden && navigationButton.classList.toggle('hidden', checkHidden);
+//     checkHidden && navigationButton.classList.toggle('visible', !checkHidden);
+
+//     settingsPanel.classList.toggle('hidden', !checkHidden);
+//     settingsButton.classList.toggle('hidden', !checkHidden);
+//     settingsButton.classList.toggle('visible', checkHidden);
+
+//     informationPanel.classList.toggle('hidden', checkHidden);
+//     informationButton.classList.toggle('hidden', checkHidden);
+//     informationButton.classList.toggle('visible', !checkHidden);
+// });
+
+// informationButton.addEventListener('click', () => {
+//     const checkHidden = informationPanel.classList.contains('hidden');
+
+//     navigationPanel.classList.toggle('hidden', checkHidden);
+//     navigationButton.classList.toggle('hidden', checkHidden);
+//     navigationButton.classList.toggle('visible', !checkHidden);
+
+//     checkHidden && settingsPanel.classList.toggle('hidden', checkHidden);
+//     checkHidden && settingsButton.classList.toggle('hidden', checkHidden);
+//     checkHidden && settingsButton.classList.toggle('visible', !checkHidden);
+
+//     informationPanel.classList.toggle('hidden', !checkHidden);
+//     informationButton.classList.toggle('hidden', !checkHidden);
+//     informationButton.classList.toggle('visible', checkHidden);
+// });
+
+const navigationAcodiItem = document.querySelector('.navigation');
+const settingsAcodiItem = document.querySelector('.settings');
+const informationAcodiItem = document.querySelector('.information');
+
+navigationButton.itemId = 'navigationButton';
+settingsButton.itemId = 'settingsButton';
+informationButton.itemId = 'informationButton';
+
+const onClick = (e) => {
+    const btnItemId = e.target.itemId;
+    const beforeOpenedItem = acodItemList.find(item => item.isOpen);
+    let foundItem;
+
+    acodItemList.forEach((acodItem) => {
+        if (acodItem.actionBtn.itemId === btnItemId) {
+            foundItem = acodItem;
+        } else {
+            // acodItem.colleasceFn();
+        }
+    });
+
+    if (foundItem) {
+        foundItem.expandFn(beforeOpenedItem);
+    }
 };
 
-// navigationButton.addEventListener('click', e => {
-//     categoryFold(
-//         navigationPanelStyle,
-//         settingsPanelStyle,
-//         informationPanelStyle,
-//         e.target,
-//         settingsButton,
-//         informationButton
-//         );
-//     // myPanel, 
-//     // otherPanel,
-//     // other2Panel, 
-//     // myButton, // e.target
-//     // otherButton,
-//     // other2Button 
-// });
+class AcodItem {
+    constructor(param = {}) {
+        this.title = param.title || '';
+        this.itemId = param.itemId || null;
+        this.isOpen = !!param.isOpen;
+        this.imgSrc = param.imgSrc || null;
+        this.wrapPnl = param.wrapPnl;
+        this.bodyPnl = param.bodyPnl;
+        this.actionBtn = param.actionBtn;
 
-// settingsButton.addEventListener('click', e => {
-//     categoryFold(
-//         settingsPanelStyle,
-//         informationPanelStyle,
-//         navigationPanelStyle,
-//         e.target,
-//         informationButton,
-//         navigationButton
-//         );
-// });
+        if (this.wrapPnl) {
+            this.wrapPnl.classList.add('acodi-item');
+        }
 
-// informationButton.addEventListener('click', e => {
-//     categoryFold(
-//         informationPanelStyle, 
-//         settingsPanelStyle, 
-//         navigationPanelStyle,
-//         e.target,
-//         settingsButton,
-//         navigationButton
-//         );
-// });
+        if (this.bodyPnl) {
+            this.bodyPnl.classList.add('acodi-item-body');
+        }
 
+        if (this.actionBtn) {
+            this.actionBtn.addEventListener('click', onClick);
+        }
 
+        if (this.isOpen) {
+            this.expandFn();
+        } else {
+            this.colleasceFn();
+        }
+    }
+    expandFn(beforeOpenedItem) {
+        this.bodyPnl.classList.remove('disp-none');
+        this.bodyPnl.classList.add('disp-block');
 
+        setTimeout(() => {
+            // this.bodyPnl.classList.remove('height-zero');
+            this.bodyPnl.classList.add('height-full');
 
+            if (beforeOpenedItem) {
+                beforeOpenedItem.bodyPnl.classList.remove('height-full');     
+                // beforeOpenedItem.bodyPnl.classList.add('height-zero');
+            }
 
+            setTimeout(() => {
+                if (beforeOpenedItem) {
+                    beforeOpenedItem.bodyPnl.classList.add('disp-none');
+                }
+            }, 0);
+        }, 0);
+    }
+    colleasceFn() {
+        this.bodyPnl.classList.remove('disp-block');
+        this.bodyPnl.classList.add('disp-none');
+    }
+}
 
-// const execNavigationBtn = () => {
-//     categoryFold(
-//         navigationPanelStyle,
-//         settingsPanelStyle,
-//         informationPanelStyle,
-//         e.target,
-//         settingsButton,
-//         informationButton
-//         );
-// };
-// const execSettingsBtn = () => {
-//     categoryFold(
-//         settingsPanelStyle,
-//         informationPanelStyle,
-//         navigationPanelStyle,
-//         e.target,
-//         informationButton,
-//         navigationButton
-//         );
-// };
-// const execInformationBtn = () => {
-//     categoryFold(
-//         informationPanelStyle, 
-//         settingsPanelStyle, 
-//         navigationPanelStyle,
-//         e.target,
-//         settingsButton,
-//         navigationButton
-//         );
-// };
-
-
-// navigationButton.itemId = 'navigationBtn';
-// settingsButton.itemId = 'settingsBtn';
-// informationButton.itemId = 'informationBtn';
-
-// // const addAllEventListener
-// const addEventListeners = () => {
-//     navigationButton.addEventListener('click', navigationButton.onClick);
-//     settingsButton.addEventListener('click', settingsButton.onClick);
-//     informationButton.addEventListener('click', informationButton.onClick);
-// }
-
-
-// class BaseButton {
-//     data = {
-//         a: 10
-//     };
-
-//     constructor(param = {}, flag) {
-//         this.label = '';
-//         this.itemId = null;
-//         this.imgSrc = null;
-
-//         if (flag) {
-//             data.a = 30;
-//         }
-
-//         this.init();
-//     }
-
-//     init() {
-
-//     }
-
-//     onClick = (e) => {
-//         const btn = e.target;
-    
-//         switch(btn.itemId) {
-//             case 'navigationBtn':
-//                 execNavigationBtn();
-//                 break;
-//             case 'settingsBtn':
-//                 execSettingsBtn();
-//                 break;
-//             case 'informationBtn':
-//                 execInformationBtn();
-//                 break;
-//             default:
-//                 break;
-//         }
-//     }
-// }
-
-// const navigationBtn = new BaseButton(
-//     {
-//         label: 'navigation',
-//         itemId: 'navigationBtn',
-//         // imgSrc: ,
-//     },
-//     true
-// );
-
-// const settingsBtn = new BaseButton(
-//     {
-//         label: 'settings',
-//         itemId: 'settingsBtn',
-//     },
-//     false
-// );
-
-// console.dir(navigationBtn);
-// console.dir(settingsBtn);
-
-
-
-
-
-
-
-
-// initLayout () => {
-//     createWestPanel();
-//     createEastPanel();
-//     createSouthPanel();
-// }
-
-
-
-
-// init() {
-//     initProperty();
-//     initLayout();
-//     after...();
-// }
-
-
-
-
-
-// const btn
-// addEventListeners();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+const acodItemList = [
+    new AcodItem({
+        title: 'navi',
+        itemId: 'navigationBtn',
+        isOpen: true,
+        wrapPnl: navigationAcodiItem,
+        bodyPnl: navigationPanel,
+        actionBtn: navigationButton,
+    }),
+    new AcodItem({
+        title: 'settings',
+        itemId: 'settingsBtn',
+        wrapPnl: settingsAcodiItem,
+        bodyPnl: settingsPanel,
+        actionBtn: settingsButton,
+    }),
+    new AcodItem({
+        title: 'information',
+        itemId: 'informationBtn',
+        wrapPnl: informationAcodiItem,
+        bodyPnl: informationPanel,
+        actionBtn: informationButton,
+    }),
+];
 
 
 
