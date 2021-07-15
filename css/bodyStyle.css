@@ -126,20 +126,25 @@
 .property-grid-button, .a-tab-button /* east side 같이 적용 */
 {
     height: 31px;
-    padding:8px 12px;
-    background: #4B9CD7;
+    padding: 8px 12px;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
+    font-weight: bold;
+}
+
+.category .center-panel-button, .a-tab-button{
+    background: #4B9CD7;
     color: #FFFFFF;
 }
 
 .category .close-me-button, .property-grid-button{
     padding-right: 28px;
+    background: #ADD2ED;
+    color: #157fcc;
 }
 
 .center-panel-button, .property-grid-button{
-    margin-left: 3px;
+    margin-left: 2px;
 }
 
 .middle-block .description{
@@ -161,6 +166,12 @@
 
     width:12px;
     height: 12px;
+}
+
+.bottom-background{
+    background: #ADD2ED;
+    width: 100%;
+    height: 10px;
 }
 
 /* body east side */

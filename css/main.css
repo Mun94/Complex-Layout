@@ -2,16 +2,29 @@
     background: #3892D3;
     padding:10px;
 }
+
 p{
     margin:5px
 }
+
 .body-block{
     display: flex;
+    flex-direction: row;
 }
+
 .east,.west{
     width:30%;
     display: flex;
 }
+
+.middle {
+    flex: 1;
+}
+
 .title{
     color: #FFFFFF;
+}
+
+.hidden {
+    display: none;
 }

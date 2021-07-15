@@ -1,5 +1,6 @@
-// west side button controll(클릭시 왼쪽으로 접힘)
+// west side button controll(클릭 시 왼쪽으로 접힘)
 const westSideBlock = document.querySelector('.west-side-block');
+const westSideBlockFoled = document.querySelector('.west-side-block-folded');
 const westSideDragZone = document.querySelector('.west-side-drag-zone');
 
 const westSideDragZoneButton = document.querySelector('.west-side-drag-zone .button');
@@ -7,36 +8,43 @@ const eastSideDragZoneButton = document.querySelector('.east-side-drag-zone .but
 
 const westParent = document.querySelector('.west'); // 전체 블럭
 const westSideTopButton = document.querySelector('.west-side-block .button');
+const westSideTopFoldedButton = document.querySelector('.west-side-block-folded .button');
 
 const spreadFold = (fold, button) => {        
     button.addEventListener('click', () => {
         westSideDragZoneButton.style.transform = 'rotate(0deg)' 
       
+        westSideBlockFoled.classList.add('hidden');
+        westSideBlock.classList.remove('hidden');
+        // westSideDragZone.addEventListener('mousedown', onWestMouseDown); // 폴더가 다시 열리면 창 크기 조절 가능
+        // westParent.style.width = '30%';
 
-        westSideDragZone.addEventListener('mousedown', onWestMouseDown); // 폴더가 다시 열리면 창 크기 조절 가능
-        westParent.style.width = '30%';
+        // fold.remove(); // 접혀있을 때 요소 제거
 
-        fold.remove(); // 접혀있을 때 요소 제거
-
-        westParent.appendChild(westSideBlock); // outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
-        westParent.appendChild(westSideDragZone);
+        // westParent.appendChild(westSideBlock); // outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
+        // westParent.appendChild(westSideDragZone);
     });
 };
 
 westSideTopButton.addEventListener('click', e => {
     westSideDragZoneButton.style.transform = 'rotate(180deg)';
 
-    westSideBlock.outerHTML = westSideFoldedHtml; // foldHtml.js 파일에 있음
-    westParent.style.width = 'initial';
-    westParent.style.minWidth = 'initial'; // 창 크기 조절하면서 적용했던 최소 길이를 초기화 함
+    // westSideBlock.outerHTML = westSideFoldedHtml; // foldHtml.js 파일에 있음
+    // westParent.style.width = 'initial';
+    // westParent.style.minWidth = 'initial'; // 창 크기 조절하면서 적용했던 최소 길이를 초기화 함
+    westSideBlock.classList.add('hidden');
+    westSideBlockFoled.classList.remove('hidden');
     
-    const westSideFolded = document.querySelector('.west-side-block-folded');  
-    const westSideTopFoldedButton = document.querySelector('.west-side-block-folded .button');
+    // 다시 눌렀을 때 펴짐
+    // const westSideFolded = document.querySelector('.west-side-block-folded');  
+    // const westSideTopFoldedButton = document.querySelector('.west-side-block-folded .button');
 
-    westSideDragZone.removeEventListener('mousedown', onWestMouseDown); // 접힌 상태에서는 창 크기 조절 x
+    // westSideDragZone.removeEventListener('mousedown', onWestMouseDown); // 접힌 상태에서는 창 크기 조절 x
 
-    spreadFold(westSideFolded, westSideTopFoldedButton); // 다시 폴더 열기
+    // spreadFold(westSideFolded, westSideTopFoldedButton); // 다시 폴더 열기
 });
+
+spreadFold(westSideBlockFoled, westSideTopFoldedButton); // 다시 폴더 열기
 
 // west side drag zone 클릭 시 왼쪽으로 접힘
 const onClickDragZoneButton = ( // east side, west side에서 사용 됨
@@ -213,6 +221,12 @@ middleDescriptionPlace.innerHTML = closeMe;
 closeMeButton.addEventListener('click', () => {
    if(middleDescriptionPlace.innerHTML === closeMe) return; // 없으면 클릭때마다 같은 부분이 중첩으로 계속 새로 생김
 
+  
+    closeMeButton.style.background= '#ADD2ED';
+    closeMeButton.style.color= '#157fcc';
+    centerPanelButton.style.background= '#4B9CD7';
+    centerPanelButton.style.color= '#FFFFFF';
+
     middleDescriptionPlace.innerHTML = closeMe; // 본문 내용 교체
 });
 
@@ -250,6 +264,11 @@ const westSideToggle = (toggleWestSide) => {
 
 centerPanelButton.addEventListener('click', () => {
     if(middleDescriptionPlace.innerHTML === centerPanel) return;
+
+    centerPanelButton.style.background= '#ADD2ED';
+    centerPanelButton.style.color= '#157fcc';
+    closeMeButton.style.background= '#4B9CD7';
+    closeMeButton.style.color= '#FFFFFF';
 
     middleDescriptionPlace.innerHTML = centerPanel; // 본문 내용 교체
 
@@ -346,12 +365,22 @@ eastDescriptionPlace.innerHTML = propertyGrid;
 aTabButton.addEventListener('click', () => {
     if(eastDescriptionPlace.innerHTML === aTab) return;
 
+    aTabButton.style.background = '#ADD2ED';
+    aTabButton.style.color = '#157FCC';
+    propertyGridButton.style.background = '#4B9CD7';
+    propertyGridButton.style.color = '#FFFFFF';
+
     eastDescriptionPlace.innerHTML = aTab;
 });
 
 propertyGridButton.addEventListener('click', () => {
     if(eastDescriptionPlace.innerHTML === propertyGrid) return;
     
+    propertyGridButton.style.background = '#ADD2ED';
+    propertyGridButton.style.color = '#157FCC';
+    aTabButton.style.background = '#4B9CD7';
+    aTabButton.style.color = '#FFFFFF';
+
     eastDescriptionPlace.innerHTML = propertyGrid;
     
     const reloadFirstCol = document.querySelector('.first-col');

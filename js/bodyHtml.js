@@ -32,6 +32,14 @@ bodyWest.innerHTML = `
             ${westSideCategory("information", "Some info in here.", "none")}
         </div>
     </div>
+    <div class= "west-side-block-folded hidden">
+        <div class= "top">
+            <button class= "button"></button>
+            <div class= "title">
+                side
+            </div>
+        </div>
+    </div>
     <div class="west-side-drag-zone">
         <div class="button">
         </div>  
@@ -56,6 +64,7 @@ const bodyMiddle = document.querySelector('.body-block .middle');
 bodyMiddle.innerHTML = `
     <div class= "middle-block">
         ${middleAndEastCategory("close-me", "center-panel")}
+        <div class= "bottom-background"></div>
 
         <div class= "description"></div>
     </div>
@@ -81,6 +90,7 @@ bodyEast.innerHTML = `
         <div class= "grid-description">
         </div>
 
+        <div class= "bottom-background"></div>
         ${middleAndEastCategory("property-grid", "a-tab")}
     </div>
 `;
