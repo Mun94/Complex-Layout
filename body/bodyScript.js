@@ -6,7 +6,7 @@ const westParent = useGetElement('.west'); // 전체 블럭
 const westSideTopButton = useGetElement('.west-side-block .button');
 
 const spreadFold = (fold, button) => {
-    button && useClickEvent(button, () => {
+    useClickEvent(button, () => {
         westSideDragZone.addEventListener('mousedown', onWestMouseDown); // 폴더가 다시 열리면 창 크기 조절 가능
         westParent.style.width = '30%';
 
