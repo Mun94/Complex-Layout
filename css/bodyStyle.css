@@ -1,0 +1,214 @@
+/* body west side */
+.west-side-block, .east-side-block{ /*.east-side-block이랑 중복됨*/
+    width:100%;
+}
+
+.west-side-drag-zone, .east-side-drag-zone{
+    width:8px;
+}
+
+.west-side-block .top{ /*.east-side-block .top이랑 중복됨*/
+    background: #157FCC;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.west-side-block .category{
+    background: #FFFFFF;
+    padding: 5px;
+}
+
+.navigation-panel,.settings-panel, .information-panel{
+    height: 578px;
+}
+
+.navigation-button-wrapper,
+.settings-button-wrapper,
+.information-button-wrapper
+{
+    background: #DFEAF2;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.settings-button-wrapper,
+.information-button-wrapper{
+    margin-top:5px;
+}
+
+.west-side-block button{
+    border: none;
+    cursor: pointer;
+    width: 17px;
+    height: 16px;
+}
+
+.west-side-block .top .button, .east-side-block-folded .button,
+.west-side-block-folded .button, .east-side-block .button
+{
+    background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/tools/tool-sprites.png');
+    background-color: #157FCC;
+
+    border: none;
+    cursor: pointer;
+    width: 17px;
+    height: 16px;
+    opacity: 0.5;
+}
+
+.west-side-block .top .button, .east-side-block-folded .button{
+    background-position: 1px -192px;
+}
+
+.navigation-button, .settings-button, .information-button{
+    background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/tools/tool-sprites-dark.png');
+}
+
+.navigation-button{
+    background-position: 1px -272px;
+}
+
+.settings-button,
+.information-button{
+    background-position: 1px -255px;
+}
+
+.button-name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.category .categoryImg{
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
+
+.navigation-button-wrapper .categoryImg{
+    background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/examples/shared/icons/fam/folder_go.png');
+}
+
+.settings-button-wrapper .categoryImg{
+    background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/examples/shared/icons/fam/folder_wrench.png');
+}
+
+.information-button-wrapper .categoryImg{
+    background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/examples/shared/icons/fam/information.png');
+}
+/* west side 접혔을 때*/
+.west-side-block-folded, .east-side-block-folded{
+    background: #157FCC;
+    height: 730px;
+    padding: 10px;
+}
+
+.west-side-block-folded .button, .east-side-block .button{
+    background-position: 1px -176px;
+}
+
+/* body middle */
+.middle{
+    width:100%;
+}
+
+.middle-block{
+    background-color: #157FCC;
+}
+
+.middle-block .category, .east-side-block .category{ /* east side 같이 적용 */
+    display: flex;
+}
+
+.category .close-me-button,.center-panel-button,
+.property-grid-button, .a-tab-button /* east side 같이 적용 */
+{
+    height: 41px;
+    padding:8px 12px;
+    background: #4B9CD7;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #FFFFFF;
+}
+
+.center-panel-button, .property-grid-button{
+    margin-left: 3px;
+}
+
+.middle-block .description{
+    height: 721px;
+    overflow: auto;
+    background: #FFFFFF;
+}
+
+.close-me-block, .property-grid-block{
+    position: relative;
+}
+
+.close-me-close-icon, .property-grid-close-icon{
+    position: absolute;
+    top:0;
+    right: 5px;
+    cursor: pointer;
+}
+
+/* body east side */
+.east-side-block .top{
+    background: #157FCC;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.east-side-block .category{
+    background: #157FCC;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.east-side-block .grid-description{
+    height: 680px;
+    background: #FFFFFF;
+}
+
+.east-side-block .grid-description p{
+    margin: 0;
+}
+
+.east-side-block .grid-description table{
+    margin:0 auto;
+}
+
+.first-col, .second-col{
+    cursor: pointer;
+}
+
+.second-col .icon{
+    display: none;
+}
+
+/* drag zone button*/
+.east-side-drag-zone, .west-side-drag-zone{
+    position: relative;
+    cursor: col-resize;
+}
+
+.east-side-drag-zone .button, .west-side-drag-zone .button{
+    width: 100%;
+    height: 49px;
+
+    position: absolute;
+    top: 45%;
+    cursor: pointer;
+}
+
+.west-side-drag-zone .button{
+    background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/util/splitter/mini-left.png');
+}
+
+.east-side-drag-zone .button{
+    background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/util/splitter/mini-right.png');
+}

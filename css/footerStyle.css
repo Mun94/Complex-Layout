@@ -1,0 +1,62 @@
+.south-side-block .top{
+    display: flex;
+    justify-content: space-between;
+    background: #157FCC;
+    padding:10px;
+}
+
+.south-side-drag-zone{
+    height: 8px;
+}
+
+.south-side-block{
+    background: #FFFFFF;
+}
+
+.south-side-block .description{
+    height: 64px;
+}
+
+.south-side-block-folded .top{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    background: #157FCC;
+    padding: 10px;
+}
+
+/* drag zone button */
+.south-side-drag-zone{
+    position: relative;
+    cursor: col-resize;
+}
+
+.south-side-drag-zone .button{
+    width: 48px;
+    height: 100%;
+    background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/util/splitter/mini-top.png');
+
+    position: absolute;
+    left: 45%;
+    cursor: pointer;
+}
+
+.south-side-block .top .button, .south-side-block-folded .button
+{
+    background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/tools/tool-sprites.png');
+    background-color: #157FCC;
+
+    border: none;
+    cursor: pointer;
+    width: 17px;
+    height: 16px;
+    opacity: 0.5;
+}
+
+.south-side-block .top .button{
+    background-position: 0 -208px;
+}
+
+.south-side-block-folded .button{
+    background-position: 0 -224px;
+}

@@ -1,12 +1,15 @@
 // west side button controll(클릭시 왼쪽으로 접힘)
-const westSideBlock = useGetElement('.west-side-block');
-const westSideDragZone = useGetElement('.west-side-drag-zone');
+const westSideBlock = document.querySelector('.west-side-block');
+const westSideDragZone = document.querySelector('.west-side-drag-zone');
+const westSideDragZoneButton = document.querySelector('.west-side-drag-zone .button');
 
-const westParent = useGetElement('.west'); // 전체 블럭
-const westSideTopButton = useGetElement('.west-side-block .button');
+const westParent = document.querySelector('.west'); // 전체 블럭
+const westSideTopButton = document.querySelector('.west-side-block .button');
 
-const spreadFold = (fold, button) => {
-    useClickEvent(button, () => {
+const spreadFold = (fold, button, side) => {
+    side === 'west' ? westSideDragZoneButton.style.backgroundImage = 'url("https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/util/splitter/mini-left.png")'
+        : eastSideDragZoneButton.style.backgroundImage = 'url("https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/util/splitter/mini-right.png")';
+    button.addEventListener('click', () => {
         westSideDragZone.addEventListener('mousedown', onWestMouseDown); // 폴더가 다시 열리면 창 크기 조절 가능
         westParent.style.width = '30%';
 
@@ -17,22 +20,22 @@ const spreadFold = (fold, button) => {
     });
 };
 
-useClickEvent(westSideTopButton, e => {
+westSideTopButton.addEventListener('click', e => {
+    westSideDragZoneButton.style.tarnsform = 'rotate(180deg)';
+
     westSideBlock.outerHTML = westSideFoldedHtml; // foldHtml.js 파일에 있음
     westParent.style.width = 'initial';
     westParent.style.minWidth = 'initial'; // 창 크기 조절하면서 적용했던 최소 길이를 초기화 함
     
-    const westSideFolded = useGetElement('.west-side-block-folded');  
-    const westSideTopFoldedButton = useGetElement('.west-side-block-folded .button');
+    const westSideFolded = document.querySelector('.west-side-block-folded');  
+    const westSideTopFoldedButton = document.querySelector('.west-side-block-folded .button');
 
     westSideDragZone.removeEventListener('mousedown', onWestMouseDown); // 접힌 상태에서는 창 크기 조절 x
 
-    spreadFold(westSideFolded, westSideTopFoldedButton); // 다시 폴더 열기
+    spreadFold(westSideFolded, westSideTopFoldedButton, 'west'); // 다시 폴더 열기
 });
 
 // west side drag zone 클릭 시 왼쪽으로 접힘
-const westSideDragZoneButton = useGetElement('.west-side-drag-zone .button');
-
 const onClickDragZoneButton = ( // east side, west side에서 사용 됨
     folded, 
     block, 
@@ -59,10 +62,10 @@ const onClickDragZoneButton = ( // east side, west side에서 사용 됨
 
         removeEvent(side); // 접힌 상태에서는 창 크기 조절 x
 
-        const topFoldedButton = useGetElement(`${blockFoldedClassName} .button`); // 상단에 있는 좌/우 접기 버튼
+        const topFoldedButton = document.querySelector(`${blockFoldedClassName} .button`); // 상단에 있는 좌/우 접기 버튼
 
-        useClickEvent(topFoldedButton, () => {
-            const folded = useGetElement(`${blockFoldedClassName}`); 
+        topFoldedButton.addEventListener('click', () => {
+            const folded = document.querySelector(`${blockFoldedClassName}`); 
             parent.style.width = '30%';
             folded.remove(); // 접혀 있을때의 요소 제거
             parent.appendChild(block); // 펴진 상태 적용
@@ -83,8 +86,8 @@ const onClickDragZoneButton = ( // east side, west side에서 사용 됨
     };
 };
 
-useClickEvent(westSideDragZoneButton, () => {
-    const westSideFolded = useGetElement('.west-side-block-folded');
+westSideDragZoneButton.addEventListener('click', () => {
+    const westSideFolded = document.querySelector('.west-side-block-folded');
 
     onClickDragZoneButton(
         westSideFolded, 
@@ -117,14 +120,40 @@ document.addEventListener('mouseup', () => {
 });
 
 // west side category
-const {style: navigationPanelStyle} = useGetElement('.navigation-panel');
-const {style: settingsPanelStyle} = useGetElement('.settings-panel');
-const {style: informationPanelStyle} = useGetElement('.information-panel');
-const navigationButton = useGetElement('.navigation-button');
-const settingsButton = useGetElement('.settings-button');
-const informationButton = useGetElement('.information-button');
+const {style: navigationPanelStyle} = document.querySelector('.navigation-panel');
+const {style: settingsPanelStyle} = document.querySelector('.settings-panel');
+const {style: informationPanelStyle} = document.querySelector('.information-panel');
+const navigationButton = document.querySelector('.navigation-button');
+const settingsButton = document.querySelector('.settings-button');
+const informationButton = document.querySelector('.information-button');
 
-useClickEvent(navigationButton, e => {
+const categoryFold = (
+    myPanel, 
+    otherPanel,
+    other2Panel, 
+    myButton, // e.target
+    otherButton,
+    other2Button 
+    ) => {
+    if(myPanel.display === 'block'){
+        myButton.style.backgroundPosition = '1px -255px';
+        myPanel.display= 'none';
+
+        otherButton.style.backgroundPosition = '1px -272px';
+        otherPanel.display= 'block';
+    }else{
+        myButton.style.backgroundPosition = '1px -272px';
+        myPanel.display = 'block';
+
+        otherButton.style.backgroundPosition = '1px -255px';
+        otherPanel.display = 'none';
+
+        other2Button.style.backgroundPosition = '1px -255px';
+        other2Panel.display= 'none';
+    };
+};
+
+navigationButton.addEventListener('click', e => {
     categoryFold(
         navigationPanelStyle,
         settingsPanelStyle,
@@ -141,7 +170,7 @@ useClickEvent(navigationButton, e => {
     // other2Button 
 });
 
-useClickEvent(settingsButton, e => {
+settingsButton.addEventListener('click', e => {
     categoryFold(
         settingsPanelStyle,
         informationPanelStyle,
@@ -152,7 +181,7 @@ useClickEvent(settingsButton, e => {
         );
 });
 
-useClickEvent(informationButton, e => {
+informationButton.addEventListener('click', e => {
     categoryFold(
         informationPanelStyle, 
         settingsPanelStyle, 
@@ -163,56 +192,24 @@ useClickEvent(informationButton, e => {
         );
 });
 
-const categoryFold = (
-    myPanel, 
-    otherPanel,
-    other2Panel, 
-    myButton, // e.target
-    otherButton,
-    other2Button 
-    // navigationPanelStyle,
-    // settingsPanelStyle,
-    // informationPanelStyle,
-    // e.target,
-    // settingsButton,
-    // informationButton
-    ) => {
-    if(myPanel.display === 'block'){
-        myButton.innerHTML = '+';
-        myPanel.display= 'none';
-
-        otherButton.innerHTML = '-';
-        otherPanel.display= 'block';
-    }else{
-        myButton.innerHTML = '-';
-        myPanel.display = 'block';
-
-        otherButton.innerHTML = '+';
-        otherPanel.display = 'none';
-
-        other2Button.innerHTML = '+';
-        other2Panel.display= 'none';
-    };
-};
-
 // middle 부분 부터 본문 내용은 description.config.js에 있음!
 // middle button(close me, center panel) controll (+ toggle west side controll)
-const middleDescriptionPlace = useGetElement('.middle-block .description');
-const closeMeButton = useGetElement('.close-me-button');
-const centerPanelButton = useGetElement('.center-panel-button');
+const middleDescriptionPlace = document.querySelector('.middle-block .description');
+const closeMeButton = document.querySelector('.close-me-button');
+const centerPanelButton = document.querySelector('.center-panel-button');
 
 middleDescriptionPlace.innerHTML = closeMe;
 
-useClickEvent(closeMeButton, () => {
+closeMeButton.addEventListener('click', () => {
    if(middleDescriptionPlace.innerHTML === closeMe) return; // 없으면 클릭때마다 같은 부분이 중첩으로 계속 새로 생김
 
     middleDescriptionPlace.innerHTML = closeMe; // 본문 내용 교체
 });
 
 const westSideToggle = (toggleWestSide) => {
-    return useClickEvent(toggleWestSide, () =>{
-        const reloadWestSideBlock = useGetElement('.west-side-block');
-        const westParent = useGetElement('.west'); // 부모 요소
+    return toggleWestSide.addEventListener('click', () =>{
+        const reloadWestSideBlock = document.querySelector('.west-side-block');
+        const westParent = document.querySelector('.west'); // 부모 요소
         
         westParent.style.width = 'initial';
         westParent.style.minWidth = 'initial';
@@ -222,12 +219,12 @@ const westSideToggle = (toggleWestSide) => {
             westSideDragZone.removeEventListener('mousedown', onWestMouseDown);
 
             // 아래 로직은 center panel의 toggle 버튼을 통해 west side를 접은 상태에서 west side 상단의 버튼을 클릭했을 때 동작하지 않는 에러 해결
-            const westSideTopFoldedButton = useGetElement('.west-side-block-folded .button');
-            const westSideFolded = useGetElement('.west-side-block-folded');  
+            const westSideTopFoldedButton = document.querySelector('.west-side-block-folded .button');
+            const westSideFolded = document.querySelector('.west-side-block-folded');  
 
-            spreadFold(westSideFolded, westSideTopFoldedButton);
+            spreadFold(westSideFolded, westSideTopFoldedButton, 'east');
         }else{
-            const westSideFolded = useGetElement('.west-side-block-folded');  
+            const westSideFolded = document.querySelector('.west-side-block-folded');  
             westSideDragZone.addEventListener('mousedown', onWestMouseDown);
 
             westParent.style.width = '30%';
@@ -238,47 +235,47 @@ const westSideToggle = (toggleWestSide) => {
     });
 };
 
-useClickEvent(centerPanelButton, () => {
+centerPanelButton.addEventListener('click', () => {
     if(middleDescriptionPlace.innerHTML === centerPanel) return;
 
     middleDescriptionPlace.innerHTML = centerPanel; // 본문 내용 교체
 
-    const toggleWestSide = useGetElement('.toggle-the-west-region');
+    const toggleWestSide = document.querySelector('.toggle-the-west-region');
 
     westSideToggle(toggleWestSide)
 });
 
 // middle close me close (close me 창 닫기)
-const closeMeClose = useGetElement('.close-me-close-icon');
-const closeMeBlock = useGetElement('.close-me-block');
+const closeMeClose = document.querySelector('.close-me-close-icon');
+const closeMeBlock = document.querySelector('.close-me-block');
 
-useClickEvent(closeMeClose, () => {
+closeMeClose.addEventListener('click', () => {
     closeMeBlock.remove();
     middleDescriptionPlace.innerHTML = centerPanel;
 
-    const toggleWestSide = useGetElement('.toggle-the-west-region');
+    const toggleWestSide = document.querySelector('.toggle-the-west-region');
 
     westSideToggle(toggleWestSide);
 });
 
 // east side button controll(클릭 시 오른쪽으로 접힘)
-const eastSideBlock = useGetElement('.east-side-block');
-const eastSideTopButton = useGetElement('.east-side-block .button');
-const eastParent = useGetElement('.east');
-const eastSideDragZone = useGetElement('.east-side-drag-zone');
+const eastSideBlock = document.querySelector('.east-side-block');
+const eastSideTopButton = document.querySelector('.east-side-block .button');
+const eastParent = document.querySelector('.east');
+const eastSideDragZone = document.querySelector('.east-side-drag-zone');
 
-useClickEvent(eastSideTopButton, () => {
+eastSideTopButton.addEventListener('click', () => {
     eastSideBlock.outerHTML = eastSideFoldedHtml;
 
     eastParent.style.width = 'initial';
     eastParent.style.minWidth = 'initial';
 
-    const eastSideFolded = useGetElement('.east-side-block-folded');
-    const eastSideTopFoldedButton = useGetElement('.east-side-block-folded .button');
+    const eastSideFolded = document.querySelector('.east-side-block-folded');
+    const eastSideTopFoldedButton = document.querySelector('.east-side-block-folded .button');
 
     eastSideDragZone.removeEventListener('mousedown', onEastMouseDown);
 
-    eastSideTopFoldedButton && useClickEvent(eastSideTopFoldedButton, ()=>{
+    eastSideTopFoldedButton && eastSideTopFoldedButton.addEventListener('click', ()=>{
         eastSideFolded.remove();
         eastParent.style.width = '30%';
         eastParent.appendChild(eastSideBlock);
@@ -288,10 +285,10 @@ useClickEvent(eastSideTopButton, () => {
 });
 
 // east side drag zone button 클릭 시 오른쪽으로 접힘
-const eastSideDragZoneButton = useGetElement('.east-side-drag-zone .button');
+const eastSideDragZoneButton = document.querySelector('.east-side-drag-zone .button');
 
-useClickEvent(eastSideDragZoneButton, () => {
-    const eastSideFolded = useGetElement('.east-side-block-folded');
+eastSideDragZoneButton.addEventListener('click', () => {
+    const eastSideFolded = document.querySelector('.east-side-block-folded');
 
     onClickDragZoneButton(
         eastSideFolded, 
@@ -309,7 +306,7 @@ let rememberEastWidth = 0;
 const onEastMouseMove = e => {
     eastParent.style.width = (rememberEastWidth + document.body.clientWidth - e.clientX) +'px';
     rememberEastWidth = document.body.clientWidth - e.clientX;
-    const table = useGetElement('.property-grid-table');
+    const table = document.querySelector('.property-grid-table');
 
     eastParent.style.minWidth = table ? table.clientWidth + 10 + 'px' : '120px'; 
 };
@@ -325,55 +322,55 @@ document.addEventListener('mouseup', () => {
 });
 
 // east button(a tab, property grid) controll
-const eastDescriptionPlace = useGetElement('.east-side-block .grid-description');
-const aTabButton = useGetElement('.a-tab-button');
-const propertyGridButton = useGetElement('.property-grid-button');
+const eastDescriptionPlace = document.querySelector('.east-side-block .grid-description');
+const aTabButton = document.querySelector('.a-tab-button');
+const propertyGridButton = document.querySelector('.property-grid-button');
 
 eastDescriptionPlace.innerHTML = propertyGrid;
 
-useClickEvent(aTabButton, () => {
+aTabButton.addEventListener('click', () => {
     if(eastDescriptionPlace.innerHTML === aTab) return;
 
     eastDescriptionPlace.innerHTML = aTab;
 });
 
-useClickEvent(propertyGridButton, () => {
+propertyGridButton.addEventListener('click', () => {
     if(eastDescriptionPlace.innerHTML === propertyGrid) return;
     
     eastDescriptionPlace.innerHTML = propertyGrid;
     
-    const reloadFirstCol = useGetElement('.first-col');
-    const reloadSecondCol = useGetElement('.second-col');
+    const reloadFirstCol = document.querySelector('.first-col');
+    const reloadSecondCol = document.querySelector('.second-col');
 
     sortFirstCol(reloadFirstCol);
     sortSecondCol(reloadSecondCol)
 });
 
 // east side property grid close (property grid 창 닫기)
-const propertyGridClose = useGetElement('.property-grid-close-icon');
-const propertyGridBlock = useGetElement('.property-grid-block');
+const propertyGridClose = document.querySelector('.property-grid-close-icon');
+const propertyGridBlock = document.querySelector('.property-grid-block');
 
-useClickEvent(propertyGridClose, () => {
+propertyGridClose.addEventListener('click', () => {
     propertyGridBlock.remove();
     eastDescriptionPlace.innerHTML = aTab;
 });
 
 // east side property grid sort
-const firstColPropertyGrid = useGetElement('.first-col');
+const firstColPropertyGrid = document.querySelector('.first-col');
 
 function sortFirstCol(firstCol){ // innerHTML 등으로 요소를 적용했을 때 같은 class 이름이더라도 인식하지 못 하게 됨 
-    useClickEvent(firstCol , () => {
+    firstCol.addEventListener('click' , () => {
         eastDescriptionPlace.innerHTML = makeTable([
                     [...rowValue[0].sort((a, b) => a > b ? -1 : a < b ? 1 : 0)], 
                     [...rowValue[1]]
                 ]);
 
-        const reloadFirstCol = useGetElement('.first-col');
-        const reloadSecondCol = useGetElement('.second-col');
+        const reloadFirstCol = document.querySelector('.first-col');
+        const reloadSecondCol = document.querySelector('.second-col');
 
         sortSecondCol(reloadSecondCol); // 첫 번째 열을 눌렀을 때 두 번째 열을 누르면 두 번째 열 sort
 
-        useClickEvent(reloadFirstCol, () => {
+        reloadFirstCol.addEventListener('click', () => {
             eastDescriptionPlace.innerHTML = makeTable([
                 [...rowValue[0].sort((a, b) => a > b ? 1 : a < b ? -1 : 0)], // 오름차순
                 [...rowValue[1]]
@@ -382,8 +379,8 @@ function sortFirstCol(firstCol){ // innerHTML 등으로 요소를 적용했을 �
             // [1,3,2,4] 처음 스타트 
             // a = 1, b = 3 <=== 1 < 3 이므로 -1 이 리턴되고 1이 3보다 낮은 인덱스로 위치한다. [1, 3, 2, 4]
             // a = 3, b = 2 <=== 3 > 2 이므로 1 이 리턴되고  3이 2보다 높은 인덱스로 위치한다. [1, 2, 3, 4]
-            const secondReloadFirstCol = useGetElement('.first-col');
-            const secondReloadSecondCol = useGetElement('.second-col');
+            const secondReloadFirstCol = document.querySelector('.first-col');
+            const secondReloadSecondCol = document.querySelector('.second-col');
 
             sortSecondCol(secondReloadSecondCol);
             sortFirstCol(secondReloadFirstCol); // 클릭 마다 반복 됨
@@ -392,28 +389,28 @@ function sortFirstCol(firstCol){ // innerHTML 등으로 요소를 적용했을 �
 };
 sortFirstCol(firstColPropertyGrid);
 
-const secondColPropertyGrid = useGetElement('.second-col');
+const secondColPropertyGrid = document.querySelector('.second-col');
 
 function sortSecondCol(secondCol){
-    useClickEvent(secondCol , () => {
+   secondCol.addEventListener('click', () => {
         eastDescriptionPlace.innerHTML = makeTable([
                     [...rowValue[0]],
                     [...rowValue[1].sort((a, b) => a > b ? -1 : a < b ? 1 : 0)]
                 ]);
 
-        const reloadFirstCol = useGetElement('.first-col');
-        const reloadSecondCol = useGetElement('.second-col');
+        const reloadFirstCol = document.querySelector('.first-col');
+        const reloadSecondCol = document.querySelector('.second-col');
 
         sortFirstCol(reloadFirstCol);
 
-        useClickEvent(reloadSecondCol, () => {
+        reloadSecondCol.addEventListener('click', () => {
             eastDescriptionPlace.innerHTML = makeTable([
                 [...rowValue[0]],
                 [...rowValue[1].sort((a, b) => a > b ? 1 : a < b ? -1 : 0)], 
             ]);
 
-            const secondReloadFirstCol = useGetElement('.first-col');
-            const secondReloadSecondCol = useGetElement('.second-col');
+            const secondReloadFirstCol = document.querySelector('.first-col');
+            const secondReloadSecondCol = document.querySelector('.second-col');
             
             sortSecondCol(secondReloadSecondCol);
             sortFirstCol(secondReloadFirstCol);

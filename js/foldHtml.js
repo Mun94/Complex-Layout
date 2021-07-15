@@ -1,9 +1,7 @@
-const foldedHtml = (side, arrow) => `
+const foldedHtml = (side) => `
     <div class= "${side}-side-block-folded">
         <div class= "top">
-            <button class= "button">
-                ${arrow}
-            </button>
+            <button class= "button"></button>
             <div class= "title">
                 ${side}
             </div>
@@ -12,11 +10,11 @@ const foldedHtml = (side, arrow) => `
 `;
 
 const westSideFoldedHtml = `
-    ${foldedHtml('west', '>')}
+    ${foldedHtml('west')}
 `;
 
 const eastSideFoldedHtml = `
-    ${foldedHtml('east', '<')}
+    ${foldedHtml('east')}
 `;
 
 const southSideFoldedHtml = `
@@ -24,5 +22,5 @@ const southSideFoldedHtml = `
         <div class="button">
         </div> 
     </div>
-    ${foldedHtml('south', '^')}
+    ${foldedHtml('south')}
 `;

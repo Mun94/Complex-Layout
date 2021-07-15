@@ -1,13 +1,14 @@
-const bodyWest = useGetElement('.body-block .west');
+const bodyWest = document.querySelector('.body-block .west');
 
 // body west side
-const westSideCategory = (categoryName, text, buttonIcon, display) =>
+const westSideCategory = (categoryName, text, display) =>
    ` <div class= ${categoryName}>
         <div class= "${categoryName}-button-wrapper">
             <div class= "button-name">
+                <div class= "categoryImg"></div>    
                 ${categoryName}
             </div>
-            <button class= "${categoryName}-button">${buttonIcon}</button>
+            <button class= "${categoryName}-button"></button>
         </div>
         <div class= "${categoryName}-panel" style="display:${display}">
             ${text}
@@ -22,14 +23,13 @@ bodyWest.innerHTML = `
                 west
             </div>
             <button class= "button">
-                <
             </button>
         </div>
 
         <div class= "category">
-            ${westSideCategory("navigation", "hi im the west panel", "-", "block")}
-            ${westSideCategory("settings", "Some settings in here.", "+", "none")}
-            ${westSideCategory("information", "Some info in here.", "+", "none")}
+            ${westSideCategory("navigation", "hi im the west panel", "block")}
+            ${westSideCategory("settings", "Some settings in here.", "none")}
+            ${westSideCategory("information", "Some info in here.", "none")}
         </div>
     </div>
     <div class="west-side-drag-zone">
@@ -51,7 +51,7 @@ const middleAndEastCategory = (firstTab, secondTab) => `
     </div>
 `;
 
-const bodyMiddle = useGetElement('.body-block .middle');
+const bodyMiddle = document.querySelector('.body-block .middle');
 
 bodyMiddle.innerHTML = `
     <div class= "middle-block">
@@ -62,7 +62,7 @@ bodyMiddle.innerHTML = `
 `;
 
 // body east side
-const bodyEast = useGetElement('.body-block .east');
+const bodyEast = document.querySelector('.body-block .east');
 
 bodyEast.innerHTML = `
     <div class="east-side-drag-zone">
@@ -75,7 +75,6 @@ bodyEast.innerHTML = `
                 east side
             </div>
             <button class= "button">
-                >
             </button>
         </div>
 
