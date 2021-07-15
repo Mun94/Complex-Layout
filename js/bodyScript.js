@@ -10,21 +10,21 @@ const westParent = document.querySelector('.west'); // 전체 블럭
 const westSideTopButton = document.querySelector('.west-side-block .button');
 const westSideTopFoldedButton = document.querySelector('.west-side-block-folded .button');
 
-const spreadFold = (fold, button) => {        
-    button.addEventListener('click', () => {
-        westSideDragZoneButton.style.transform = 'rotate(0deg)' 
+// const spreadFold = (fold, button) => {        
+//     button.addEventListener('click', () => {
+//         westSideDragZoneButton.style.transform = 'rotate(0deg)' 
       
-        westSideBlockFoled.classList.add('hidden');
-        westSideBlock.classList.remove('hidden');
-        // westSideDragZone.addEventListener('mousedown', onWestMouseDown); // 폴더가 다시 열리면 창 크기 조절 가능
-        // westParent.style.width = '30%';
+//         westSideBlockFoled.classList.add('hidden');
+//         westSideBlock.classList.remove('hidden');
+//         // westSideDragZone.addEventListener('mousedown', onWestMouseDown); // 폴더가 다시 열리면 창 크기 조절 가능
+//         // westParent.style.width = '30%';
 
-        // fold.remove(); // 접혀있을 때 요소 제거
+//         // fold.remove(); // 접혀있을 때 요소 제거
 
-        // westParent.appendChild(westSideBlock); // outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
-        // westParent.appendChild(westSideDragZone);
-    });
-};
+//         // westParent.appendChild(westSideBlock); // outerHTML을 사용하면 [object HTMLDivElement]이 출력됨
+//         // westParent.appendChild(westSideDragZone);
+//     });
+// };
 
 westSideTopButton.addEventListener('click', e => {
     westSideDragZoneButton.style.transform = 'rotate(180deg)';
@@ -44,78 +44,87 @@ westSideTopButton.addEventListener('click', e => {
     // spreadFold(westSideFolded, westSideTopFoldedButton); // 다시 폴더 열기
 });
 
-spreadFold(westSideBlockFoled, westSideTopFoldedButton); // 다시 폴더 열기
+// spreadFold(westSideBlockFoled, westSideTopFoldedButton); // 다시 폴더 열기
+
+westSideTopFoldedButton.addEventListener('click', e => {
+    westSideDragZoneButton.style.transform = 'rotate(0deg)';
+
+    westSideBlockFoled.classList.add('hidden');
+    westSideBlock.classList.remove('hidden');
+})
 
 // west side drag zone 클릭 시 왼쪽으로 접힘
-const onClickDragZoneButton = ( // east side, west side에서 사용 됨
-    folded, 
-    block, 
-    foldedHtml, 
-    blockFoldedClassName, 
-    parent, 
-    dragZone, 
-    checkDragZone, 
-    side) => {
-    let fold = !folded
+// const onClickDragZoneButton = ( // east side, west side에서 사용 됨
+//     folded, 
+//     block, 
+//     foldedHtml, 
+//     blockFoldedClassName, 
+//     parent, 
+//     dragZone, 
+//     checkDragZone, 
+//     side) => {
+//     let fold = !folded
 
-    const removeEvent = (val) => val === 'west' ? 
-        westSideDragZone.removeEventListener('mousedown', onWestMouseDown) 
-            : eastSideDragZone.removeEventListener('mousedown', onEastMouseDown);
+//     const removeEvent = (val) => val === 'west' ? 
+//         westSideDragZone.removeEventListener('mousedown', onWestMouseDown) 
+//             : eastSideDragZone.removeEventListener('mousedown', onEastMouseDown);
     
-    const addEvent = (val) => val === 'west' ? 
-        westSideDragZone.addEventListener('mousedown', onWestMouseDown) 
-            : eastSideDragZone.addEventListener('mousedown', onEastMouseDown);
+//     const addEvent = (val) => val === 'west' ? 
+//         westSideDragZone.addEventListener('mousedown', onWestMouseDown) 
+//             : eastSideDragZone.addEventListener('mousedown', onEastMouseDown);
 
-    if(fold){ // 접힌 상태이면
-        block.outerHTML = foldedHtml; // 접힌 상태의 요소 적용
-        parent.style.width = 'initial';
-        parent.style.minWidth = 'initial';
- 
-        removeEvent(side); // 접힌 상태에서는 창 크기 조절 x
+//     if(fold){ // 접힌 상태이면
+//         // block.outerHTML = foldedHtml; // 접힌 상태의 요소 적용
+//         // parent.style.width = 'initial';
+//         // parent.style.minWidth = 'initial';
+//         westSideBlock.classList.add('hidden');
+//         westSideBlockFoled.classList.remove('hidden');
+//         removeEvent(side); // 접힌 상태에서는 창 크기 조절 x
 
-        const topFoldedButton = document.querySelector(`${blockFoldedClassName} .button`); // 상단에 있는 좌/우 접기 버튼
+//         // const topFoldedButton = document.querySelector(`${blockFoldedClassName} .button`); // 상단에 있는 좌/우 접기 버튼
 
-        topFoldedButton.addEventListener('click', () => {
-            side === 'west' ? westSideDragZoneButton.style.transform = 'rotate(0deg)' : 
-                eastSideDragZoneButton.style.transform = 'rotate(0deg)';
+//         // topFoldedButton.addEventListener('click', () => {
+//         //     side === 'west' ? westSideDragZoneButton.style.transform = 'rotate(0deg)' : 
+//         //         eastSideDragZoneButton.style.transform = 'rotate(0deg)';
 
-            const folded = document.querySelector(`${blockFoldedClassName}`); 
-            parent.style.width = '30%';
-            folded.remove(); // 접혀 있을때의 요소 제거
-            parent.appendChild(block); // 펴진 상태 적용
+//         //     const folded = document.querySelector(`${blockFoldedClassName}`); 
+//         //     parent.style.width = '30%';
+//         //     folded.remove(); // 접혀 있을때의 요소 제거
+//         //     parent.appendChild(block); // 펴진 상태 적용
         
-            checkDragZone && parent.appendChild(dragZone); 
-            // appendChild를 하면 마지막에 적용되는데 west side에서는 west side block 다음에 drag zone이 생성 되도록 함
+//         //     checkDragZone && parent.appendChild(dragZone); 
+//         //     // appendChild를 하면 마지막에 적용되는데 west side에서는 west side block 다음에 drag zone이 생성 되도록 함
 
-            addEvent(side);
-        });
-    }else{
-        side === 'west' ? westSideDragZoneButton.style.transform = 'rotate(0deg)' : 
-            eastSideDragZoneButton.style.transform = 'rotate(0deg)';
+//         //     addEvent(side);
+//         // });
+//     }else{
+//         side === 'west' ? westSideDragZoneButton.style.transform = 'rotate(0deg)' : 
+//             eastSideDragZoneButton.style.transform = 'rotate(0deg)';
 
-        parent.style.width = '30%';
-        folded.remove();
-        parent.appendChild(block);
+//         parent.style.width = '30%';
+//         folded.remove();
+//         parent.appendChild(block);
 
-        checkDragZone && parent.appendChild(dragZone);
+//         checkDragZone && parent.appendChild(dragZone);
 
-        addEvent(side);
-    };
-};
+//         addEvent(side);
+//     };
+// };
 
 westSideDragZoneButton.addEventListener('click', () => {
     const westSideFolded = document.querySelector('.west-side-block-folded');
 
-    westSideDragZoneButton.style.transform = 'rotate(180deg)';
-    onClickDragZoneButton(
-        westSideFolded, 
-        westSideBlock, 
-        westSideFoldedHtml, 
-        '.west-side-block-folded', 
-        westParent, 
-        westSideDragZone, 
-        true , 
-        'west');
+    
+    // westSideDragZoneButton.style.transform = 'rotate(180deg)';
+    // onClickDragZoneButton(
+    //     westSideFolded, 
+    //     westSideBlock, 
+    //     westSideFoldedHtml, 
+    //     '.west-side-block-folded', 
+    //     westParent, 
+    //     westSideDragZone, 
+    //     true , 
+    //     'west');
 });
 
 // west side drag zone 창 크기 조절
@@ -171,44 +180,206 @@ const categoryFold = (
     };
 };
 
-navigationButton.addEventListener('click', e => {
-    categoryFold(
-        navigationPanelStyle,
-        settingsPanelStyle,
-        informationPanelStyle,
-        e.target,
-        settingsButton,
-        informationButton
-        );
-    // myPanel, 
-    // otherPanel,
-    // other2Panel, 
-    // myButton, // e.target
-    // otherButton,
-    // other2Button 
-});
+// navigationButton.addEventListener('click', e => {
+//     categoryFold(
+//         navigationPanelStyle,
+//         settingsPanelStyle,
+//         informationPanelStyle,
+//         e.target,
+//         settingsButton,
+//         informationButton
+//         );
+//     // myPanel, 
+//     // otherPanel,
+//     // other2Panel, 
+//     // myButton, // e.target
+//     // otherButton,
+//     // other2Button 
+// });
 
-settingsButton.addEventListener('click', e => {
-    categoryFold(
-        settingsPanelStyle,
-        informationPanelStyle,
-        navigationPanelStyle,
-        e.target,
-        informationButton,
-        navigationButton
-        );
-});
+// settingsButton.addEventListener('click', e => {
+//     categoryFold(
+//         settingsPanelStyle,
+//         informationPanelStyle,
+//         navigationPanelStyle,
+//         e.target,
+//         informationButton,
+//         navigationButton
+//         );
+// });
 
-informationButton.addEventListener('click', e => {
-    categoryFold(
-        informationPanelStyle, 
-        settingsPanelStyle, 
-        navigationPanelStyle,
-        e.target,
-        settingsButton,
-        navigationButton
-        );
-});
+// informationButton.addEventListener('click', e => {
+//     categoryFold(
+//         informationPanelStyle, 
+//         settingsPanelStyle, 
+//         navigationPanelStyle,
+//         e.target,
+//         settingsButton,
+//         navigationButton
+//         );
+// });
+
+
+
+
+
+
+// const execNavigationBtn = () => {
+//     categoryFold(
+//         navigationPanelStyle,
+//         settingsPanelStyle,
+//         informationPanelStyle,
+//         e.target,
+//         settingsButton,
+//         informationButton
+//         );
+// };
+// const execSettingsBtn = () => {
+//     categoryFold(
+//         settingsPanelStyle,
+//         informationPanelStyle,
+//         navigationPanelStyle,
+//         e.target,
+//         informationButton,
+//         navigationButton
+//         );
+// };
+// const execInformationBtn = () => {
+//     categoryFold(
+//         informationPanelStyle, 
+//         settingsPanelStyle, 
+//         navigationPanelStyle,
+//         e.target,
+//         settingsButton,
+//         navigationButton
+//         );
+// };
+
+
+// navigationButton.itemId = 'navigationBtn';
+// settingsButton.itemId = 'settingsBtn';
+// informationButton.itemId = 'informationBtn';
+
+// // const addAllEventListener
+// const addEventListeners = () => {
+//     navigationButton.addEventListener('click', navigationButton.onClick);
+//     settingsButton.addEventListener('click', settingsButton.onClick);
+//     informationButton.addEventListener('click', informationButton.onClick);
+// }
+
+
+// class BaseButton {
+//     data = {
+//         a: 10
+//     };
+
+//     constructor(param = {}, flag) {
+//         this.label = '';
+//         this.itemId = null;
+//         this.imgSrc = null;
+
+//         if (flag) {
+//             data.a = 30;
+//         }
+
+//         this.init();
+//     }
+
+//     init() {
+
+//     }
+
+//     onClick = (e) => {
+//         const btn = e.target;
+    
+//         switch(btn.itemId) {
+//             case 'navigationBtn':
+//                 execNavigationBtn();
+//                 break;
+//             case 'settingsBtn':
+//                 execSettingsBtn();
+//                 break;
+//             case 'informationBtn':
+//                 execInformationBtn();
+//                 break;
+//             default:
+//                 break;
+//         }
+//     }
+// }
+
+// const navigationBtn = new BaseButton(
+//     {
+//         label: 'navigation',
+//         itemId: 'navigationBtn',
+//         // imgSrc: ,
+//     },
+//     true
+// );
+
+// const settingsBtn = new BaseButton(
+//     {
+//         label: 'settings',
+//         itemId: 'settingsBtn',
+//     },
+//     false
+// );
+
+// console.dir(navigationBtn);
+// console.dir(settingsBtn);
+
+
+
+
+
+
+
+
+// initLayout () => {
+//     createWestPanel();
+//     createEastPanel();
+//     createSouthPanel();
+// }
+
+
+
+
+// init() {
+//     initProperty();
+//     initLayout();
+//     after...();
+// }
+
+
+
+
+
+// const btn
+// addEventListeners();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // middle 부분 부터 본문 내용은 description.config.js에 있음!
 // middle button(close me, center panel) controll (+ toggle west side controll)

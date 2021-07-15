@@ -32,18 +32,6 @@ bodyWest.innerHTML = `
             ${westSideCategory("information", "Some info in here.", "none")}
         </div>
     </div>
-    <div class= "west-side-block-folded hidden">
-        <div class= "top">
-            <button class= "button"></button>
-            <div class= "title">
-                side
-            </div>
-        </div>
-    </div>
-    <div class="west-side-drag-zone">
-        <div class="button">
-        </div>  
-    </div>
 `;
 
 // body middle
