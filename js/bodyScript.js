@@ -3,53 +3,93 @@ const westSideBlock = document.querySelector('.west-side-block');
 const westSideBlockFolded = document.querySelector('.west-side-block-folded');
 const westSideDragZone = document.querySelector('.west-side-drag-zone');
 
-const westSideDragZoneButton = document.querySelector('.west-side-drag-zone .button');
+const westSideDragZoneButton = document.querySelector('.west-side-drag-zone .drag-zone-button');
 const eastSideDragZoneButton = document.querySelector('.east-side-drag-zone .button');
 
 const westParent = document.querySelector('.west'); // 전체 블럭
 const westSideTopButton = document.querySelector('.west-side-block .button');
-const westSideTopFoldedButton = document.querySelector('.west-side-block-folded .button');
+const westSideFoldedTopButton = document.querySelector('.west-side-block-folded .folded-button');
 
 const westSideFoldedDragZone = document.querySelector(".west-side-folded-drag-zone");
 const westSideFoldedDragZoneButton = document.querySelector('.west-side-folded-drag-zone .button');
+class WestFold {
+    constructor(params= {}){
+        const {topBtn, foldedTopBtn, dragZone, wrap, foldedWrap, parent} = params;
+        this.topBtn = topBtn;
+        this.foldedTopBtn = foldedTopBtn;
+        this.dragZone = dragZone;
+        this.wrap = wrap;
+        this.foldedWrap = foldedWrap;
+        this.parent = parent;
 
-westSideTopButton.addEventListener('click', e => {
-    westSideBlock.classList.add('hidden');
-    westSideBlockFolded.classList.remove('hidden');
-    
-    westSideDragZone.classList.add('hidden');
-    westSideFoldedDragZone.classList.remove('hidden');
-});
+        if(this.topBtn){
+            this.topBtn.addEventListener('click', () => {
+                this.folded()
+            });
+        };
 
-westSideTopFoldedButton.addEventListener('click', e => {
-    westSideBlockFolded.classList.add('hidden');
-    westSideBlock.classList.remove('hidden');
+        if(this.foldedTopBtn){
+            this.foldedTopBtn.addEventListener('click', ()=>{
+                this.spread();
+            });
+        };
 
-    westSideDragZone.classList.remove('hidden');
-    westSideFoldedDragZone.classList.add('hidden');
-})
+        if(this.dragZone){
+            this.dragZone.addEventListener('click', () => {
+                if(this.dragZone.classList.contains('west-side-folded')){
+                    this.dragZone.classList.remove('west-side-folded');
+                
+                    this.spread();
+                    return;
+                }
+                this.dragZone.classList.add('west-side-folded');
 
-westSideDragZoneButton.addEventListener('click', () => {
-    westSideBlockFolded.classList.remove('hidden');
-    westSideBlock.classList.add('hidden');
+                this.folded();
+            })
+        }
+    }
 
-    westSideDragZone.classList.add('hidden');
-    westSideFoldedDragZone.classList.remove('hidden');
-});
+    folded(){
+        this.dragZone.removeEventListener('mousedown', onWestMouseDown);
+        this.parent.style.minWidth = 'initial';
+        this.parent.style.width = 'initial';
 
-westSideFoldedDragZoneButton.addEventListener('click', () => {
-    westSideBlockFolded.classList.add('hidden');
-    westSideBlock.classList.remove('hidden');
+        this.wrap.classList.add('folded2');
+        this.wrap.classList.remove('open2');
 
-    westSideDragZone.classList.remove('hidden');
-    westSideFoldedDragZone.classList.add('hidden');
-});
+        this.foldedWrap.classList.remove('folded1');
+        this.foldedWrap.classList.add('open1');
+        this.dragZone.classList.add('west-side-folded');
+    }
+
+    spread(){
+        this.dragZone.addEventListener('mousedown', onWestMouseDown);
+
+        this.wrap.classList.remove('folded2');
+        this.wrap.classList.add('open2');
+
+        this.foldedWrap.classList.add('folded1');
+        this.foldedWrap.classList.remove('open1');
+        this.dragZone.classList.remove('west-side-folded');
+    };
+}
+
+const foldItemList = [
+    new WestFold({
+        topBtn : westSideTopButton,
+        foldedTopBtn: westSideFoldedTopButton,
+        dragZone: westSideDragZone,
+        wrap: westSideBlock,
+        foldedWrap: westSideBlockFolded,
+        parent: westParent
+    })
+]
 
 // west side drag zone 창 크기 조절
 const onWestMouseMove = e => {
     westParent.style.width =  e.clientX + 'px';
     rememberWestWidth = e.clientX;
-    westParent.style.maxWidth = '400px';
+ 
     westParent.style.minWidth = '175px';
 };
 
@@ -64,165 +104,88 @@ document.addEventListener('mouseup', () => {
 });
 
 // west side category
-const navigationPanel = document.querySelector('.navigation-panel');
-const settingsPanel = document.querySelector('.settings-panel');
-const informationPanel = document.querySelector('.information-panel');
-const navigationButton = document.querySelector('.navigation-button');
-const settingsButton = document.querySelector('.settings-button');
-const informationButton = document.querySelector('.information-button');
-
-// navigationButton.addEventListener('click', () => {
-//     const checkHidden = navigationPanel.classList.contains('hidden');
-
-//     navigationPanel.classList.toggle('hidden', !checkHidden);
-//     navigationButton.classList.toggle('hidden', !checkHidden);
-//     navigationButton.classList.toggle('visible', checkHidden);
-
-//     settingsPanel.classList.toggle('hidden', checkHidden);
-//     settingsButton.classList.toggle('hidden', checkHidden);
-//     settingsButton.classList.toggle('visible', !checkHidden);
-
-//     if (checkHidden) {
-//         informationPanel.classList.add('hidden'); // information panel이 열린 상태에서 navigation button을 클릭했을 때
-//         informationButton.classList.toggle('hidden', checkHidden);
-//         informationButton.classList.toggle('visible', !checkHidden);
-//     }
-// });
-
-// settingsButton.addEventListener('click', () => {
-//     const checkHidden = settingsPanel.classList.contains('hidden');
-
-//     checkHidden && navigationPanel.classList.toggle('hidden', checkHidden);
-//     checkHidden && navigationButton.classList.toggle('hidden', checkHidden);
-//     checkHidden && navigationButton.classList.toggle('visible', !checkHidden);
-
-//     settingsPanel.classList.toggle('hidden', !checkHidden);
-//     settingsButton.classList.toggle('hidden', !checkHidden);
-//     settingsButton.classList.toggle('visible', checkHidden);
-
-//     informationPanel.classList.toggle('hidden', checkHidden);
-//     informationButton.classList.toggle('hidden', checkHidden);
-//     informationButton.classList.toggle('visible', !checkHidden);
-// });
-
-// informationButton.addEventListener('click', () => {
-//     const checkHidden = informationPanel.classList.contains('hidden');
-
-//     navigationPanel.classList.toggle('hidden', checkHidden);
-//     navigationButton.classList.toggle('hidden', checkHidden);
-//     navigationButton.classList.toggle('visible', !checkHidden);
-
-//     checkHidden && settingsPanel.classList.toggle('hidden', checkHidden);
-//     checkHidden && settingsButton.classList.toggle('hidden', checkHidden);
-//     checkHidden && settingsButton.classList.toggle('visible', !checkHidden);
-
-//     informationPanel.classList.toggle('hidden', !checkHidden);
-//     informationButton.classList.toggle('hidden', !checkHidden);
-//     informationButton.classList.toggle('visible', checkHidden);
-// });
-
 const navigationAcodiItem = document.querySelector('.navigation');
+const navigationButton = document.querySelector('.navigation-button');
+
 const settingsAcodiItem = document.querySelector('.settings');
+const settingsButton = document.querySelector('.settings-button');
+
 const informationAcodiItem = document.querySelector('.information');
+const informationButton = document.querySelector('.information-button');
 
 navigationButton.itemId = 'navigationButton';
 settingsButton.itemId = 'settingsButton';
 informationButton.itemId = 'informationButton';
 
-const onClick = (e) => {
+const onClickWestCategory = (e) => {
     const btnItemId = e.target.itemId;
-    const beforeOpenedItem = acodItemList.find(item => item.isOpen);
     let foundItem;
 
     acodItemList.forEach((acodItem) => {
         if (acodItem.actionBtn.itemId === btnItemId) {
             foundItem = acodItem;
         } else {
-            // acodItem.colleasceFn();
-        }
+            acodItem.colleasce();
+        };
     });
 
     if (foundItem) {
-        foundItem.expandFn(beforeOpenedItem);
-    }
+        foundItem.expand();
+    };
 };
 
-class AcodItem {
+class WestAcodItem {
     constructor(param = {}) {
-        this.title = param.title || '';
-        this.itemId = param.itemId || null;
-        this.isOpen = !!param.isOpen;
-        this.imgSrc = param.imgSrc || null;
-        this.wrapPnl = param.wrapPnl;
-        this.bodyPnl = param.bodyPnl;
-        this.actionBtn = param.actionBtn;
-
-        if (this.wrapPnl) {
-            this.wrapPnl.classList.add('acodi-item');
-        }
-
-        if (this.bodyPnl) {
-            this.bodyPnl.classList.add('acodi-item-body');
-        }
+        const {itemId, isOpen, wrapPnl, actionBtn, nextWrapPnl} = param;
+        
+        this.itemId = itemId || null;
+        this.isOpen = !!isOpen;
+        this.wrapPnl = wrapPnl;
+        this.actionBtn = actionBtn;
+        this.nextWrapPnl = nextWrapPnl;
 
         if (this.actionBtn) {
-            this.actionBtn.addEventListener('click', onClick);
-        }
+            this.actionBtn.addEventListener('click', onClickWestCategory);
+        };
 
         if (this.isOpen) {
-            this.expandFn();
+            this.expand();
         } else {
-            this.colleasceFn();
+            this.colleasce();
+        };
+    };
+    expand() {
+        if(this.wrapPnl.classList.contains('open-west-panel')){
+            this.nextWrapPnl.classList.add('open-west-panel');
+            this.wrapPnl.classList.remove('open-west-panel');
+            return;
         }
-    }
-    expandFn(beforeOpenedItem) {
-        this.bodyPnl.classList.remove('disp-none');
-        this.bodyPnl.classList.add('disp-block');
-
-        setTimeout(() => {
-            // this.bodyPnl.classList.remove('height-zero');
-            this.bodyPnl.classList.add('height-full');
-
-            if (beforeOpenedItem) {
-                beforeOpenedItem.bodyPnl.classList.remove('height-full');     
-                // beforeOpenedItem.bodyPnl.classList.add('height-zero');
-            }
-
-            setTimeout(() => {
-                if (beforeOpenedItem) {
-                    beforeOpenedItem.bodyPnl.classList.add('disp-none');
-                }
-            }, 0);
-        }, 0);
-    }
-    colleasceFn() {
-        this.bodyPnl.classList.remove('disp-block');
-        this.bodyPnl.classList.add('disp-none');
-    }
-}
+        this.wrapPnl.classList.add('open-west-panel');
+    };
+    colleasce() {
+        this.wrapPnl.classList.remove('open-west-panel');
+    };
+};
 
 const acodItemList = [
-    new AcodItem({
-        title: 'navi',
+    new WestAcodItem({
         itemId: 'navigationBtn',
         isOpen: true,
         wrapPnl: navigationAcodiItem,
-        bodyPnl: navigationPanel,
         actionBtn: navigationButton,
+        nextWrapPnl: settingsAcodiItem
     }),
-    new AcodItem({
-        title: 'settings',
+    new WestAcodItem({
         itemId: 'settingsBtn',
         wrapPnl: settingsAcodiItem,
-        bodyPnl: settingsPanel,
         actionBtn: settingsButton,
+        nextWrapPnl: informationAcodiItem
     }),
-    new AcodItem({
-        title: 'information',
+    new WestAcodItem({
         itemId: 'informationBtn',
         wrapPnl: informationAcodiItem,
-        bodyPnl: informationPanel,
         actionBtn: informationButton,
+        nextWrapPnl: settingsAcodiItem
     }),
 ];
 
