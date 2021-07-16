@@ -249,21 +249,21 @@
     position: relative;
 }
 
-.folded1, .folded2{
+.west-folded-folder-close, .west-spread-folder-close{
     width: 0;
     overflow: hidden;
     padding: 0;
 }
 
-.folded2{
+.west-spread-folder-close{
     animation: westFadeOut 0.4s linear;
 }
 
-.open1{
+.west-folded-folder-open{
     animation: westFadeIn 0.8s linear;
 }
 
-.open2{
+.west-spread-folder-open{
     animation: westFadeOut2 0.4s linear;
 }
 

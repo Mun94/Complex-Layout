@@ -54,22 +54,22 @@ class WestFold {
         this.parent.style.minWidth = 'initial';
         this.parent.style.width = 'initial';
 
-        this.wrap.classList.add('folded2');
-        this.wrap.classList.remove('open2');
+        this.wrap.classList.add('west-spread-folder-close');
+        this.wrap.classList.remove('west-spread-folder-open');
 
-        this.foldedWrap.classList.remove('folded1');
-        this.foldedWrap.classList.add('open1');
+        this.foldedWrap.classList.add('west-folded-folder-open');
+        this.foldedWrap.classList.remove('west-folded-folder-close');
         this.dragZone.classList.add('west-side-folded');
     }
 
     spread(){
         this.dragZone.addEventListener('mousedown', onWestMouseDown);
 
-        this.wrap.classList.remove('folded2');
-        this.wrap.classList.add('open2');
+        this.wrap.classList.add('west-spread-folder-open');
+        this.wrap.classList.remove('west-spread-folder-close');
 
-        this.foldedWrap.classList.add('folded1');
-        this.foldedWrap.classList.remove('open1');
+        this.foldedWrap.classList.add('west-folded-folder-close');
+        this.foldedWrap.classList.remove('west-folded-folder-open');
         this.dragZone.classList.remove('west-side-folded');
     };
 }
