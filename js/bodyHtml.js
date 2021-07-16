@@ -39,11 +39,11 @@ const middleAndEastCategory = (firstTab, secondTab) => `
     <div class= "category">
         <div class= "${firstTab}-block">
             <span class= "${firstTab}-close-icon"></span>
-            <button class= "${firstTab}-button">
+            <button class= "${firstTab}-button category-click-true">
                 ${firstTab}
             </button>
         </div>
-        <button class= "${secondTab}-button">${secondTab}</button>
+        <button class= "${secondTab}-button category-click-false">${secondTab}</button>
     </div>
 `;
 
@@ -52,9 +52,10 @@ const bodyMiddle = document.querySelector('.body-block .middle');
 bodyMiddle.innerHTML = `
     <div class= "middle-block">
         ${middleAndEastCategory("close-me", "center-panel")}
-        <div class= "bottom-background"></div>
+        <div class= "bottom-border"></div>
 
-        <div class= "description"></div>
+        <div class= "close-me-description open-middle-description">${closeMe}</div>
+        <div class= "center-panel-description close-middle-description">${centerPanel}</div>
     </div>
 `;
 
@@ -74,7 +75,7 @@ bodyEast.innerHTML = `
         <div class= "grid-description">
         </div>
 
-        <div class= "bottom-background"></div>
+        <div class= "top-border"></div>
         ${middleAndEastCategory("property-grid", "a-tab")}
     </div>
 `;
