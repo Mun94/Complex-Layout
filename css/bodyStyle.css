@@ -158,7 +158,8 @@
 }
 
 .east-side-block .property-grid-description, .a-tab-description{
-    height: 680px;
+    padding-top: 36px;
+    height: 645px;
     min-width: 250px;
     background: #FFFFFF;
 }
@@ -167,8 +168,18 @@
     margin: 0;
 }
 
-.east-side-block .grid-description table{
-    margin:0 auto;
+.property-grid-table{
+    border-collapse: collapse;
+}
+
+.property-grid-table th, td{
+    border: 1px solid;
+    padding:5px 10px;
+    font: normal 13px/15px helvetica, arial, verdana, sans-serif;
+}
+
+.property-grid-table th:last-child, td:last-child{
+    width: 100%;
 }
 
 .first-col, .second-col{

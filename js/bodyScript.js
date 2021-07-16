@@ -331,7 +331,7 @@ toggleWestRegion.addEventListener('click', () => {
     };
 
     westSide.folded();
-})
+});
 
 // east side drag zone 창 크기 조절
 const onEastMouseMove = e => {
