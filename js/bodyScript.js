@@ -21,7 +21,6 @@ const eastParent = document.querySelector('.east');
 const eastSideTopButton = document.querySelector('.east-side-block .button');
 const eastSideFoldedTopButton = document.querySelector('.east-side-block-folded .folded-button');
 
-
 class Parent{
     constructor(side, dragZone, wrap, foldedWrap, parent){
         this.side = side;
@@ -228,57 +227,108 @@ const acodItemList = [
 
 // middle 부분 부터 본문 내용은 description.config.js에 있음!
 // middle button(close me, center panel) controll (+ toggle west side controll)
-const closeMeDescriptions = document.querySelector('.middle-block .close-me-description');
-const centerPanelDescriptions = document.querySelector('.middle-block .center-panel-description');
+const closeMeDescriptionPlace = document.querySelector('.middle-block .close-me-description');
+const centerPanelDescriptionPlace = document.querySelector('.middle-block .center-panel-description');
 const closeMeButton = document.querySelector('.close-me-button');
 const centerPanelButton = document.querySelector('.center-panel-button');
 
 const closeMeClose = document.querySelector('.close-me-close-icon');
 const closeMeBlock = document.querySelector('.close-me-block');
 
+class Category{
+    constructor(params={}){
+        const {firBtn, firDes, secBtn, secDes} = params;
 
-centerPanelButton.addEventListener('click', () => {
-    closeMeButton.classList.add('category-click-false');
-    closeMeButton.classList.remove('category-click-true');
-    closeMeDescriptions.classList.add('close-middle-description');
-    closeMeDescriptions.classList.remove('open-middle-description');
+        this.firBtn = firBtn;
+        this.firDes = firDes;
+        this.secBtn = secBtn;
+        this.secDes = secDes;
+    
+        if(this.firBtn){
+            this.firBtn.addEventListener('click', e => {
+                const check = e.target.classList.contains('category-click-true');
 
-    centerPanelButton.classList.add('category-click-true');
-    centerPanelButton.classList.remove('category-click-false');
-    centerPanelDescriptions.classList.add('open-middle-description');
-    centerPanelDescriptions.classList.remove('close-middle-description');
+                if(check){ return; };
+
+                this.onClickCategory();
+                this.appearDes();
+            });
+        };
+
+        if(this.secBtn){
+            this.secBtn.addEventListener('click', e => {
+                const check = e.target.classList.contains('category-click-true');
+
+                if(check){ return; };
+
+                this.onClickCategory();
+                this.appearDes();
+            });
+        };
+    };
+
+    onClickCategory(){
+        this.firBtn.classList.toggle('category-click-true' );
+        this.secBtn.classList.toggle('category-click-true');
+    };
+
+    appearDes(){
+        this.firDes.classList.toggle('hidden-description');
+        this.secDes.classList.toggle('hidden-description');
+    };
+};
+
+class CloseIcon extends Category{
+    constructor(params={}){
+        const {wrap, clsIcon, secBtn} = params;
+        super(params);
+
+        this.wrap = wrap;
+        this.clsIcon = clsIcon;
+        this.secBtn = secBtn;
+
+        this.clsIcon.addEventListener('click', () => {
+            this.onClickCloseIcon();
+        });
+    };
+
+    onClickCloseIcon(){
+        this.wrap.remove();
+
+        this.secBtn.classList.add('category-click-true');
+        this.appearDes();
+    };
+};
+
+new Category({
+    firBtn: closeMeButton,
+    firDes: closeMeDescriptionPlace,
+    secBtn: centerPanelButton,
+    secDes: centerPanelDescriptionPlace
 });
 
-closeMeButton.addEventListener('click', () => {
-    closeMeButton.classList.add('category-click-true');
-    closeMeButton.classList.remove('category-click-false');
-    closeMeDescriptions.classList.add('open-middle-description');
-    closeMeDescriptions.classList.remove('close-middle-description');
-
-    centerPanelButton.classList.add('category-click-false');
-    centerPanelButton.classList.remove('category-click-true');
-    centerPanelDescriptions.classList.add('close-middle-description');
-    centerPanelDescriptions.classList.remove('open-middle-description');
+new CloseIcon({
+    wrap: closeMeBlock,
+    clsIcon: closeMeClose,
+    firDes: closeMeDescriptionPlace,
+    secDes: centerPanelDescriptionPlace,
+    secBtn: centerPanelButton
 });
 
-// middle close me close (close me 창 닫기)
-closeMeClose.addEventListener('click', () => {
-    closeMeBlock.remove();
 
-    closeMeDescriptions.classList.add('close-middle-description');
-    closeMeDescriptions.classList.remove('open-middle-description');
 
-    centerPanelButton.classList.add('category-click-true');
-    centerPanelButton.classList.remove('category-click-false');
-    centerPanelDescriptions.classList.add('open-middle-description');
-    centerPanelDescriptions.classList.remove('close-middle-description');
-});
+
 
 // toggle west side
 const toggleWestRegion = document.querySelector('.toggle-the-west-region');
-const westSide = new Parent('west',westSideDragZone,westSideBlock,westSideFolded,westParent);
 
 toggleWestRegion.addEventListener('click', () => {
+    const westSide = new Parent('west',
+                            westSideDragZone,
+                            westSideBlock,
+                            westSideFolded,
+                            westParent);
+
     if(westSideBlock.classList.contains('west-spread-folder-close')){
         westSide.spread(); 
         return;
@@ -286,44 +336,6 @@ toggleWestRegion.addEventListener('click', () => {
 
     westSide.folded();
 })
-
-// class ChangeCategory {
-//     constructor(params={}){
-//         const { incBtn, incDes, secBtn, secDes, clsIcon, clsBlock } = params;
-        
-//         this.incBtn = incBtn; 
-//         this.incDes = incDes;
-//         this.secBtn = secBtn;
-//         this.secDes = secDes;
-//         this.clsIcon = clsIcon;
-//         this.clsBlock = clsBlock;
-
-//         this.clsIcon.addEventListener('click', () => {
-
-//         });
-//     };
-
-//     clickClose(){
-//         this.clsBlock.remove();
-
-//         this.incDes.classList
-//     };
-
-//     appearDes(){
-
-//     };
-// };  
-
-// const categoryItemList = [
-//     new ChangeCategory({
-//         incBtn: closeMeButton,
-//         incDes: closeMeDescriptions,
-//         secBtn: centerPanelButton,
-//         secDes: centerPanelDescriptions,
-//         clsIcon: closeMeClose,
-//         clsBlock: closeMeBlock
-//     })
-// ];
 
 // east side drag zone 창 크기 조절
 let rememberEastWidth = 0;
@@ -346,39 +358,10 @@ document.addEventListener('mouseup', () => {
 });
 
 // east button(a tab, property grid) controll
-const eastDescriptionPlace = document.querySelector('.east-side-block .grid-description');
+const propertyGridDescriptionPlace = document.querySelector('.property-grid-description');
+const aTabDescriptionPlace = document.querySelector('.a-tab-description');
 const aTabButton = document.querySelector('.a-tab-button');
 const propertyGridButton = document.querySelector('.property-grid-button');
-
-eastDescriptionPlace.innerHTML = propertyGrid;
-
-aTabButton.addEventListener('click', () => {
-    if(eastDescriptionPlace.innerHTML === aTab) return;
-
-    aTabButton.style.background = '#ADD2ED';
-    aTabButton.style.color = '#157FCC';
-    propertyGridButton.style.background = '#4B9CD7';
-    propertyGridButton.style.color = '#FFFFFF';
-
-    eastDescriptionPlace.innerHTML = aTab;
-});
-
-propertyGridButton.addEventListener('click', () => {
-    if(eastDescriptionPlace.innerHTML === propertyGrid) return;
-    
-    propertyGridButton.style.background = '#ADD2ED';
-    propertyGridButton.style.color = '#157FCC';
-    aTabButton.style.background = '#4B9CD7';
-    aTabButton.style.color = '#FFFFFF';
-
-    eastDescriptionPlace.innerHTML = propertyGrid;
-    
-    const reloadFirstCol = document.querySelector('.first-col');
-    const reloadSecondCol = document.querySelector('.second-col');
-
-    sortFirstCol(reloadFirstCol);
-    sortSecondCol(reloadSecondCol)
-});
 
 // east side property grid close (property grid 창 닫기)
 const propertyGridClose = document.querySelector('.property-grid-close-icon');
@@ -386,8 +369,20 @@ const propertyGridBlock = document.querySelector('.property-grid-block');
 
 propertyGridClose.addEventListener('click', () => {
     propertyGridBlock.remove();
-    eastDescriptionPlace.innerHTML = aTab;
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // east side property grid sort
 const firstColPropertyGrid = document.querySelector('.first-col');

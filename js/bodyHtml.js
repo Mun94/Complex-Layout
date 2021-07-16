@@ -43,7 +43,7 @@ const middleAndEastCategory = (firstTab, secondTab) => `
                 ${firstTab}
             </button>
         </div>
-        <button class= "${secondTab}-button category-click-false">${secondTab}</button>
+        <button class= "${secondTab}-button">${secondTab}</button>
     </div>
 `;
 
@@ -54,8 +54,8 @@ bodyMiddle.innerHTML = `
         ${middleAndEastCategory("close-me", "center-panel")}
         <div class= "bottom-border"></div>
 
-        <div class= "close-me-description open-middle-description">${closeMe}</div>
-        <div class= "center-panel-description close-middle-description">${centerPanel}</div>
+        <div class= "close-me-description">${closeMe}</div>
+        <div class= "center-panel-description hidden-description">${centerPanel}</div>
     </div>
 `;
 
@@ -72,8 +72,8 @@ bodyEast.innerHTML = `
             </button>
         </div>
 
-        <div class= "grid-description">
-        </div>
+        <div class= "property-grid-description">${propertyGrid}</div>
+        <div class= "a-tab-description hidden-description">${aTab}</div>
 
         <div class= "top-border"></div>
         ${middleAndEastCategory("property-grid", "a-tab")}
