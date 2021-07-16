@@ -27,9 +27,6 @@ bodyWest.innerHTML = `
         </div>
 
         <div class= "category">
-            <!--${westSideCategory("navigation", "hi im the west panel", "visible")}-->
-            <!--${westSideCategory("settings", "Some settings in here.", "hidden")}-->
-            <!--${westSideCategory("information", "Some info in here.", "hidden")}-->
             ${westSideCategory("navigation", "hi im the west panel")}
             ${westSideCategory("settings", "Some settings in here.")}
             ${westSideCategory("information", "Some info in here.")}
@@ -65,10 +62,6 @@ bodyMiddle.innerHTML = `
 const bodyEast = document.querySelector('.body-block .east');
 
 bodyEast.innerHTML = `
-    <div class="east-side-drag-zone">
-        <div class="button">
-        </div>
-    </div>
     <div class= "east-side-block">
         <div class= "top">
             <div class= "title">

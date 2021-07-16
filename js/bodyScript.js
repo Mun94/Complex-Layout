@@ -1,6 +1,6 @@
 // west side button controll(클릭 시 왼쪽으로 접힘)
 const westSideBlock = document.querySelector('.west-side-block');
-const westSideBlockFolded = document.querySelector('.west-side-block-folded');
+const westSideFolded = document.querySelector('.west-side-block-folded');
 const westSideDragZone = document.querySelector('.west-side-drag-zone');
 
 const westSideDragZoneButton = document.querySelector('.west-side-drag-zone .drag-zone-button');
@@ -12,9 +12,18 @@ const westSideFoldedTopButton = document.querySelector('.west-side-block-folded 
 
 const westSideFoldedDragZone = document.querySelector(".west-side-folded-drag-zone");
 const westSideFoldedDragZoneButton = document.querySelector('.west-side-folded-drag-zone .button');
+
+const eastSideBlock = document.querySelector('.east-side-block');
+const eastSideFolded = document.querySelector('.east-side-block-folded');
+const eastSideDragZone = document.querySelector('.east-side-drag-zone');
+
+const eastParent = document.querySelector('.east');
+const eastSideTopButton = document.querySelector('.east-side-block .button');
+const eastSideFoldedTopButton = document.querySelector('.east-side-block-folded .folded-button');
 class WestFold {
     constructor(params= {}){
-        const {topBtn, foldedTopBtn, dragZone, wrap, foldedWrap, parent} = params;
+        const {side, topBtn, foldedTopBtn, dragZone, wrap, foldedWrap, parent} = params;
+        this.side = side;
         this.topBtn = topBtn;
         this.foldedTopBtn = foldedTopBtn;
         this.dragZone = dragZone;
@@ -36,13 +45,13 @@ class WestFold {
 
         if(this.dragZone){
             this.dragZone.addEventListener('click', () => {
-                if(this.dragZone.classList.contains('west-side-folded')){
-                    this.dragZone.classList.remove('west-side-folded');
+                if(this.dragZone.classList.contains(`${this.side}-side-folded`)){
+                    this.dragZone.classList.remove(`${this.side}-side-folded`);
                 
                     this.spread();
                     return;
                 }
-                this.dragZone.classList.add('west-side-folded');
+                this.dragZone.classList.add(`${this.side}-side-folded`);
 
                 this.folded();
             })
@@ -50,40 +59,50 @@ class WestFold {
     }
 
     folded(){
-        this.dragZone.removeEventListener('mousedown', onWestMouseDown);
+        // this.dragZone.removeEventListener('mousedown', onWestMouseDown);
         this.parent.style.minWidth = 'initial';
         this.parent.style.width = 'initial';
 
-        this.wrap.classList.add('west-spread-folder-close');
-        this.wrap.classList.remove('west-spread-folder-open');
+        this.wrap.classList.add(`${this.side}-spread-folder-close`);
+        this.wrap.classList.remove(`${this.side}-spread-folder-open`);
 
-        this.foldedWrap.classList.add('west-folded-folder-open');
-        this.foldedWrap.classList.remove('west-folded-folder-close');
-        this.dragZone.classList.add('west-side-folded');
+        this.foldedWrap.classList.add(`${this.side}-folded-folder-open`);
+        this.foldedWrap.classList.remove(`${this.side}-folded-folder-close`);
+        this.dragZone.classList.add(`${this.side}-side-folded`);
     }
 
     spread(){
-        this.dragZone.addEventListener('mousedown', onWestMouseDown);
+        // this.dragZone.addEventListener('mousedown', onWestMouseDown);
 
-        this.wrap.classList.add('west-spread-folder-open');
-        this.wrap.classList.remove('west-spread-folder-close');
+        this.wrap.classList.add(`${this.side}-spread-folder-open`);
+        this.wrap.classList.remove(`${this.side}-spread-folder-close`);
 
-        this.foldedWrap.classList.add('west-folded-folder-close');
-        this.foldedWrap.classList.remove('west-folded-folder-open');
-        this.dragZone.classList.remove('west-side-folded');
+        this.foldedWrap.classList.add(`${this.side}-folded-folder-close`);
+        this.foldedWrap.classList.remove(`${this.side}-folded-folder-open`);
+        this.dragZone.classList.remove(`${this.side}-side-folded`);
     };
-}
+};
 
 const foldItemList = [
     new WestFold({
-        topBtn : westSideTopButton,
+        side: 'west',
+        topBtn: westSideTopButton,
         foldedTopBtn: westSideFoldedTopButton,
         dragZone: westSideDragZone,
         wrap: westSideBlock,
-        foldedWrap: westSideBlockFolded,
+        foldedWrap: westSideFolded,
         parent: westParent
+    }),
+    new WestFold({
+        side:'east',
+        topBtn: eastSideTopButton,
+        foldedTopBtn: eastSideFoldedTopButton,
+        dragZone: eastSideDragZone,
+        wrap: eastSideBlock,
+        foldedWrap: eastSideFolded,
+        parent: eastParent
     })
-]
+];
 
 // west side drag zone 창 크기 조절
 const onWestMouseMove = e => {
@@ -273,49 +292,49 @@ closeMeClose.addEventListener('click', () => {
 });
 
 // east side button controll(클릭 시 오른쪽으로 접힘)
-const eastSideBlock = document.querySelector('.east-side-block');
-const eastSideTopButton = document.querySelector('.east-side-block .button');
-const eastParent = document.querySelector('.east');
-const eastSideDragZone = document.querySelector('.east-side-drag-zone');
+// const eastSideBlock = document.querySelector('.east-side-block');
+// const eastSideTopButton = document.querySelector('.east-side-block .button');
+// const eastParent = document.querySelector('.east');
+// const eastSideDragZone = document.querySelector('.east-side-drag-zone');
 
-eastSideTopButton.addEventListener('click', () => {
-    eastSideDragZoneButton.style.transform = 'rotate(180deg)';
+// eastSideTopButton.addEventListener('click', () => {
+//     eastSideDragZoneButton.style.transform = 'rotate(180deg)';
 
-    eastSideBlock.outerHTML = eastSideFoldedHtml;
+//     eastSideBlock.outerHTML = eastSideFoldedHtml;
 
-    eastParent.style.width = 'initial';
-    eastParent.style.minWidth = 'initial';
+//     eastParent.style.width = 'initial';
+//     eastParent.style.minWidth = 'initial';
 
-    const eastSideFolded = document.querySelector('.east-side-block-folded');
-    const eastSideTopFoldedButton = document.querySelector('.east-side-block-folded .button');
+//     const eastSideFolded = document.querySelector('.east-side-block-folded');
+//     const eastSideTopFoldedButton = document.querySelector('.east-side-block-folded .button');
 
-    eastSideDragZone.removeEventListener('mousedown', onEastMouseDown);
+//     eastSideDragZone.removeEventListener('mousedown', onEastMouseDown);
 
-    eastSideTopFoldedButton && eastSideTopFoldedButton.addEventListener('click', ()=>{
-        eastSideDragZoneButton.style.transform = 'rotate(0deg)';
-        eastSideFolded.remove();
-        eastParent.style.width = '30%';
-        eastParent.appendChild(eastSideBlock);
+//     eastSideTopFoldedButton && eastSideTopFoldedButton.addEventListener('click', ()=>{
+//         eastSideDragZoneButton.style.transform = 'rotate(0deg)';
+//         eastSideFolded.remove();
+//         eastParent.style.width = '30%';
+//         eastParent.appendChild(eastSideBlock);
 
-        eastSideDragZone.addEventListener('mousedown', onEastMouseDown);
-    });
-});
+//         eastSideDragZone.addEventListener('mousedown', onEastMouseDown);
+//     });
+// });
 
 // east side drag zone button 클릭 시 오른쪽으로 접힘
-eastSideDragZoneButton.addEventListener('click', () => {
-    const eastSideFolded = document.querySelector('.east-side-block-folded');
+// eastSideDragZoneButton.addEventListener('click', () => {
+//     const eastSideFolded = document.querySelector('.east-side-block-folded');
 
-    eastSideDragZoneButton.style.transform = 'rotate(180deg)';
-    onClickDragZoneButton(
-        eastSideFolded, 
-        eastSideBlock, 
-        eastSideFoldedHtml, 
-        '.east-side-block-folded', 
-        eastParent, 
-        eastSideDragZone, 
-        false, 
-        'east');
-});
+//     eastSideDragZoneButton.style.transform = 'rotate(180deg)';
+//     onClickDragZoneButton(
+//         eastSideFolded, 
+//         eastSideBlock, 
+//         eastSideFoldedHtml, 
+//         '.east-side-block-folded', 
+//         eastParent, 
+//         eastSideDragZone, 
+//         false, 
+//         'east');
+// });
 
 // east side drag zone 창 크기 조절
 let rememberEastWidth = 0;

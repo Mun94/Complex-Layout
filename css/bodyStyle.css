@@ -34,52 +34,6 @@
     margin-top:5px;
 }
 
-.west-side-block button{
-    border: none;
-    cursor: pointer;
-    width: 17px;
-    height: 16px;
-}
-
-.west-side-block .top .button, .east-side-block-folded .button,
-.west-side-block-folded .folded-button, .east-side-block .button
-{
-    background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/tools/tool-sprites.png');
-    background-color: #157FCC;
-
-    border: none;
-    cursor: pointer;
-    width: 17px;
-    height: 16px;
-    opacity: 0.5;
-}
-
-.west-side-block .top .button, .east-side-block-folded .button{
-    background-position: 1px -192px;
-}
-
-.category .navigation-button, .settings-button, .information-button{
-    background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/tools/tool-sprites-dark.png');
-}
-
-.west-category-panel{
-    height: 0px;
-    overflow: hidden;
-    transition: height 0.5s ease-in-out;
-} 
-
-.west-category-button{
-    background-position: 1px -255px;
-}
-
-.open-west-panel .west-category-button{
-    background-position: 1px -272px;
-}
-
-.open-west-panel .west-category-panel{
-    height: 578px;
-}
-
 
 .button-name{
     display: flex;
@@ -216,12 +170,16 @@
 }
 
 /* drag zone button*/
-.east-side-drag-zone, .west-side-drag-zone , .west-side-folded-drag-zone{
+.east-side-drag-zone, 
+.west-side-drag-zone, 
+.west-side-folded-drag-zone{
     position: relative;
     cursor: col-resize;
 }
 
-.east-side-drag-zone .button, .west-side-drag-zone .drag-zone-button, .west-side-folded-drag-zone .button{
+.east-side-drag-zone .drag-zone-button, 
+.west-side-drag-zone .drag-zone-button, 
+.west-side-folded-drag-zone .button{
     width: 100%;
     height: 49px;
 
@@ -237,19 +195,72 @@
    transform: rotate(180deg);
 }
 
-.east-side-drag-zone .button{
+.east-side-drag-zone .drag-zone-button{
     background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/util/splitter/mini-right.png');
+}
+.east-side-folded .drag-zone-button{
+    transform: rotate(180deg);
+ }
+
+ .west-side-block button{
+    border: none;
+    cursor: pointer;
+    width: 17px;
+    height: 16px;
+}
+
+.west-side-block .top .button, .east-side-block-folded .folded-button,
+.east-side-block .top .button, .west-side-block-folded .folded-button
+{
+    background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/tools/tool-sprites.png');
+    background-color: #157FCC;
+
+    border: none;
+    cursor: pointer;
+    width: 17px;
+    height: 16px;
+    opacity: 0.5;
+}
+
+.west-side-block .top .button, .east-side-block-folded .folded-button{
+    background-position: 1px -192px;
+}
+
+.category .navigation-button, .settings-button, .information-button{
+    background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/tools/tool-sprites-dark.png');
+}
+
+.west-category-panel{
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.5s ease-in-out;
+} 
+
+.west-category-button{
+    background-position: 1px -255px;
+}
+
+.open-west-panel .west-category-button{
+    background-position: 1px -272px;
+}
+
+.open-west-panel .west-category-panel{
+    height: 578px;
 }
 
 
 
 
 
-.west{
+
+
+
+.west, .east{
     position: relative;
 }
 
-.west-folded-folder-close, .west-spread-folder-close{
+.west-folded-folder-close, .west-spread-folder-close,
+.east-folded-folder-close, .east-spread-folder-close{
     width: 0;
     overflow: hidden;
     padding: 0;
@@ -282,6 +293,15 @@
     }
 }
 
+@keyframes westFadeIn {
+    from {
+        transform: translateX(-200px);
+    }
+    to {
+        transform: translateX(0px);
+    }
+}
+
 @keyframes westFadeOut2{
     from{
         position:absolute;
@@ -297,9 +317,49 @@
     }
 }
 
-@keyframes westFadeIn {
+.east-spread-folder-close{
+    animation: eastFadeOut 0.4s linear;
+}
+
+.east-folded-folder-open{
+    animation: eastFadeIn 0.8s linear;
+}
+
+.east-spread-folder-open{
+    animation: eastFadeOut2 0.4s linear;
+}
+
+@keyframes eastFadeOut{
+    from{
+        position:absolute;
+        z-index: 1;
+        width: 250px;
+        right: 0px;
+    }to{
+        position:absolute;
+        z-index: 1;
+        width: 250px;
+        right: -300px;
+    }
+}
+
+@keyframes eastFadeOut2{
+    from{
+        position:absolute;
+        z-index: 1;
+        width: 250px;
+        right: -250px;
+    }to{
+        position:absolute;
+        z-index: 1;
+        width: 250px;
+        right: 0px;
+    }
+}
+
+@keyframes eastFadeIn {
     from {
-        transform: translateX(-200px);
+        transform: translateX(250px);
     }
     to {
         transform: translateX(0px);
