@@ -61,23 +61,13 @@
 /* west side 접혔을 때*/
 .west-side-block-folded, .east-side-block-folded{
     background: #157FCC;
-    height: 730px;
+    height: 742px;
     padding: 10px;
 }
 
 .west-side-block-folded .folded-button, .east-side-block .button{
     background-position: 1px -176px;
 }
-
-
-
-
-
-
-
-
-
-
 
 /* body middle */
 .middle{
@@ -149,18 +139,9 @@
     height: 10px;
 }
 
-.middle-block .hidden-description{
+.hidden-description{
     display: none;
 }
-
-
-
-
-
-
-
-
-
 
 /* body east side */
 .east-side-block .top{
@@ -176,12 +157,13 @@
     justify-content: flex-end;
 }
 
-.east-side-block .grid-description{
+.east-side-block .property-grid-description, .a-tab-description{
     height: 680px;
+    min-width: 250px;
     background: #FFFFFF;
 }
 
-.east-side-block .grid-description p{
+.east-side-block .a-tab-description p{
     margin: 0;
 }
 
@@ -285,6 +267,7 @@
     width: 0;
     overflow: hidden;
     padding: 0;
+    height: 743px;
 }
 
 .west-spread-folder-close{

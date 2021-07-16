@@ -94,7 +94,7 @@ class WestEastFold extends Parent{
         this.dragZone.classList.add(`${this.side}-side-folded`);
 
         this.folded();
-    }
+    };
 };
 
 const foldItemList = [
@@ -102,10 +102,10 @@ const foldItemList = [
         side: 'west',
         topBtn: westSideTopButton,
         foldedTopBtn: westSideFoldedTopButton,
-        dragZone: westSideDragZone, //
-        wrap: westSideBlock, //
-        foldedWrap: westSideFolded, //
-        parent: westParent //
+        dragZone: westSideDragZone,
+        wrap: westSideBlock,
+        foldedWrap: westSideFolded,
+        parent: westParent
     }),
     new WestEastFold({
         side:'east',
@@ -222,9 +222,6 @@ const acodItemList = [
     }),
 ];
 
-
-
-
 // middle 부분 부터 본문 내용은 description.config.js에 있음!
 // middle button(close me, center panel) controll (+ toggle west side controll)
 const closeMeDescriptionPlace = document.querySelector('.middle-block .close-me-description');
@@ -287,16 +284,19 @@ class CloseIcon extends Category{
         this.clsIcon = clsIcon;
         this.secBtn = secBtn;
 
-        this.clsIcon.addEventListener('click', () => {
-            this.onClickCloseIcon();
+        this.clsIcon.addEventListener('click', (e) => {
+            this.onClickCloseIcon(e);
         });
     };
 
     onClickCloseIcon(){
         this.wrap.remove();
+        const check = this.secBtn.classList.contains('category-click-true');
 
-        this.secBtn.classList.add('category-click-true');
-        this.appearDes();
+        if(!check){
+            this.secBtn.classList.toggle('category-click-true', !check);
+            this.appearDes();
+        }
     };
 };
 
@@ -314,10 +314,6 @@ new CloseIcon({
     secDes: centerPanelDescriptionPlace,
     secBtn: centerPanelButton
 });
-
-
-
-
 
 // toggle west side
 const toggleWestRegion = document.querySelector('.toggle-the-west-region');
@@ -338,10 +334,9 @@ toggleWestRegion.addEventListener('click', () => {
 })
 
 // east side drag zone 창 크기 조절
-let rememberEastWidth = 0;
 const onEastMouseMove = e => {
-    eastParent.style.width = (rememberEastWidth + document.body.clientWidth - e.clientX) +'px';
-    rememberEastWidth = document.body.clientWidth - e.clientX;
+    eastParent.style.width = (document.body.clientWidth - e.clientX) +'px';
+    
     const table = document.querySelector('.property-grid-table');
 
     eastParent.style.minWidth = table ? table.clientWidth + 10 + 'px' : '120px'; 
@@ -363,17 +358,24 @@ const aTabDescriptionPlace = document.querySelector('.a-tab-description');
 const aTabButton = document.querySelector('.a-tab-button');
 const propertyGridButton = document.querySelector('.property-grid-button');
 
+new Category({
+    firBtn: propertyGridButton,
+    firDes: propertyGridDescriptionPlace,
+    secBtn: aTabButton,
+    secDes: aTabDescriptionPlace
+});
+
 // east side property grid close (property grid 창 닫기)
 const propertyGridClose = document.querySelector('.property-grid-close-icon');
 const propertyGridBlock = document.querySelector('.property-grid-block');
 
-propertyGridClose.addEventListener('click', () => {
-    propertyGridBlock.remove();
+new CloseIcon({
+    wrap: propertyGridBlock,
+    clsIcon: propertyGridClose,
+    firDes: propertyGridDescriptionPlace,
+    secDes: aTabDescriptionPlace,
+    secBtn: aTabButton
 });
-
-
-
-
 
 
 
