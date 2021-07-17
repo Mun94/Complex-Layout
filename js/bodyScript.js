@@ -5,15 +5,9 @@ const westSideBlock = bodyParentEle.querySelector('.west-side-block');
 const westSideFolded = bodyParentEle.querySelector('.west-side-block-folded');
 const westSideDragZone = bodyParentEle.querySelector('.west-side-drag-zone');
 
-const westSideDragZoneButton = bodyParentEle.querySelector('.west-side-drag-zone .drag-zone-button');
-const eastSideDragZoneButton = bodyParentEle.querySelector('.east-side-drag-zone .button');
-
 const westParent = bodyParentEle.querySelector('.west'); // 전체 블럭
 const westSideTopButton = bodyParentEle.querySelector('.west-side-block .button');
 const westSideFoldedTopButton = bodyParentEle.querySelector('.west-side-block-folded .folded-button');
-
-const westSideFoldedDragZone = bodyParentEle.querySelector(".west-side-folded-drag-zone");
-const westSideFoldedDragZoneButton = bodyParentEle.querySelector('.west-side-folded-drag-zone .button');
 
 const eastSideBlock = bodyParentEle.querySelector('.east-side-block');
 const eastSideFolded = bodyParentEle.querySelector('.east-side-block-folded');
@@ -40,9 +34,6 @@ class Parent{
     }
 
     folded(){
-        this.side === 'west' && this.dragZone.removeEventListener('mousedown', onWestMouseDown);
-        this.side === 'east' && this.dragZone.removeEventListener('mousedown', onEastMouseDown);
-
         this.parent.style.minWidth = 'initial';
         this.parent.style.width = 'initial';
 
@@ -51,20 +42,30 @@ class Parent{
 
         this.foldedWrap.classList.add(`${this.side}-folded-folder-open`);
         this.foldedWrap.classList.remove(`${this.side}-folded-folder-close`);
-        this.dragZone.classList.add(`${this.side}-side-folded`);
+
+        if(this.side === 'south'){
+            this.dragZone.classList.remove(`${this.side}-side-folded`)
+        }else{
+            this.dragZone.classList.add(`${this.side}-side-folded`);
+            this.side === 'west' && this.dragZone.removeEventListener('mousedown', onWestMouseDown);
+            this.side === 'east' && this.dragZone.removeEventListener('mousedown', onEastMouseDown);
+        }
     };
 
     spread(){
-        if(this.side !=='south'){
-            this.side === 'west' && this.dragZone.addEventListener('mousedown', onWestMouseDown);
-            this.side === 'east' && this.dragZone.addEventListener('mousedown', onEastMouseDown);
-        }
         this.wrap.classList.add(`${this.side}-spread-folder-open`);
         this.wrap.classList.remove(`${this.side}-spread-folder-close`);
 
         this.foldedWrap.classList.add(`${this.side}-folded-folder-close`);
         this.foldedWrap.classList.remove(`${this.side}-folded-folder-open`);
-        this.dragZone.classList.remove(`${this.side}-side-folded`);
+
+        if(this.side === 'south'){
+            this.dragZone.classList.add(`${this.side}-side-folded`)
+        }else{
+            this.dragZone.classList.remove(`${this.side}-side-folded`);
+            this.side === 'west' && this.dragZone.addEventListener('mousedown', onWestMouseDown);
+            this.side === 'east' && this.dragZone.addEventListener('mousedown', onEastMouseDown);
+        }
     };
 };
 class WestEastFold extends Parent{

@@ -47,6 +47,10 @@
     cursor: pointer;
 }
 
+.south-side-folded .button{
+    transform: rotate(180deg);
+}
+
 .south-side-block .top .button, .south-side-block-folded .folded-button
 {
     background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/tools/tool-sprites.png');
