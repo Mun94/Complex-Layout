@@ -67,16 +67,29 @@
     background-position: 0 -224px;
 }
 
-.south-spread-folder-close{
-    animation: southFadeOut 0.2s linear;
-}
-
 .south-folded-folder-open{
     animation: southFadeIn 0.4s linear;
 }
 
+.south-spread-folder-close{
+    animation: southFadeOut 0.2s linear;
+}
+
 .south-spread-folder-open{
+    animation: southFadeIn2 0.4s linear;
+}
+
+.south-folded-folder-close{
     animation: southFadeOut2 0.4s linear;
+}
+
+@keyframes southFadeIn {
+    from {
+        transform: translateY(80px);
+    }
+    to {
+        transform: translateY(0px);
+    }
 }
 
 @keyframes southFadeOut{
@@ -95,27 +108,26 @@
     }
 }
 
-@keyframes southFadeOut2{
+@keyframes southFadeIn2{
     from{
-        position:absolute;
-        z-index: 1;
-        height: 100px;
-        width:98%;
-        bottom: 10px;
+        transform: translateY(80px);
     }to{
-        position:absolute;
-        z-index: 1;
-        height: 100px;
-        width:98%;
-        bottom: 70px;
+        transform: translateY(0px);
     }
 }
 
-@keyframes southFadeIn {
-    from {
-        transform: translateY(80px);
-    }
-    to {
-        transform: translateY(0px);
+@keyframes southFadeOut2 {
+    from{
+        position:absolute;
+        z-index: 1;
+        height: 64px;
+        width:98%;
+        bottom: 0px;
+    }to{
+        position:absolute;
+        z-index: 1;
+        height: 64px;
+        width:98%;
+        bottom: -80px;
     }
 }

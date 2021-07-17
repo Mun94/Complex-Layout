@@ -1,16 +1,36 @@
-// southSideFoldedTopButton.addEventListener('click', () => {
-//     closeMeDescriptionPlace.style.height = 721 - 64 + 'px';
-//     centerPanelDescriptionPlace.style.height = 721 - 64 + 'px';
+const eastFoldedFolder = document.querySelector('.east-folded-folder-close');
+const westFoldedFolder = document.querySelector('.west-folded-folder-close');
 
-//     propertyGridDescriptionPlace.style.height = 645 - 64 + 'px';
-//     aTabDescriptionPlace.style.height = 645 - 64 + 'px';
-
-//     const westCategoryPanel = document.querySelector('.open-west-panel .west-category-panel');
-//     westCategoryPanel.style.height = 578 - 64 + 'px';
+// southSideFolde(dTopButton.addEventListener('click', () => {
+//     setTimeout(() => {
+//         closeMeDescriptionPlace.style.height = 721 - 64 + 'px';
+//         centerPanelDescriptionPlace.style.height = 721 - 64 + 'px';
+    
+//         eastFoldedFolder.style.height = 743 - 64 + 'px';
+//         westFoldedFolder.style.height = 743 - 64 + 'px';
+    
+//         propertyGridDescriptionPlace.style.height = 645 - 64 + 'px';
+//         aTabDescriptionPlace.style.height = 645 - 64 + 'px';
+    
+//         const westCategoryPanel = document.querySelector('.open-west-panel .west-category-panel');
+//         westCategoryPanel.style.height = 578 - 64 + 'px';
+//     }, 400)
 // });
 
 
+// southSideTopButton.addEventListener('click', () => {
+//     closeMeDescriptionPlace.style.height = 721 + 64 + 'px';
+//     centerPanelDescriptionPlace.style.height = 721 + 64 + 'px';
 
+//     eastFoldedFolder.style.height = 743 + 64 + 'px';
+//     westFoldedFolder.style.height = 743 + 64 + 'px';
+
+//     propertyGridDescriptionPlace.style.height = 645 + 64 + 'px';
+//     aTabDescriptionPlace.style.height = 645 + 64 + 'px';
+
+//     const westCategoryPanel = document.querySelector('.open-west-panel .west-category-panel');
+//     westCategoryPanel.style.height = 578 + 64 + 'px';
+// });
 
 // const southSideTopFoldedButton = document.querySelector('.south-side-block-folded .button');
 // const southSideFolded = document.querySelector('.south-side-block-folded');
