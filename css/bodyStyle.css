@@ -160,7 +160,6 @@
 .east-side-block .property-grid-description, .a-tab-description{
     padding-top: 36px;
     height: 645px;
-    min-width: 250px;
     background: #FFFFFF;
 }
 
@@ -182,9 +181,9 @@
     font: normal 13px helvetica, arial, verdana, sans-serif;
 }
 
-.property-grid-table th:last-child, td:last-child{
+/* .property-grid-table th:last-child, td:last-child{
     width: 100%;
-}
+} */
 
 .property-grid-table .first-col-icon, .second-col-icon{
     background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/grid/sort_asc.png');

@@ -23,6 +23,13 @@ const eastParent = bodyParentEle.querySelector('.east');
 const eastSideTopButton = bodyParentEle.querySelector('.east-side-block .button');
 const eastSideFoldedTopButton = bodyParentEle.querySelector('.east-side-block-folded .folded-button');
 
+const southSideTopButton = document.querySelector('.south-side-block .button');
+const southSideFoldedTopButton = document.querySelector('.south-side-block-folded .folded-button');
+const southSideDragZone = document.querySelector('.south-side-drag-zone');
+const southSideBlock = document.querySelector('.south-side-block');
+const southSideFolded = document.querySelector('.south-side-block-folded');
+const southParent = document.querySelector('.footer');
+
 class Parent{
     constructor(side, dragZone, wrap, foldedWrap, parent){
         this.side = side;
@@ -33,8 +40,8 @@ class Parent{
     }
 
     folded(){
-        this.dragZone.removeEventListener('mousedown', onWestMouseDown);
-        this.dragZone.removeEventListener('mousedown', onEastMouseDown);
+        this.side === 'west' && this.dragZone.removeEventListener('mousedown', onWestMouseDown);
+        this.side === 'east' && this.dragZone.removeEventListener('mousedown', onEastMouseDown);
 
         this.parent.style.minWidth = 'initial';
         this.parent.style.width = 'initial';
@@ -48,9 +55,10 @@ class Parent{
     };
 
     spread(){
-        this.dragZone.addEventListener('mousedown', onWestMouseDown);
-        this.dragZone.addEventListener('mousedown', onEastMouseDown);
-
+        if(this.side !=='south'){
+            this.side === 'west' && this.dragZone.addEventListener('mousedown', onWestMouseDown);
+            this.side === 'east' && this.dragZone.addEventListener('mousedown', onEastMouseDown);
+        }
         this.wrap.classList.add(`${this.side}-spread-folder-open`);
         this.wrap.classList.remove(`${this.side}-spread-folder-close`);
 
@@ -87,15 +95,16 @@ class WestEastFold extends Parent{
     };
 
     onClickDragZone(){
-        if(this.dragZone.classList.contains(`${this.side}-side-folded`)){
-            this.dragZone.classList.remove(`${this.side}-side-folded`);
-        
-            this.spread();
+        const check = this.dragZone.classList.contains(`${this.side}-side-folded`);
+
+        if(this.side === 'south'){
+            check ? this.folded() : this.spread() 
+            this.dragZone.classList.toggle(`${this.side}-side-folded`, !check);
             return;
         }
-        this.dragZone.classList.add(`${this.side}-side-folded`);
 
-        this.folded();
+        check ? this.spread() : this.folded();
+        this.dragZone.classList.toggle(`${this.side}-side-folded`, !check);
     };
 };
 
@@ -117,6 +126,15 @@ const foldItemList = [
         wrap: eastSideBlock,
         foldedWrap: eastSideFolded,
         parent: eastParent
+    }),
+    new WestEastFold({
+        side:'south',
+        topBtn: southSideTopButton,
+        foldedTopBtn: southSideFoldedTopButton,
+        dragZone: southSideDragZone,
+        wrap: southSideBlock,
+        foldedWrap: southSideFolded,
+        parent: southParent
     })
 ];
 
@@ -151,6 +169,8 @@ const informationButton = bodyParentEle.querySelector('.information-button');
 navigationButton.itemId = 'navigationButton';
 settingsButton.itemId = 'settingsButton';
 informationButton.itemId = 'informationButton';
+
+const westCategoryPanel = document.querySelector('.west-category-panel');
 
 const onClickWestCategory = (e) => {
     const btnItemId = e.target.itemId;
@@ -190,12 +210,10 @@ class WestAcodItem {
         };
     };
     expand() {
-        if(this.wrapPnl.classList.contains('open-west-panel')){
-            this.nextWrapPnl.classList.add('open-west-panel');
-            this.wrapPnl.classList.remove('open-west-panel');
-            return;
-        }
-        this.wrapPnl.classList.add('open-west-panel');
+        const check = this.wrapPnl.classList.contains('open-west-panel');
+
+        this.wrapPnl.classList.toggle('open-west-panel', !check);
+        check &&  this.nextWrapPnl.classList.add('open-west-panel');
     };
     colleasce() {
         this.wrapPnl.classList.remove('open-west-panel');

@@ -5,6 +5,12 @@
     padding:10px;
 }
 
+.south-folded-folder-close, .south-spread-folder-close{
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+}
+
 .south-side-drag-zone{
     height: 8px;
 }
@@ -13,7 +19,7 @@
     background: #FFFFFF;
 }
 
-.south-side-block .description{
+.south-side-block .south-description{
     height: 64px;
 }
 
@@ -41,7 +47,7 @@
     cursor: pointer;
 }
 
-.south-side-block .top .button, .south-side-block-folded .button
+.south-side-block .top .button, .south-side-block-folded .folded-button
 {
     background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/tools/tool-sprites.png');
     background-color: #157FCC;
@@ -57,6 +63,59 @@
     background-position: 0 -208px;
 }
 
-.south-side-block-folded .button{
+.south-side-block-folded .folded-button{
     background-position: 0 -224px;
+}
+
+.south-spread-folder-close{
+    animation: southFadeOut 0.2s linear;
+}
+
+.south-folded-folder-open{
+    animation: southFadeIn 0.4s linear;
+}
+
+.south-spread-folder-open{
+    animation: southFadeOut2 0.4s linear;
+}
+
+@keyframes southFadeOut{
+    from{
+        position:absolute;
+        z-index: 1;
+        height: 64px;
+        width:98%;
+        bottom: 0px;
+    }to{
+        position:absolute;
+        z-index: 1;
+        height: 64px;
+        width:98%;
+        bottom: -80px;
+    }
+}
+
+@keyframes southFadeOut2{
+    from{
+        position:absolute;
+        z-index: 1;
+        height: 100px;
+        width:98%;
+        bottom: 10px;
+    }to{
+        position:absolute;
+        z-index: 1;
+        height: 100px;
+        width:98%;
+        bottom: 70px;
+    }
+}
+
+@keyframes southFadeIn {
+    from {
+        transform: translateY(80px);
+    }
+    to {
+        transform: translateY(0px);
+    }
 }
