@@ -170,8 +170,6 @@ navigationButton.itemId = 'navigationButton';
 settingsButton.itemId = 'settingsButton';
 informationButton.itemId = 'informationButton';
 
-const westCategoryPanel = document.querySelector('.west-category-panel');
-
 const onClickWestCategory = (e) => {
     const btnItemId = e.target.itemId;
     let foundItem;
