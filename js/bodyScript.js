@@ -1,25 +1,27 @@
+const bodyParentEle = document.querySelector('.body-block');
+
 // west side button controll(클릭 시 왼쪽으로 접힘)
-const westSideBlock = document.querySelector('.west-side-block');
-const westSideFolded = document.querySelector('.west-side-block-folded');
-const westSideDragZone = document.querySelector('.west-side-drag-zone');
+const westSideBlock = bodyParentEle.querySelector('.west-side-block');
+const westSideFolded = bodyParentEle.querySelector('.west-side-block-folded');
+const westSideDragZone = bodyParentEle.querySelector('.west-side-drag-zone');
 
-const westSideDragZoneButton = document.querySelector('.west-side-drag-zone .drag-zone-button');
-const eastSideDragZoneButton = document.querySelector('.east-side-drag-zone .button');
+const westSideDragZoneButton = bodyParentEle.querySelector('.west-side-drag-zone .drag-zone-button');
+const eastSideDragZoneButton = bodyParentEle.querySelector('.east-side-drag-zone .button');
 
-const westParent = document.querySelector('.west'); // 전체 블럭
-const westSideTopButton = document.querySelector('.west-side-block .button');
-const westSideFoldedTopButton = document.querySelector('.west-side-block-folded .folded-button');
+const westParent = bodyParentEle.querySelector('.west'); // 전체 블럭
+const westSideTopButton = bodyParentEle.querySelector('.west-side-block .button');
+const westSideFoldedTopButton = bodyParentEle.querySelector('.west-side-block-folded .folded-button');
 
-const westSideFoldedDragZone = document.querySelector(".west-side-folded-drag-zone");
-const westSideFoldedDragZoneButton = document.querySelector('.west-side-folded-drag-zone .button');
+const westSideFoldedDragZone = bodyParentEle.querySelector(".west-side-folded-drag-zone");
+const westSideFoldedDragZoneButton = bodyParentEle.querySelector('.west-side-folded-drag-zone .button');
 
-const eastSideBlock = document.querySelector('.east-side-block');
-const eastSideFolded = document.querySelector('.east-side-block-folded');
-const eastSideDragZone = document.querySelector('.east-side-drag-zone');
+const eastSideBlock = bodyParentEle.querySelector('.east-side-block');
+const eastSideFolded = bodyParentEle.querySelector('.east-side-block-folded');
+const eastSideDragZone = bodyParentEle.querySelector('.east-side-drag-zone');
 
-const eastParent = document.querySelector('.east');
-const eastSideTopButton = document.querySelector('.east-side-block .button');
-const eastSideFoldedTopButton = document.querySelector('.east-side-block-folded .folded-button');
+const eastParent = bodyParentEle.querySelector('.east');
+const eastSideTopButton = bodyParentEle.querySelector('.east-side-block .button');
+const eastSideFoldedTopButton = bodyParentEle.querySelector('.east-side-block-folded .folded-button');
 
 class Parent{
     constructor(side, dragZone, wrap, foldedWrap, parent){
@@ -127,24 +129,24 @@ const onWestMouseMove = e => {
 };
 
 const onWestMouseDown = () => {
-    document.addEventListener('mousemove', onWestMouseMove);
+    bodyParentEle.addEventListener('mousemove', onWestMouseMove);
 };
 
 westSideDragZone.addEventListener('mousedown', onWestMouseDown);
 
-document.addEventListener('mouseup', () => {
-    document.removeEventListener('mousemove', onWestMouseMove);
+bodyParentEle.addEventListener('mouseup', () => {
+    bodyParentEle.removeEventListener('mousemove', onWestMouseMove);
 });
 
 // west side category
-const navigationAcodiItem = document.querySelector('.navigation');
-const navigationButton = document.querySelector('.navigation-button');
+const navigationAcodiItem = bodyParentEle.querySelector('.navigation');
+const navigationButton = bodyParentEle.querySelector('.navigation-button');
 
-const settingsAcodiItem = document.querySelector('.settings');
-const settingsButton = document.querySelector('.settings-button');
+const settingsAcodiItem = bodyParentEle.querySelector('.settings');
+const settingsButton = bodyParentEle.querySelector('.settings-button');
 
-const informationAcodiItem = document.querySelector('.information');
-const informationButton = document.querySelector('.information-button');
+const informationAcodiItem = bodyParentEle.querySelector('.information');
+const informationButton = bodyParentEle.querySelector('.information-button');
 
 navigationButton.itemId = 'navigationButton';
 settingsButton.itemId = 'settingsButton';
@@ -224,13 +226,13 @@ const acodItemList = [
 
 // middle 부분 부터 본문 내용은 description.config.js에 있음!
 // middle button(close me, center panel) controll (+ toggle west side controll)
-const closeMeDescriptionPlace = document.querySelector('.middle-block .close-me-description');
-const centerPanelDescriptionPlace = document.querySelector('.middle-block .center-panel-description');
-const closeMeButton = document.querySelector('.close-me-button');
-const centerPanelButton = document.querySelector('.center-panel-button');
+const closeMeDescriptionPlace = bodyParentEle.querySelector('.middle-block .close-me-description');
+const centerPanelDescriptionPlace = bodyParentEle.querySelector('.middle-block .center-panel-description');
+const closeMeButton = bodyParentEle.querySelector('.close-me-button');
+const centerPanelButton = bodyParentEle.querySelector('.center-panel-button');
 
-const closeMeClose = document.querySelector('.close-me-close-icon');
-const closeMeBlock = document.querySelector('.close-me-block');
+const closeMeClose = bodyParentEle.querySelector('.close-me-close-icon');
+const closeMeBlock = bodyParentEle.querySelector('.close-me-block');
 
 class Category{
     constructor(params={}){
@@ -316,7 +318,7 @@ new CloseIcon({
 });
 
 // toggle west side
-const toggleWestRegion = document.querySelector('.toggle-the-west-region');
+const toggleWestRegion = bodyParentEle.querySelector('.toggle-the-west-region');
 
 toggleWestRegion.addEventListener('click', () => {
     const westSide = new Parent('west',
@@ -337,26 +339,26 @@ toggleWestRegion.addEventListener('click', () => {
 const onEastMouseMove = e => {
     eastParent.style.width = (document.body.clientWidth - e.clientX) +'px';
     
-    const table = document.querySelector('.property-grid-table');
+    const table = bodyParentEle.querySelector('.property-grid-table');
 
     eastParent.style.minWidth = table ? table.clientWidth + 10 + 'px' : '120px'; 
 };
 
 const onEastMouseDown = e => {
-    document.addEventListener('mousemove', onEastMouseMove);
+    bodyParentEle.addEventListener('mousemove', onEastMouseMove);
 };
 
 eastSideDragZone.addEventListener('mousedown', onEastMouseDown);
 
-document.addEventListener('mouseup', () => {
-    document.removeEventListener('mousemove', onEastMouseMove);
+bodyParentEle.addEventListener('mouseup', () => {
+    bodyParentEle.removeEventListener('mousemove', onEastMouseMove);
 });
 
 // east button(a tab, property grid) controll
-const propertyGridDescriptionPlace = document.querySelector('.property-grid-description');
-const aTabDescriptionPlace = document.querySelector('.a-tab-description');
-const aTabButton = document.querySelector('.a-tab-button');
-const propertyGridButton = document.querySelector('.property-grid-button');
+const propertyGridDescriptionPlace = bodyParentEle.querySelector('.property-grid-description');
+const aTabDescriptionPlace = bodyParentEle.querySelector('.a-tab-description');
+const aTabButton = bodyParentEle.querySelector('.a-tab-button');
+const propertyGridButton = bodyParentEle.querySelector('.property-grid-button');
 
 new Category({
     firBtn: propertyGridButton,
@@ -366,8 +368,8 @@ new Category({
 });
 
 // east side property grid close (property grid 창 닫기)
-const propertyGridClose = document.querySelector('.property-grid-close-icon');
-const propertyGridBlock = document.querySelector('.property-grid-block');
+const propertyGridClose = bodyParentEle.querySelector('.property-grid-close-icon');
+const propertyGridBlock = bodyParentEle.querySelector('.property-grid-block');
 
 new CloseIcon({
     wrap: propertyGridBlock,
@@ -377,37 +379,40 @@ new CloseIcon({
     secBtn: aTabButton
 });
 
-
-
-
-
-
-
-
-
-
 // east side property grid sort
-const firstColPropertyGrid = document.querySelector('.first-col');
+const eastDescriptionPlace = bodyParentEle.querySelector('.property-grid-description');
+const firstColPropertyGrid = eastDescriptionPlace.querySelector('.first-col');
 
-function sortFirstCol(firstCol){ // innerHTML 등으로 요소를 적용했을 때 같은 class 이름이더라도 인식하지 못 하게 됨 
+const sortFirstCol = firstCol => { // innerHTML 등으로 요소를 적용했을 때 같은 class 이름이더라도 인식하지 못 하게 됨 
     firstCol.addEventListener('click' , () => {
-        eastDescriptionPlace.innerHTML = makeTable([
-                    [...rowValue[0].sort((a, b) => a > b ? -1 : a < b ? 1 : 0)], 
-                    [...rowValue[1]]
-                ]);
+        const ascending = (a, b) => a > b ? -1 : a < b ? 1 : 0
+        const descending = (a, b) => a > b ? 1 : a < b ? -1 : 0;
 
-        const reloadFirstCol = document.querySelector('.first-col');
-        const reloadSecondCol = document.querySelector('.second-col');
+        const sortByName = (by, opt) => {
+            const sortNameObj = Object[opt](rowValue).sort(by).reduce((newObj, cur) => {
+                newObj[cur] = rowValue[cur]
+                return newObj;
+            },{});
+
+            return [Object.keys(sortNameObj), Object.values(sortNameObj)]
+        };
+
+        eastDescriptionPlace.innerHTML = makeTable(sortByName(ascending, 'keys'));
+
+        const reloadFirstCol = eastDescriptionPlace.querySelector('.first-col');
+        reloadFirstCol.children[0].classList.remove('hidden-col-icon');
+        reloadFirstCol.children[0].style.transform = 'rotate(180deg)';
+        const reloadSecondCol = document.querySelector('.second-col'); // 가까운 형제 요소 찾아 줌
+
 
         sortSecondCol(reloadSecondCol); // 첫 번째 열을 눌렀을 때 두 번째 열을 누르면 두 번째 열 sort
 
         reloadFirstCol.addEventListener('click', () => {
-            eastDescriptionPlace.innerHTML = makeTable([
-                [...rowValue[0].sort((a, b) => a > b ? 1 : a < b ? -1 : 0)], // 오름차순
-                [...rowValue[1]]
-            ]);
-            const secondReloadFirstCol = document.querySelector('.first-col');
-            const secondReloadSecondCol = document.querySelector('.second-col');
+            eastDescriptionPlace.innerHTML = makeTable(sortByName(descending, 'keys'));
+
+            const secondReloadFirstCol = eastDescriptionPlace.querySelector('.first-col');
+            secondReloadFirstCol.children[0].classList.remove('hidden-col-icon');
+            const secondReloadSecondCol =  document.querySelector('.second-col');// 가까운 형제 요소 찾아 줌
 
             sortSecondCol(secondReloadSecondCol);
             sortFirstCol(secondReloadFirstCol); // 클릭 마다 반복 됨
@@ -416,37 +421,57 @@ function sortFirstCol(firstCol){ // innerHTML 등으로 요소를 적용했을 �
 };
 sortFirstCol(firstColPropertyGrid);
 
-const secondColPropertyGrid = document.querySelector('.second-col');
+const secondColPropertyGrid = eastDescriptionPlace.querySelector('.second-col');
 
-function sortSecondCol(secondCol){
+const sortSecondCol = secondCol => {
    secondCol.addEventListener('click', () => {
-        eastDescriptionPlace.innerHTML = makeTable([
-                    [...rowValue[0]],
-                    [...rowValue[1].sort((a, b) => a > b ? -1 : a < b ? 1 : 0)]
-                ]);
+        const sortByValue = (by, opt) => {
+          const sortValueObj = Object[opt](rowValue).sort(by).reduce((newObj, [name,value]) =>({
+              ...newObj, [name]: value
+          }),{})
 
-        const reloadFirstCol = document.querySelector('.first-col');
+            return [Object.keys(sortValueObj), Object.values(sortValueObj)];
+        };
+
+        const ascending = ([,a], [,b]) => {
+            if(typeof a === 'string' && a.includes('/')) {
+                a = parseInt(a);
+                
+                return a > b ? -1 : a < b ? 1 : 0;
+            }
+            return a > b ? -1 : a < b ? 1 : 0;
+        };
+
+        const descending = ([,a], [,b]) => {
+            if(typeof b === 'string' && b.includes('/')) {
+                b = parseInt(b);
+                
+                return a > b ? 1 : a < b ? -1 : 0;
+            }
+            return a > b ? 1 : a < b ? -1 : 0;
+        };
+
+        eastDescriptionPlace.innerHTML = makeTable(sortByValue(ascending, 'entries'));
+
+        const reloadFirstCol = eastDescriptionPlace.querySelector('.first-col');
+        reloadFirstCol.children[0].classList.add('hidden-col-icon');
         const reloadSecondCol = document.querySelector('.second-col');
+        reloadSecondCol.children[0].classList.remove('hidden-col-icon');
+        reloadSecondCol.children[0].style.transform = 'rotate(180deg)';
 
         sortFirstCol(reloadFirstCol);
 
         reloadSecondCol.addEventListener('click', () => {
-            eastDescriptionPlace.innerHTML = makeTable([
-                [...rowValue[0]],
-                [...rowValue[1].sort((a, b) => a > b ? 1 : a < b ? -1 : 0)], 
-            ]);
+            eastDescriptionPlace.innerHTML = makeTable(sortByValue(descending, 'entries'));
 
-            const secondReloadFirstCol = document.querySelector('.first-col');
+            const secondReloadFirstCol = eastDescriptionPlace.querySelector('.first-col');
+            secondReloadFirstCol.children[0].classList.add('hidden-col-icon');
             const secondReloadSecondCol = document.querySelector('.second-col');
-            
+            secondReloadSecondCol.children[0].classList.remove('hidden-col-icon');
+
             sortSecondCol(secondReloadSecondCol);
             sortFirstCol(secondReloadFirstCol);
         });
     });
 };
 sortSecondCol(secondColPropertyGrid);
-
-    // 리턴 값이 -1이면 a가 b보다 낮은 인덱스로 위치 한다. 리턴 값이 1이면 반대
-    // [1,3,2,4] 처음 스타트 
-    // a = 1, b = 3 <=== 1 < 3 이므로 -1 이 리턴되고 1이 3보다 낮은 인덱스로 위치한다. [1, 3, 2, 4]
-    // a = 3, b = 2 <=== 3 > 2 이므로 1 이 리턴되고  3이 2보다 높은 인덱스로 위치한다. [1, 2, 3, 4]

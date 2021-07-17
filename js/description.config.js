@@ -45,12 +45,14 @@ const aTab = '<p>A TabPanel component can be a region.</p>';
 const firstColTitle = `
     <div class="first-col" style="text-align:initial">
         Name
+        <div class="first-col-icon"></div>
     </div>
 `;
 
 const secondColTitle = `
     <div class="second-col" style="text-align:initial">
-            value
+        value
+        <div class="second-col-icon hidden-col-icon"></div>
     </div>
 `;
 
@@ -86,30 +88,21 @@ const makeTable = (td) => {
     return table;
 };
 
-let rowValue =   [
-    [
-        '(name)', 
-        'autoFitColumns', 
-        'borderWidth', 
-        'created', 
-        'grouping', 
-        'productionQuality', 
-        'tested', 
-        'version'
-    ],
-    [
-        'Properties Grid',
-        'true',
-        '1',
-        '10/15/2006',
-        'false',
-        'false',
-        'false',
-        '1.01'
-    ]
-];
+const rowValue = {
+    '(name)': 'Properties Grid',
+    'autoFitColumns': true,
+    'borderWidth': 1,
+    'created': '10/15/2006',
+    'grouping': false,
+    'productionQuality': false,
+    'tested': false,
+    'version': 0.01
+};
 
-const propertyGrid = makeTable(rowValue);
+
+
+
+const propertyGrid = makeTable([Object.keys(rowValue), Object.values(rowValue)]);
 
 // footer
 const southDescription = `<p>south - generally for informational stuff, also could be for status bar</p>`;

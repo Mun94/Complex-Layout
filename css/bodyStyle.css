@@ -172,18 +172,33 @@
     border-collapse: collapse;
 }
 
+.property-grid-table tr:nth-child(odd){
+    background: #F5F5F5;
+}
+
 .property-grid-table th, td{
-    border: 1px solid;
+    border: 1px solid #EDEDED; 
     padding:5px 10px;
-    font: normal 13px/15px helvetica, arial, verdana, sans-serif;
+    font: normal 13px helvetica, arial, verdana, sans-serif;
 }
 
 .property-grid-table th:last-child, td:last-child{
     width: 100%;
 }
 
+.property-grid-table .first-col-icon, .second-col-icon{
+    background-image: url('https://docs.sencha.com/extjs/4.2.2/extjs-build/resources/ext-theme-neptune/images/grid/sort_asc.png');
+    width: 15px;
+    height: 15px;
+}
+
+.property-grid-table .hidden-col-icon{
+    display: none;
+}
+
 .first-col, .second-col{
     cursor: pointer;
+    display: flex;
 }
 
 .second-col .icon{
