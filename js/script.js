@@ -1,64 +1,61 @@
 const bodyParentEle = document.querySelector('.body-block');
 
 // west side button controll(클릭 시 왼쪽으로 접힘)
-const westSideBlock = bodyParentEle.querySelector('.west-side-block');
+const westParent = bodyParentEle.querySelector('.west');
+const westSideBlock = westParent.querySelector('.west-side-block');
+const westSideTopButton = westParent.querySelector('.west-side-block .button');
 const westSideFolded = bodyParentEle.querySelector('.west-side-block-folded');
 const westSideDragZone = bodyParentEle.querySelector('.west-side-drag-zone');
 
-const westParent = bodyParentEle.querySelector('.west'); // 전체 블럭
-const westSideTopButton = bodyParentEle.querySelector('.west-side-block .button');
-const westSideFoldedTopButton = bodyParentEle.querySelector('.west-side-block-folded .folded-button');
+const westSideFoldedTopButton = westSideFolded.querySelector('.west-side-block-folded .folded-button');
 
-const eastSideBlock = bodyParentEle.querySelector('.east-side-block');
+const westCategory = westSideBlock.querySelector('.category');
+const navigationAcodiItem = westCategory.querySelector('.navigation');
+const settingsAcodiItem = westCategory.querySelector('.settings');
+const informationAcodiItem = westCategory.querySelector('.information');
+const navigationButton = navigationAcodiItem.querySelector('.navigation-button');
+const navigationCategoryPanel = navigationAcodiItem.querySelector('.navigation-panel');
+const settingsButton = settingsAcodiItem.querySelector('.settings-button');
+const settingsCategoryPanel = settingsAcodiItem.querySelector('.settings-panel');
+const informationButton = informationAcodiItem.querySelector('.information-button');
+const informationCategoryPanel = informationAcodiItem.querySelector('.information-panel');
+
+const middleBlock = bodyParentEle.querySelector('.middle-block');
+const closeMeDescriptionPlace = middleBlock.querySelector('.close-me-description');
+const centerPanelDescriptionPlace = middleBlock.querySelector('.center-panel-description');
+const toggleWestRegion = centerPanelDescriptionPlace.querySelector('.toggle-the-west-region');
+
+const closeMeBlock = middleBlock.querySelector('.close-me-block');
+const closeMeButton = closeMeBlock.querySelector('.close-me-button');
+const closeMeClose = closeMeBlock.querySelector('.close-me-close-icon');
+const centerPanelButton = middleBlock.querySelector('.center-panel-button');
+
+const eastParent = bodyParentEle.querySelector('.east');
+const eastSideBlock = eastParent.querySelector('.east-side-block');
+const eastSideTopButton = eastSideBlock.querySelector('.east-side-block .button');
 const eastSideFolded = bodyParentEle.querySelector('.east-side-block-folded');
 const eastSideDragZone = bodyParentEle.querySelector('.east-side-drag-zone');
 
-const eastParent = bodyParentEle.querySelector('.east');
-const eastSideTopButton = bodyParentEle.querySelector('.east-side-block .button');
-const eastSideFoldedTopButton = bodyParentEle.querySelector('.east-side-block-folded .folded-button');
+const eastSideFoldedTopButton = eastSideFolded.querySelector('.east-side-block-folded .folded-button');
 
-const southSideTopButton = document.querySelector('.south-side-block .button');
-const southSideFoldedTopButton = document.querySelector('.south-side-block-folded .folded-button');
+const propertyGridDescriptionPlace = eastSideBlock.querySelector('.property-grid-description');
+const firstColPropertyGrid = propertyGridDescriptionPlace.querySelector('.first-col');
+const secondColPropertyGrid = propertyGridDescriptionPlace.querySelector('.second-col');
+const aTabDescriptionPlace = eastSideBlock.querySelector('.a-tab-description');
+
+const aTabButton = eastSideBlock.querySelector('.a-tab-button');
+const propertyGridBlock = eastSideBlock.querySelector('.property-grid-block');
+const propertyGridButton = propertyGridBlock.querySelector('.property-grid-button');
+const propertyGridClose = propertyGridBlock.querySelector('.property-grid-close-icon');
+
 const southSideDragZone = document.querySelector('.south-side-drag-zone');
-const southSideBlock = document.querySelector('.south-side-block');
-const southSideFolded = document.querySelector('.south-side-block-folded');
 const southParent = document.querySelector('.south');
-//////////
-const navigationAcodiItem = bodyParentEle.querySelector('.navigation');
-const navigationButton = bodyParentEle.querySelector('.navigation-button');
+const southSideFolded = document.querySelector('.south-side-block-folded');
 
-const settingsAcodiItem = bodyParentEle.querySelector('.settings');
-const settingsButton = bodyParentEle.querySelector('.settings-button');
+const southSideBlock = southParent.querySelector('.south-side-block');
+const southSideTopButton = southSideBlock.querySelector('.south-side-block .button');
 
-const informationAcodiItem = bodyParentEle.querySelector('.information');
-const informationButton = bodyParentEle.querySelector('.information-button');
-
-/////////
-const closeMeDescriptionPlace = bodyParentEle.querySelector('.middle-block .close-me-description');
-const centerPanelDescriptionPlace = bodyParentEle.querySelector('.middle-block .center-panel-description');
-const closeMeButton = bodyParentEle.querySelector('.close-me-button');
-const centerPanelButton = bodyParentEle.querySelector('.center-panel-button');
-
-const closeMeClose = bodyParentEle.querySelector('.close-me-close-icon');
-const closeMeBlock = bodyParentEle.querySelector('.close-me-block');
-/////////
-const toggleWestRegion = bodyParentEle.querySelector('.toggle-the-west-region');
-/////////
-const propertyGridDescriptionPlace = bodyParentEle.querySelector('.property-grid-description');
-const aTabDescriptionPlace = bodyParentEle.querySelector('.a-tab-description');
-const aTabButton = bodyParentEle.querySelector('.a-tab-button');
-const propertyGridButton = bodyParentEle.querySelector('.property-grid-button');
-/////////
-const propertyGridClose = bodyParentEle.querySelector('.property-grid-close-icon');
-const propertyGridBlock = bodyParentEle.querySelector('.property-grid-block');
-///////////
-const navigationCategoryPanel = document.querySelector('.navigation-panel');
-const settingsCategoryPanel = document.querySelector('.settings-panel');
-const informationCategoryPanel = document.querySelector('.information-panel');
-///////
-const eastDescriptionPlace = bodyParentEle.querySelector('.property-grid-description');
-const firstColPropertyGrid = eastDescriptionPlace.querySelector('.first-col');
-const secondColPropertyGrid = eastDescriptionPlace.querySelector('.second-col');
+const southSideFoldedTopButton = southSideFolded.querySelector('.south-side-block-folded .folded-button');
 
 // west east south 접고 펴기
 class WestEastSouthFold extends AcodFold{
@@ -315,20 +312,20 @@ const sortFirstCol = firstCol => { // innerHTML 등으로 요소를 적용했을
         const ascending = (a, b) => a > b ? -1 : a < b ? 1 : 0;
         const descending = (a, b) => a > b ? 1 : a < b ? -1 : 0;
 
-        eastDescriptionPlace.innerHTML = makeTable(sortByName(ascending, 'keys'));
+        propertyGridDescriptionPlace.innerHTML = makeTable(sortByName(ascending, 'keys'));
 
-        const reloadFirstCol = eastDescriptionPlace.querySelector('.first-col');
-        const reloadSecondCol = eastDescriptionPlace.querySelector('.second-col'); // 가까운 형제 요소 찾아 줌
+        const reloadFirstCol = propertyGridDescriptionPlace.querySelector('.first-col');
+        const reloadSecondCol = propertyGridDescriptionPlace.querySelector('.second-col'); // 가까운 형제 요소 찾아 줌
 
         sortIcon(reloadSecondCol, reloadFirstCol, 'rotate');
         sortFirstCol(reloadFirstCol);
         sortSecondCol(reloadSecondCol); // 첫 번째 열을 눌렀을 때 두 번째 열을 누르면 두 번째 열 sort
 
         reloadFirstCol.addEventListener('click', () => {
-            eastDescriptionPlace.innerHTML = makeTable(sortByName(descending, 'keys'));
+            propertyGridDescriptionPlace.innerHTML = makeTable(sortByName(descending, 'keys'));
 
-            const secondReloadFirstCol = eastDescriptionPlace.querySelector('.first-col');
-            const secondReloadSecondCol =  eastDescriptionPlace.querySelector('.second-col');// 가까운 형제 요소 찾아 줌
+            const secondReloadFirstCol = propertyGridDescriptionPlace.querySelector('.first-col');
+            const secondReloadSecondCol =  propertyGridDescriptionPlace.querySelector('.second-col');// 가까운 형제 요소 찾아 줌
 
             sortIcon(reloadSecondCol, reloadFirstCol);
             sortFirstCol(secondReloadFirstCol); // 클릭 마다 반복 됨
@@ -366,19 +363,19 @@ const sortSecondCol = secondCol => {
             return a > b ? 1 : a < b ? -1 : 0;
         };
 
-        eastDescriptionPlace.innerHTML = makeTable(sortByValue(ascending, 'entries'));
+        propertyGridDescriptionPlace.innerHTML = makeTable(sortByValue(ascending, 'entries'));
 
-        const reloadFirstCol = eastDescriptionPlace.querySelector('.first-col');
-        const reloadSecondCol = eastDescriptionPlace.querySelector('.second-col');
+        const reloadFirstCol = propertyGridDescriptionPlace.querySelector('.first-col');
+        const reloadSecondCol = propertyGridDescriptionPlace.querySelector('.second-col');
     
         sortIcon(reloadFirstCol, reloadSecondCol, 'rotate');
         sortFirstCol(reloadFirstCol);
 
         reloadSecondCol.addEventListener('click', () => {
-            eastDescriptionPlace.innerHTML = makeTable(sortByValue(descending, 'entries'));
+            propertyGridDescriptionPlace.innerHTML = makeTable(sortByValue(descending, 'entries'));
 
-            const secondReloadFirstCol = eastDescriptionPlace.querySelector('.first-col');
-            const secondReloadSecondCol = eastDescriptionPlace.querySelector('.second-col');
+            const secondReloadFirstCol = propertyGridDescriptionPlace.querySelector('.first-col');
+            const secondReloadSecondCol = propertyGridDescriptionPlace.querySelector('.second-col');
            
             sortIcon(secondReloadFirstCol, secondReloadSecondCol)
             sortSecondCol(secondReloadSecondCol);
