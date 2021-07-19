@@ -245,12 +245,7 @@ new CloseIcon({
 
 // toggle west side
 toggleWestRegion.addEventListener('click', () => {
-    const westSide = new AcodFold(
-                            westSideDragZone,
-                            westSideBlock,
-                            westSideFolded,
-                            westParent
-                        );
+    const westSide = new AcodFold(westSideDragZone,westSideBlock,westSideFolded,westParent);
     const check = westSideBlock.classList.contains('west-spread-folder-close');
 
     if(check){
@@ -318,7 +313,6 @@ const sortFirstCol = firstCol => { // innerHTML 등으로 요소를 적용했을
         const reloadSecondCol = propertyGridDescriptionPlace.querySelector('.second-col'); // 가까운 형제 요소 찾아 줌
 
         sortIcon(reloadSecondCol, reloadFirstCol, 'rotate');
-        sortFirstCol(reloadFirstCol);
         sortSecondCol(reloadSecondCol); // 첫 번째 열을 눌렀을 때 두 번째 열을 누르면 두 번째 열 sort
 
         reloadFirstCol.addEventListener('click', () => {
@@ -340,7 +334,7 @@ const sortSecondCol = secondCol => {
         const sortByValue = (by, opt) => {
           const sortValueObj = Object[opt](rowValue).sort(by).reduce((newObj, [name,value]) =>({
               ...newObj, [name]: value
-          }),{})
+          }),{});
 
             return [Object.keys(sortValueObj), Object.values(sortValueObj)];
         };
@@ -350,7 +344,7 @@ const sortSecondCol = secondCol => {
                 a = parseInt(a);
                 
                 return a > b ? -1 : a < b ? 1 : 0;
-            }
+            };
             return a > b ? -1 : a < b ? 1 : 0;
         };
 
@@ -359,7 +353,7 @@ const sortSecondCol = secondCol => {
                 b = parseInt(b);
                 
                 return a > b ? 1 : a < b ? -1 : 0;
-            }
+            };
             return a > b ? 1 : a < b ? -1 : 0;
         };
 
@@ -377,7 +371,7 @@ const sortSecondCol = secondCol => {
             const secondReloadFirstCol = propertyGridDescriptionPlace.querySelector('.first-col');
             const secondReloadSecondCol = propertyGridDescriptionPlace.querySelector('.second-col');
            
-            sortIcon(secondReloadFirstCol, secondReloadSecondCol)
+            sortIcon(secondReloadFirstCol, secondReloadSecondCol);
             sortSecondCol(secondReloadSecondCol);
             sortFirstCol(secondReloadFirstCol);
         });
