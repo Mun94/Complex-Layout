@@ -7,8 +7,8 @@ Donec gravida. Donec et enim. Morbi sollicitudin, lacus a facilisis pulvinar, od
 Aliquam elementum mauris id sem. Vivamus varius, est ut nonummy consectetuer, nulla quam bibendum velit, ac gravida nisi felis sit amet urna. Aliquam nec risus. Maecenas lacinia purus ut velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse sit amet dui vitae lacus fermentum sodales. Donec varius dapibus nisl. Praesent at velit id risus convallis bibendum. Aliquam felis nibh, rutrum nec, blandit non, mattis sit amet, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam varius dignissim nibh. Quisque id orci ac ante hendrerit molestie. Aliquam malesuada enim non neque.`;
 
 const firstCenterPanelDescription='<p class="toggle-the-west-region" style="color:blue; cursor:pointer;">Toggle the west region</p>';
-const secondCenterPanelDescription=`<p>My closable attribute is set to false so you can't close me. The other center panels can be closed.</p>
-<p>The center panel automatically grows to fit the remaining space in the container that isn't taken up by the border regions.</p>`;
+const secondCenterPanelDescription=`My closable attribute is set to false so you can't close me. The other center panels can be closed.
+The center panel automatically grows to fit the remaining space in the container that isn't taken up by the border regions.`;
 
 const centerPanelDescription = `Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed metus nibh, sodales a, porta at, vulputate eget, dui. Pellentesque ut nisl. Maecenas tortor turpis, interdum non, sodales non, iaculis ac, lacus. Vestibulum auctor, tortor quis iaculis malesuada, libero lectus bibendum purus, sit amet tincidunt quam turpis vel lacus. In pellentesque nisl non sem. Suspendisse nunc sem, pretium eget, cursus a, fringilla vel, urna. Aliquam commodo ullamcorper erat. Nullam vel justo in neque porttitor laoreet. Aenean lacus dui, consequat eu, adipiscing eget, nonummy non, nisi. Morbi nunc est, dignissim non, ornare sed, luctus eu, massa. Vivamus eget quam. Vivamus tincidunt diam nec urna. Curabitur velit. Quisque dolor magna, ornare sed, elementum porta, luctus in, leo.
 Donec quis dui. Sed imperdiet. Nunc consequat, est eu sollicitudin gravida, mauris ligula lacinia mauris, eu porta dui nisl in velit. Nam congue, odio id auctor nonummy, augue lectus euismod nunc, in tristique turpis dolor sed urna. Donec sit amet quam eget diam fermentum pharetra. Integer tincidunt arcu ut purus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla blandit malesuada odio. Nam augue. Aenean molestie sapien in mi. Suspendisse tincidunt. Pellentesque tempus dui vitae sapien. Donec aliquam ipsum sit amet pede. Sed scelerisque mi a erat. Curabitur rutrum ullamcorper risus. Maecenas et lorem ut felis dictum viverra. Fusce sem. Donec pharetra nibh sit amet sapien.
@@ -33,7 +33,7 @@ const splitDescription = (desc) => {
 };
 
 const closeMe = firstCloseMeDescription + splitDescription(closeMeDescription);
-const centerPanel = firstCenterPanelDescription + secondCenterPanelDescription + "<hr>" + splitDescription(centerPanelDescription);
+const centerPanel = firstCenterPanelDescription + splitDescription(secondCenterPanelDescription) + "<hr>" + splitDescription(centerPanelDescription);
 
 // east
 const aTab = '<p>A TabPanel component can be a region.</p>';
