@@ -31,9 +31,9 @@ bodyWest.innerHTML = `
         </div>
 
         <div class= "category">
-            ${westSideCategory("navigation", "hi im the west panel")}
-            ${westSideCategory("settings", "Some settings in here.")}
-            ${westSideCategory("information", "Some info in here.")}
+            ${westSideCategory('navigation', 'hi im the west panel')}
+            ${westSideCategory('settings', 'Some settings in here.')}
+            ${westSideCategory('information', 'Some info in here.')}
         </div>
     </div>
 `;
@@ -53,7 +53,7 @@ const middleAndEastCategory = (firstTab, secondTab) => `
 
 bodyMiddle.innerHTML = `
     <div class= "middle-block">
-        ${middleAndEastCategory("close-me", "center-panel")}
+        ${middleAndEastCategory('close-me', 'center-panel')}
         <div class= "bottom-border"></div>
 
         <div class= "close-me-description">${closeMe}</div>
@@ -76,6 +76,6 @@ bodyEast.innerHTML = `
         <div class= "a-tab-description hidden-description">${aTab}</div>
 
         <div class= "top-border"></div>
-        ${middleAndEastCategory("property-grid", "a-tab")}
+        ${middleAndEastCategory('property-grid', 'a-tab')}
     </div>
 `;
