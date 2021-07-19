@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8"/>
 
-    <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/headerStyle.css"/>
-    <link rel="stylesheet" href="./css/bodyStyle.css"/>
-    <link rel="stylesheet" href="./css/footerStyle.css"/>
+    <link rel="stylesheet" href="./css/utils.css">
+    <link rel="stylesheet" href="./css/style.css"/>
 </head>
 
 <body>
     <div class="main-block">
-        <div class= "header"></div>
+        <div class= "header">
+            <p>north - generally for menus, toolbars and/or advertisements</p>
+        </div>
 
-        <div class= "wrapss">
         <div class= "body-block">
             <div class= "west-side-block-folded west-folded-folder-close">
                 <div class= "top">
@@ -58,7 +57,20 @@
             <div class="button">
             </div> 
         </div>
-        <div class= "footer">
+        <div class= "south">
+            <div class= "south-side-block south-spread-folder-close">
+                <div class= "top">
+                    <div class= "title">
+                        south
+                    </div>
+                    <button class= "button">
+                    </button>
+                </div>
+          
+                <div class= "south-description">
+                  <p>south - generally for informational stuff, also could be for status bar</p>
+                </div>
+            </div>
         </div>
         <div class= "south-side-block-folded">
             <div class= "top">
@@ -68,20 +80,11 @@
                 </div>
             </div>
         </div>
-
-        </div>
     </div>
 
     <script src="./js/description.config.js"></script>
-
-    <script src="./js/headerHtml.js"></script> 
-    <!-- html 적용 -->
-    <script src="./js/headerScript.js"></script> 
-    <!-- script 적용-->
-    
-    <script src="./js/bodyHtml.js"></script>
-    <script src="./js/footerHtml.js"></script>
-    <script src="./js/bodyScript.js"></script>
-    <script src="./js/footerScript.js"></script>
+    <script src="./js/utils.Html.js"></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/script.js"></script>
 </body>
 </html>

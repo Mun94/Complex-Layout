@@ -1,4 +1,8 @@
-const bodyWest = document.querySelector('.body-block .west');
+const body = document.querySelector('.body-block');
+
+const bodyWest = body.querySelector('.west');
+const bodyMiddle = body.querySelector('.middle');
+const bodyEast = body.querySelector('.east');
 
 // body west side
 const westSideCategory = (categoryName, text) =>
@@ -47,8 +51,6 @@ const middleAndEastCategory = (firstTab, secondTab) => `
     </div>
 `;
 
-const bodyMiddle = document.querySelector('.body-block .middle');
-
 bodyMiddle.innerHTML = `
     <div class= "middle-block">
         ${middleAndEastCategory("close-me", "center-panel")}
@@ -60,8 +62,6 @@ bodyMiddle.innerHTML = `
 `;
 
 // body east side
-const bodyEast = document.querySelector('.body-block .east');
-
 bodyEast.innerHTML = `
     <div class= "east-side-block">
         <div class= "top">

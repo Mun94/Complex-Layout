@@ -1,6 +1,3 @@
-// header
-const headerDescription = '<p>north - generally for menus, toolbars and/or advertisements</p>';
-
 // middle
 const firstCloseMeDescription='<p style="font-weight:bold">Done reading me? Close me by clicking the X in the top right corner.</p>';
 
@@ -99,10 +96,4 @@ const rowValue = {
     'version': 0.01
 };
 
-
-
-
 const propertyGrid = makeTable([Object.keys(rowValue), Object.values(rowValue)]);
-
-// footer
-const southDescription = `<p>south - generally for informational stuff, also could be for status bar</p>`;
