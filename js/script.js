@@ -3,12 +3,10 @@ const bodyParentEle = document.querySelector('.body-block');
 // west side button controll(클릭 시 왼쪽으로 접힘)
 const westParent = bodyParentEle.querySelector('.west');
 const westSideBlock = westParent.querySelector('.west-side-block');
-const westSideTopButton = westParent.querySelector('.west-side-block .button');
+const westSideTopButton = westSideBlock.querySelector('.west-side-block .button');
 const westSideFolded = bodyParentEle.querySelector('.west-side-block-folded');
 const westSideDragZone = bodyParentEle.querySelector('.west-side-drag-zone');
-
 const westSideFoldedTopButton = westSideFolded.querySelector('.west-side-block-folded .folded-button');
-
 const westCategory = westSideBlock.querySelector('.category');
 const navigationAcodiItem = westCategory.querySelector('.navigation');
 const settingsAcodiItem = westCategory.querySelector('.settings');
@@ -24,7 +22,6 @@ const middleBlock = bodyParentEle.querySelector('.middle-block');
 const closeMeDescriptionPlace = middleBlock.querySelector('.close-me-description');
 const centerPanelDescriptionPlace = middleBlock.querySelector('.center-panel-description');
 const toggleWestRegion = centerPanelDescriptionPlace.querySelector('.toggle-the-west-region');
-
 const closeMeBlock = middleBlock.querySelector('.close-me-block');
 const closeMeButton = closeMeBlock.querySelector('.close-me-button');
 const closeMeClose = closeMeBlock.querySelector('.close-me-close-icon');
@@ -35,14 +32,11 @@ const eastSideBlock = eastParent.querySelector('.east-side-block');
 const eastSideTopButton = eastSideBlock.querySelector('.east-side-block .button');
 const eastSideFolded = bodyParentEle.querySelector('.east-side-block-folded');
 const eastSideDragZone = bodyParentEle.querySelector('.east-side-drag-zone');
-
 const eastSideFoldedTopButton = eastSideFolded.querySelector('.east-side-block-folded .folded-button');
-
 const propertyGridDescriptionPlace = eastSideBlock.querySelector('.property-grid-description');
 const firstColPropertyGrid = propertyGridDescriptionPlace.querySelector('.first-col');
 const secondColPropertyGrid = propertyGridDescriptionPlace.querySelector('.second-col');
 const aTabDescriptionPlace = eastSideBlock.querySelector('.a-tab-description');
-
 const aTabButton = eastSideBlock.querySelector('.a-tab-button');
 const propertyGridBlock = eastSideBlock.querySelector('.property-grid-block');
 const propertyGridButton = propertyGridBlock.querySelector('.property-grid-button');
@@ -51,10 +45,8 @@ const propertyGridClose = propertyGridBlock.querySelector('.property-grid-close-
 const southSideDragZone = document.querySelector('.south-side-drag-zone');
 const southParent = document.querySelector('.south');
 const southSideFolded = document.querySelector('.south-side-block-folded');
-
 const southSideBlock = southParent.querySelector('.south-side-block');
 const southSideTopButton = southSideBlock.querySelector('.south-side-block .button');
-
 const southSideFoldedTopButton = southSideFolded.querySelector('.south-side-block-folded .folded-button');
 
 // west east south 접고 펴기
@@ -228,6 +220,7 @@ class CloseIcon extends Category{
     };
 };
 
+// middle category(close me, center panel) controll
 new Category({
     firBtn: closeMeButton,
     firDes: closeMeDescriptionPlace,
@@ -235,6 +228,7 @@ new Category({
     secDes: centerPanelDescriptionPlace
 });
 
+// middle close me close
 new CloseIcon({
     wrap: closeMeBlock,
     clsIcon: closeMeClose,
@@ -245,7 +239,7 @@ new CloseIcon({
 
 // toggle west side
 toggleWestRegion.addEventListener('click', () => {
-    const westSide = new AcodFold(westSideDragZone,westSideBlock,westSideFolded,westParent);
+    const westSide = new AcodFold(westSideDragZone, westSideBlock, westSideFolded, westParent);
     const check = westSideBlock.classList.contains('west-spread-folder-close');
 
     if(check){
@@ -256,7 +250,7 @@ toggleWestRegion.addEventListener('click', () => {
     westSide.folded();
 });
 
-// east button(a tab, property grid) controll
+// east categoery(a tab, property grid) controll
 new Category({
     firBtn: propertyGridButton,
     firDes: propertyGridDescriptionPlace,

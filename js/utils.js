@@ -67,7 +67,6 @@ const toggleEvent = (initFolded, dragZone, side, toggleEvt, folded) => {
    if(initFolded){
         dragZone.classList.toggle(`${side}-side-folded`, folded);
    }else{
-       console.log(dragZone.className)
         dragZone.classList.toggle(`${side}-side-folded`, !folded);
         side === 'east' && dragZone[toggleEvt]('mousedown', onEastMouseDown);
         side === 'west' && dragZone[toggleEvt]('mousedown', onWestMouseDown);
