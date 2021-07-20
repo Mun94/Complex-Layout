@@ -1,3 +1,60 @@
+const splitDescription = (desc) => {
+    const splitDesc = desc.split('\n');
+    let includePTag = '';
+
+    for(let i= 0; i < splitDesc.length; i++){
+        includePTag += `<p>${splitDesc[i]}</p>`
+    };
+
+    return includePTag;
+};
+
+const makeTable = (td) => {
+    const rowCnt = td[0].length; // 행 수
+    const columnCnt = td.length  // 열 수
+
+    const firstColTitle = `
+    <div class="first-col">
+        Name
+        <div class="first-col-icon"></div>
+    </div>
+    `;
+
+    const secondColTitle = `
+        <div class="second-col">
+            value
+            <div class="second-col-icon hidden-col-icon"></div>
+        </div>
+    `;
+
+    let table = '';
+
+    table += `
+    <table class="property-grid-table"><tbody>
+        <tr>
+            <th>
+                ${firstColTitle}
+            </th>
+            <th>
+                ${secondColTitle}
+            </th>
+        </tr>
+    `;
+
+    for(let i = 0; i < rowCnt; i++){
+        table += `<tr>`;
+            for(let j = 0; j < columnCnt; j++){
+                table += `<td>`;
+                table += td[j][i];
+                table += `</td>`;
+            };
+        table += `</tr>`;
+    }
+    table += `</tbody></table>`;
+
+    return table;
+};
+
 const foldedStatus = (wrap, foldedWrap, side, folded) => {
     wrap.classList.toggle(`${side}-spread-folder-close`, !folded);
     wrap.classList.toggle(`${side}-spread-folder-open`, folded);
@@ -10,6 +67,7 @@ const toggleEvent = (initFolded, dragZone, side, toggleEvt, folded) => {
    if(initFolded){
         dragZone.classList.toggle(`${side}-side-folded`, folded);
    }else{
+       console.log(dragZone.className)
         dragZone.classList.toggle(`${side}-side-folded`, !folded);
         side === 'east' && dragZone[toggleEvt]('mousedown', onEastMouseDown);
         side === 'west' && dragZone[toggleEvt]('mousedown', onWestMouseDown);

@@ -224,7 +224,7 @@ class CloseIcon extends Category{
         if(!check){
             this.secBtn.classList.toggle('category-click-true', !check);
             this.appearDes();
-        }
+        };
     };
 };
 

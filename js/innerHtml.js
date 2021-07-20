@@ -60,17 +60,6 @@ Donec gravida. Donec et enim. Morbi sollicitudin, lacus a facilisis pulvinar, od
 Aliquam elementum mauris id sem. Vivamus varius, est ut nonummy consectetuer, nulla quam bibendum velit, ac gravida nisi felis sit amet urna. Aliquam nec risus. Maecenas lacinia purus ut velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse sit amet dui vitae lacus fermentum sodales. Donec varius dapibus nisl. Praesent at velit id risus convallis bibendum. Aliquam felis nibh, rutrum nec, blandit non, mattis sit amet, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam varius dignissim nibh. Quisque id orci ac ante hendrerit molestie. Aliquam malesuada enim non neque.
 `;
 
-const splitDescription = (desc) => {
-    const splitDesc = desc.split('\n');
-    let includePTag = '';
-
-    for(let i= 0; i < splitDesc.length; i++){
-        includePTag += `<p>${splitDesc[i]}</p>`
-    };
-
-    return includePTag;
-};
-
 const closeMe = firstCloseMeDescription + splitDescription(closeMeDescription);
 const centerPanel = firstCenterPanelDescription + splitDescription(secondCenterPanelDescription) + "<hr>" + splitDescription(centerPanelDescription);
 
@@ -99,52 +88,6 @@ bodyMiddle.innerHTML = `
 
 // east
 const aTab = '<p>A TabPanel component can be a region.</p>';
-
-const makeTable = (td) => {
-    const rowCnt = td[0].length; // 행 수
-    const columnCnt = td.length  // 열 수
-
-    const firstColTitle = `
-    <div class="first-col" style="text-align:initial">
-        Name
-        <div class="first-col-icon"></div>
-    </div>
-    `;
-
-    const secondColTitle = `
-        <div class="second-col" style="text-align:initial">
-            value
-            <div class="second-col-icon hidden-col-icon"></div>
-        </div>
-    `;
-
-    let table = '';
-
-    table += `
-    <table class="property-grid-table"><tbody>
-        <tr>
-            <th>
-                ${firstColTitle}
-            </th>
-            <th>
-                ${secondColTitle}
-            </th>
-        </tr>
-    `;
-
-    for(let i = 0; i < rowCnt; i++){
-        table += `<tr>`;
-            for(let j = 0; j < columnCnt; j++){
-                table += `<td>`;
-                table += td[j][i];
-                table += `</td>`;
-            };
-        table += `</tr>`;
-    }
-    table += `</tbody></table>`;
-
-    return table;
-};
 
 const rowValue = {
     '(name)': 'Properties Grid',

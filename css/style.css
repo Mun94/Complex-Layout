@@ -254,6 +254,8 @@ p{
 .first-col, .second-col{
     display: flex;
 
+    text-align: initial;
+
     cursor: pointer;
 }
 
