@@ -14,13 +14,16 @@ Ext.create('Ext.container.Viewport', {
         layout: 'accordion',
         items:[{
             title: 'Navigation',
-            html: "Hi. I'm the west panel."
+            html: "Hi. I'm the west panel.",
+            iconCls: 'x-fa fa-file'
         },{
             title: 'Settings',
-            html: 'Some settings in here.'
+            html: 'Some settings in here.',
+            iconCls: 'x-fa fa-file'
         },{
             title: 'Information',
-            html: 'Some info in here.'
+            html: 'Some info in here.',
+            iconCls: 'x-fa fa-file'
         }]
         // could use a TreePanel or AccordionLayout for navigational items
     }, {
@@ -39,18 +42,31 @@ Ext.create('Ext.container.Viewport', {
         width: 150
     }, {
         region: 'center',
-        xtype: 'tabpanel', // TabPanel itself has no title
-        activeTab: 0,      // First tab active by default
-        items: [
-                    {
-                        title: 'Tab 1',
-                        bodyPadding: 10,
-                        html : 'A simple tab'
-                    },
-                    {
-                        title: 'Tab 2',
-                        html : 'Another one'
-                    }
-                ],
+        items:[{
+            xtype:'button',
+            listeners: {
+                click:() => {
+                    alert('123')
+                }
+            },
+            // handler: () => {
+            //     alert('123')
+            // },  
+            html:'toggle the west side',
+            border: false
+        }]
+        // xtype: 'tabpanel', // TabPanel itself has no title
+        // activeTab: 0,      // First tab active by default
+        // items: [
+        //             {
+        //                 title: 'Tab 1',
+        //                 bodyPadding: 10,
+        //                 html : 'A simple tab'
+        //             },
+        //             {
+        //                 title: 'Tab 2',
+        //                 html : 'Another one'
+        //             }
+        //         ],
     }]
 });
