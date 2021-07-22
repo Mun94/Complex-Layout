@@ -42,31 +42,67 @@ Ext.create('Ext.container.Viewport', {
         width: 150
     }, {
         region: 'center',
-        items:[{
-            xtype:'button',
-            listeners: {
-                click:() => {
-                    alert('123')
-                }
-            },
-            // handler: () => {
-            //     alert('123')
-            // },  
-            html:'toggle the west side',
-            border: false
-        }]
-        // xtype: 'tabpanel', // TabPanel itself has no title
-        // activeTab: 0,      // First tab active by default
-        // items: [
-        //             {
-        //                 title: 'Tab 1',
-        //                 bodyPadding: 10,
-        //                 html : 'A simple tab'
-        //             },
-        //             {
-        //                 title: 'Tab 2',
-        //                 html : 'Another one'
-        //             }
-        //         ],
+        xtype:'tabpanel',
+        
     }]
 });
+
+// Ext.onReady(() => {
+//     Ext.create('Ext.tab.Panel', {
+//         width: 500,
+//         height: 500,
+//         renderTo: Ext.getBody(),
+//         tabPosition: 'bottom',
+//         items:[{
+//             xtype: 'panel',
+//             title: '탭1',
+//             items:[{
+//                 xtype: 'button',
+//                 text: '버튼1'
+//             }]
+//         },{
+//             xtype: 'panel',
+//             title: '탭2',
+//             items:[{
+//                 xtype: 'button',
+//                 text: '버튼2'
+//             }]
+//         }]
+//     })
+// })
+
+// Ext.onReady(() => {
+//     Ext.create('Ext.grid.Panel', {
+//         width: 500,
+//         height: 500,
+//         renderTo: Ext.getBody(),
+//         columns:[{
+//             text: '컬럼1',
+//             style: 'text-align: center',
+//             flex: 1,
+//             dataIndex: 'c1'
+//         },{
+//             text: '컬럼2',
+//             align: 'right',
+//             flex: 1,
+//             dataIndex: 'c3'
+//         },{
+//             text: '컬럼3',
+//             align: 'left',
+//             flex: 1,
+//             dataIndex: 'c2'
+//         }],
+//         store: {
+//             fields: ['c1', 'c2', 'c3'],
+//             data:[{
+//                 c1: '컬럼 1-1',
+//                 c2: '컬럼 1-2',
+//                 c3: '컬럼 1-3'
+//             }, {
+//                 c1: '컬럼 2-1',
+//                 c2: '컬럼 2-2',
+//                 c3: '컬럼 2-3'
+//             }]
+//         }
+//     })
+// })
