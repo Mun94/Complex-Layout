@@ -8,10 +8,11 @@ Ext.onReady(() => {
             margin: '0 0 5 0'
         }, {
             region: 'west',
+            id: 'westWrap',
             collapsible: true,
             title: 'West Panel',
             split: true,
-            width: 150,
+            width: 200,
             layout: 'accordion',
             items:[{
                 title: 'Navigation',
@@ -103,8 +104,16 @@ Ext.onReady(() => {
                     },
                     {
                         title: 'Center Panel',
-                        html : centerPanel,
-                        border: false
+                        html: centerPanel,
+                        border: false,
+                        listeners:{
+                            afterrender:(panel) => {
+                                Ext.get(panel.el.query('.toggle-the-west-region')[0]).on('click', () => {
+                                    const toggleWest = Ext.ComponentQuery.query('#westWrap')[0];
+                                    toggleWest.toggleCollapse();
+                                })
+                            }
+                        }
                     }
             ],
         }]
