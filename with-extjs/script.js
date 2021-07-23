@@ -37,7 +37,58 @@ Ext.onReady(() => {
             title: 'East Panel',
             collapsible: true,
             split: true,
-            width: 150
+            width: 300,
+            xtype:'tabpanel',
+            tabPosition: 'bottom',
+            items:[{
+                title:'A Tab',
+                html:aTab
+            },{
+                title:'Property Grid',
+                
+                items:[{
+                    xtype:'button',
+                    text:'test'
+                },{
+                    xtype: 'gridpanel',
+                    columns:[{
+                        text: 'Name',
+                        dataIndex: 'name',   
+                    },{
+                        text: 'Value',
+                        dataIndex: 'value',
+                        flex:1
+                    }],
+                    store:{
+                        fields: ['name', 'value'],
+                        data:[{
+                            name: '(name)',
+                            value: 'Properties Grid'
+                        },{
+                            name: 'autoFitColumns',
+                            value: true
+                        },{
+                            name: 'borderWidth',
+                            value: 1
+                        },{
+                            name: 'created',
+                            value: '10/15/2006'
+                        },{
+                            name: 'grouping',
+                            value: false
+                        },{
+                            name: 'productionQuality',
+                            value: false
+                        },{
+                            name: 'tested',
+                            value: false
+                        },{
+                            name: 'version',
+                            value: 0.01
+                        }]
+                    }
+                }]
+            }]
         }, {
             region: 'center',
             xtype: 'tabpanel', // TabPanel itself has no title
