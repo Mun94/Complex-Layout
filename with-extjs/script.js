@@ -3,7 +3,7 @@ Ext.onReady(() => {
         layout: 'border',
         items: [{
             region: 'north',
-            html: '<h1 class="x-panel-header">Page Title</h1>',
+            html: northDescription,
             border: false,
             margin: '0 0 5 0'
         }, {
@@ -28,7 +28,7 @@ Ext.onReady(() => {
             region: 'south',
             title: 'South Panel',
             collapsible: true,
-            html: 'Information goes here',
+            html: southDescription,
             split: true,
             height: 100,
             minHeight: 100
@@ -45,7 +45,6 @@ Ext.onReady(() => {
                 html:aTab
             },{
                 title:'Property Grid',
-                
                 items:[{
                     xtype:'button',
                     text:'test'
