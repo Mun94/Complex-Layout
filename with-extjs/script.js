@@ -16,13 +16,16 @@ Ext.onReady(() => {
             layout: 'accordion',
             items:[{
                 title: 'Navigation',
-                html: "Hi. I'm the west panel."
+                html: navigaitonDescription,
+                iconCls: 'navigation-icon'
             },{
                 title: 'Settings',
-                html: 'Some settings in here.'
+                html: settingsDescription,
+                iconCls: 'settings-icon'
             },{
                 title: 'Information',
-                html: 'Some info in here.'
+                html: informationDescription,
+                iconCls: 'information-icon'
             }]
             // could use a TreePanel or AccordionLayout for navigational items
         }, {
@@ -96,26 +99,29 @@ Ext.onReady(() => {
             xtype: 'tabpanel', // TabPanel itself has no title
             activeTab: 0,      // First tab active by default
             items: [
-                    {
-                        title: 'Close Me',
-                        html : closeMe,
-                        border: false,
-                        closable: true
-                    },
-                    {
-                        title: 'Center Panel',
-                        html: centerPanel,
-                        border: false,
-                        listeners:{
-                            afterrender:(panel) => {
-                                Ext.get(panel.el.query('.toggle-the-west-region')[0]).on('click', () => {
-                                    const toggleWest = Ext.ComponentQuery.query('#westWrap')[0];
-                                    toggleWest.toggleCollapse();
-                                })
-                            }
+                        {
+                            title: 'Close Me',
+                            html : closeMe,
+                            border: false,
+                            closable: true,
+                            autoScroll: true
+                        },
+                        {
+                            title: 'Center Panel',
+                            html: centerPanel,
+                            border: false,
+                            autoScroll: true,
+                            listeners:{
+                                afterrender:(panel) => {
+                                    Ext.get(panel.el.query('.toggle-the-west-region')[0])
+                                    .on('click', () => {
+                                            const toggleWest = Ext.ComponentQuery.query('#westWrap')[0];
+                                            toggleWest.toggleCollapse();
+                                        })
+                                    }
+                                }
                         }
-                    }
-            ],
+                    ]
         }]
     });
 })

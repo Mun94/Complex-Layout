@@ -12,6 +12,11 @@ const splitDescription = (desc) => {
     return includePTag;
 };
 
+// west
+const navigaitonDescription = '<p>Hi. I"m the west panel.</p>';
+const settingsDescription = '<p>Some settings in here.</p>';
+const informationDescription = '<p>Some info in here.</p>';
+
 // middle
 const firstCloseMeDescription='<p style="font-weight:bold">Done reading me? Close me by clicking the X in the top right corner.</p>';
 
