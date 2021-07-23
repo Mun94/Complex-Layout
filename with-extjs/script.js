@@ -28,35 +28,57 @@ Ext.onReady(() => {
                 iconCls: 'information-icon'
             }]
             // could use a TreePanel or AccordionLayout for navigational items
-        }, {
-            region: 'south',
-            title: 'South Panel',
-            collapsible: true,
-            html: southDescription,
-            split: true,
-            height: 100,
-            minHeight: 100
-        }, {
+        },{
+            region: 'center',
+            xtype: 'tabpanel', // TabPanel itself has no title
+            activeTab: 0,      // First tab active by default
+            items: [
+                        {
+                            title: 'Close Me',
+                            html : closeMe,
+                            border: false,
+                            closable: true,
+                            autoScroll: true
+                        },
+                        {
+                            title: 'Center Panel',
+                            html: centerPanel,
+                            border: false,
+                            autoScroll: true,
+                            listeners:{
+                                afterrender:(panel) => {
+                                    Ext.get(panel.el.query('.toggle-the-west-region')[0])
+                                    .on('click', () => {
+                                            const toggleWest = Ext.ComponentQuery.query('#westWrap')[0];
+                                            toggleWest.toggleCollapse();
+                                        })
+                                    }
+                                }
+                        }
+                    ]
+        },{
             region: 'east',
             title: 'East Panel',
             collapsible: true,
             split: true,
             width: 300,
-            xtype:'tabpanel',
+            xtype: 'tabpanel',
             tabPosition: 'bottom',
             activeTab: 1, 
-            items:[{
+            items: [{
                 title:'A Tab',
                 html:aTab
             },{
                 title:'Property Grid',
                 closable: true,
-                items:[{
-                    xtype:'button',
-                    text:'test'
-                },{
+                items: [{   
+                        bbar: ['->',{
+                            xtype: 'button',
+                            text: 'test',
+                        }]
+                    },{
                     xtype: 'gridpanel',
-                    columns:[{
+                    columns: [{
                         text: 'Name',
                         dataIndex: 'name',   
                     },{
@@ -94,34 +116,14 @@ Ext.onReady(() => {
                     }
                 }]
             }]
-        }, {
-            region: 'center',
-            xtype: 'tabpanel', // TabPanel itself has no title
-            activeTab: 0,      // First tab active by default
-            items: [
-                        {
-                            title: 'Close Me',
-                            html : closeMe,
-                            border: false,
-                            closable: true,
-                            autoScroll: true
-                        },
-                        {
-                            title: 'Center Panel',
-                            html: centerPanel,
-                            border: false,
-                            autoScroll: true,
-                            listeners:{
-                                afterrender:(panel) => {
-                                    Ext.get(panel.el.query('.toggle-the-west-region')[0])
-                                    .on('click', () => {
-                                            const toggleWest = Ext.ComponentQuery.query('#westWrap')[0];
-                                            toggleWest.toggleCollapse();
-                                        })
-                                    }
-                                }
-                        }
-                    ]
+        },{
+            region: 'south',
+            title: 'South Panel',
+            collapsible: true,
+            html: southDescription,
+            split: true,
+            height: 100,
+            minHeight: 100
         }]
     });
 })
