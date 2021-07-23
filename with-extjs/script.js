@@ -40,11 +40,13 @@ Ext.onReady(() => {
             width: 300,
             xtype:'tabpanel',
             tabPosition: 'bottom',
+            activeTab: 1, 
             items:[{
                 title:'A Tab',
                 html:aTab
             },{
                 title:'Property Grid',
+                closable: true,
                 items:[{
                     xtype:'button',
                     text:'test'
@@ -96,7 +98,8 @@ Ext.onReady(() => {
                     {
                         title: 'Close Me',
                         html : closeMe,
-                        border: false
+                        border: false,
+                        closable: true
                     },
                     {
                         title: 'Center Panel',
