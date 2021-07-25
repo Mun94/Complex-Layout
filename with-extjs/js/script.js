@@ -10,15 +10,16 @@ const propertyGridFieldAndData =() => {
         data.push({name: name[i], value: value[i]});
     };
 
-    return {fields: Object.keys(rowValues), data};
+    return { fields: Object.keys(rowValues), data };
 };
 
 const toggleWestEvent = () => {
     return {
-        afterrender:(panel) => {
-            Ext.get(panel.el.query('.toggle-the-west-region')[0])
-            .on('click', () => {
-                    const toggleWest = Ext.ComponentQuery.query('#westWrap')[0];
+        afterrender: () => {
+            const toggleWestEle = document.querySelector('.toggle-the-west-region');
+            const toggleWest = Ext.ComponentQuery.query('#westWrap')[0];
+            
+            Ext.get(toggleWestEle).on('click', () => {
                     toggleWest.toggleCollapse();
                 });
             }
@@ -35,7 +36,7 @@ const north = {
 const west = {
     region: 'west',
     title: 'West Panel',
-    id: 'westWrap',
+    itemId: 'westWrap',
     collapsible: true,
     split: true,
     layout: 'accordion',
