@@ -1,6 +1,3 @@
-// south
-const northDescription = '<p>north - generally for menus, toolbars and/or advertisements</p>';
-
 const splitDescription = (desc) => {
     const splitDesc = desc.split('\n');
     let includePTag = '';
@@ -11,6 +8,9 @@ const splitDescription = (desc) => {
 
     return includePTag;
 };
+
+// north
+const northDescription = '<p>north - generally for menus, toolbars and/or advertisements</p>';
 
 // west
 const navigaitonDescription = '<p>Hi. I"m the west panel.</p>';
@@ -44,17 +44,6 @@ const centerPanel = firstCenterPanelDescription + splitDescription(secondCenterP
 
 // east
 const aTab = '<p>A TabPanel component can be a region.</p>';
-
-const rowValue = {
-    '(name)': 'Properties Grid',
-    'autoFitColumns': true,
-    'borderWidth': 1,
-    'created': '10/15/2006',
-    'grouping': false,
-    'productionQuality': false,
-    'tested': false,
-    'version': 0.01
-};
 
 // south
 const southDescription = '<p>south - generally for informational stuff, also could be for status bar</p>'
