@@ -44,6 +44,16 @@ const centerPanel = firstCenterPanelDescription + splitDescription(secondCenterP
 
 // east
 const aTab = '<p>A TabPanel component can be a region.</p>';
+const rowValue = {
+    '(name)': 'Properties Grid',
+    'autoFitColumns': true,
+    'borderWidth': 1,
+    'created': Ext.Date.parse('10/15/2006', 'm/d/Y'),
+    'grouping': false,
+    'productionQuality': false,
+    'tested': false,
+    'version': 0.01
+};
 
 // south
 const southDescription = '<p>south - generally for informational stuff, also could be for status bar</p>'

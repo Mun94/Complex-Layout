@@ -1,4 +1,4 @@
-const propertyGridFieldAndData =() => {
+const propertyGridFieldAndData = () => {
     const rowValues = {
         name: ['(name)', 'autoFitColumns', 'borderWidth', 'created', 'grouping', 'productionQuality', 'tested', 'version'],
         value: ['Properties Grid', true, 1, '10/15/2006', false, false, false, 0.01]
@@ -94,16 +94,8 @@ const east = {
                                 text: 'test',
                             }]
                         },{
-                            xtype: 'gridpanel',
-                            columns: [{
-                                        text: 'Name',
-                                        dataIndex: 'name',   
-                                    },{
-                                        text: 'Value',
-                                        dataIndex: 'value',
-                                        flex:1
-                                    }],
-                            store: propertyGridFieldAndData()
+                            xtype: 'propertygrid',
+                            source: rowValue
                         }]
             }],
     width: 300,
