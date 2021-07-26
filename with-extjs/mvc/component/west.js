@@ -1,4 +1,4 @@
-Ext.define('component.west', {
+Ext.define('mvc.component.west', {
     extend: 'Ext.panel.Panel',
     region: 'west',
     title: 'West Panel',
