@@ -1,4 +1,4 @@
-Ext.define('mvc.component.west', {
+Ext.define('js.component.west', {
     extend: 'Ext.panel.Panel',
     region: 'west',
     title: 'West Panel',
@@ -8,15 +8,15 @@ Ext.define('mvc.component.west', {
     layout: 'accordion',
     items: [{
                 title: 'Navigation',
-                html: navigaitonDescription,
+                html: js.data.description.includePTag('westNavigation'),
                 iconCls: 'navigation-icon'
             },{
                 title: 'Settings',
-                html: settingsDescription,
+                html: js.data.description.includePTag('westSettings'),
                 iconCls: 'settings-icon'
             },{
                 title: 'Information',
-                html: informationDescription,
+                html: js.data.description.includePTag('westInformation'),
                 iconCls: 'information-icon'
             }],
     width: 200,

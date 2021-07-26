@@ -1,4 +1,4 @@
-Ext.define('mvc.component.east', {
+Ext.define('js.component.east', {
     extend: 'Ext.tab.Panel',
     region: 'east',
     title: 'East Panel',
@@ -8,7 +8,7 @@ Ext.define('mvc.component.east', {
     activeTab: 1, 
     items: [{
                 title:'A Tab',
-                html:aTabDescription,
+                html: js.data.description.includePTag('eastATab'),
             },{
                 title:'Property Grid',
                 closable: true,
@@ -20,7 +20,7 @@ Ext.define('mvc.component.east', {
                             }]
                         },{
                             xtype: 'propertygrid',
-                            source: {...rowValue, created: Ext.Date.parse(rowValue.created, 'm/d/Y')}
+                            source: {...js.data.description.content.east.rowValue, created: Ext.Date.parse(js.data.description.content.east.rowValue.created, 'm/d/Y')}
                         }]
             }],
     width: 300,

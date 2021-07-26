@@ -1,10 +1,10 @@
-Ext.define('mvc.component.center', {
+Ext.define('js.component.center', {
     extend: 'Ext.tab.Panel',
     region: 'center',
     activeTab: 0,      // First tab active by default
     items: [{
                 title: 'Close Me',
-                html : closeMeDescription,
+                html : js.data.description.includePTag('middleCloseMe'),
                 closable: true,
                 autoScroll: true
             },{
@@ -22,7 +22,7 @@ Ext.define('mvc.component.center', {
                     border: false
                 },{
                     xtype: 'component',
-                    html: centerPanel,
+                    html: js.data.description.includePTag('middleCenterPanel'),
                     border: false
                 }]
             }]
