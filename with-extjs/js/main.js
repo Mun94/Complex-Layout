@@ -4,7 +4,7 @@ Ext.application({
     appFolder:'./js',
 
     requires:['js.data.description'],
-
+    aaaa:
     launch:() => {
 
         Ext.create('Ext.container.Viewport', {
