@@ -1,18 +1,3 @@
-const propertyGridFieldAndData = () => {
-    const rowValues = {
-        name: ['(name)', 'autoFitColumns', 'borderWidth', 'created', 'grouping', 'productionQuality', 'tested', 'version'],
-        value: ['Properties Grid', true, 1, '10/15/2006', false, false, false, 0.01]
-    };
-    const {name, value} = rowValues;
-    let data = [];
-
-    for(let i =0;  i < name.length; i++){
-        data.push({name: name[i], value: value[i]});
-    };
-
-    return { fields: Object.keys(rowValues), data };
-};
-
 const toggleWestEvent = () => {
     return {
         afterrender: () => {
