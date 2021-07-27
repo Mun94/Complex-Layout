@@ -1,11 +1,10 @@
 Ext.define('js.data.description', {
     singleton:true,
-
     content:{
             north: 'north - generally for menus, toolbars and/or advertisements',
             west:{
                 navigation: 'Hi. I"m the west panel.',
-                settings: 'Some settings in here.</p>',
+                settings: 'Some settings in here.',
                 information: 'Some info in here.'
             },
             middle:{
@@ -63,10 +62,10 @@ Ext.define('js.data.description', {
             case 'westInformation':
                 description = information
                 break;
-            case 'middleCloseMe':
+            case 'centerCloseMe':
                 description = closeMe
                 break;
-            case 'middleCenterPanel':
+            case 'centerCenterPanel':
                 description = centerPanel
                 break;
             case 'eastATab':

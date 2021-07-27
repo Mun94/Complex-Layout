@@ -4,7 +4,7 @@ Ext.define('js.component.center', {
     activeTab: 0, 
     items: [{
                 title: 'Close Me',
-                html : js.data.description.includePTag('middleCloseMe'),
+                html : js.data.description.includePTag('centerCloseMe'),
                 closable: true,
                 autoScroll: true
             },{
@@ -28,7 +28,7 @@ Ext.define('js.component.center', {
                     border: false
                 },{
                     xtype: 'component',
-                    html: js.data.description.includePTag('middleCenterPanel'),
+                    html: js.data.description.includePTag('centerCenterPanel'),
                     border: false
                 }]
             }]
