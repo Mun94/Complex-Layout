@@ -4,7 +4,6 @@ Ext.application({
     appFolder:'./js',
 
     requires:['js.data.description'],
-    aaaa:
     launch:() => {
 
         Ext.create('Ext.container.Viewport', {
@@ -16,6 +15,6 @@ Ext.application({
                 Ext.create('js.component.east'),
                 Ext.create('js.component.south'),
             ],
-        })    // description.includePTag()
+        });
     },
 });
