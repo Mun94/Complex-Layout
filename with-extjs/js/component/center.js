@@ -18,12 +18,12 @@ Ext.define('js.component.center', {
                         html: 'toggle the west region'
                     },
                     listeners: {
-                        click: {
-                            element: 'el',
-                            fn: () => {
+                        el: {
+                            click: () => {
                                 const toggleWest = Ext.ComponentQuery.query('#westWrap')[0];
                                 toggleWest.toggleCollapse();
-                        }}
+                            }
+                        }
                     },
                     border: false
                 },{
