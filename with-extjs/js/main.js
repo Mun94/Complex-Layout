@@ -1,12 +1,9 @@
-
 Ext.application({
-    name:'complex layout',
-    appFolder:'./js',
+    name: 'complex layout',
+    appFolder: './js',
 
-    requires:['js.data.description'],
-
-    launch:() => {
-
+    requires: ['js.data.description'],
+    launch: () => {
         Ext.create('Ext.container.Viewport', {
             layout: 'border',
             items: [
@@ -16,6 +13,6 @@ Ext.application({
                 Ext.create('js.component.east'),
                 Ext.create('js.component.south'),
             ],
-        })    // description.includePTag()
+        });
     },
 });

@@ -20,7 +20,8 @@ Ext.define('js.component.east', {
                             }]
                         },{
                             xtype: 'propertygrid',
-                            source: {...js.data.description.content.east.rowValue, created: Ext.Date.parse(js.data.description.content.east.rowValue.created, 'm/d/Y')}
+                            source: { ...js.data.description.content.east.rowValue, 
+                                created: Ext.Date.parse( js.data.description.content.east.rowValue.created, 'm/d/Y')}
                         }]
             }],
     width: 300,

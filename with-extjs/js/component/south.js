@@ -5,8 +5,6 @@ Ext.define('js.component.south', {
     html: js.data.description.includePTag('south'),
     collapsible: true,
     split: true,
-    height: 100,
-    minHeight: 100
 });
 
 
